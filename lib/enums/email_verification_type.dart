@@ -1,0 +1,1 @@
+enum EmailVerificationType { Register, Forget }
