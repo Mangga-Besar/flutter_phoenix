@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 class Configs {
   static String appName = "Canisius Edufair 2022";
 
-  static String httpLink =
-      "https://asia-southeast2-edufair-2022.cloudfunctions.net/api";
+  static String httpLink = "https://phoenix-api.canisius.app";
 
   //Colors for theme
   static const primaryColor = Color.fromRGBO(84, 8, 11, 1);

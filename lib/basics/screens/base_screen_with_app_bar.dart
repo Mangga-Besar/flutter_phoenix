@@ -1,4 +1,3 @@
-import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/configs/configs.dart';
 import 'package:flutter_phoenix/enums/page_name.dart';
@@ -62,15 +61,15 @@ abstract class BaseScreenWithAppBar extends StatefulWidget {
 class _BaseScreenWithAppBarState extends State<BaseScreenWithAppBar> {
   @override
   void initState() {
-    final analytics = FirebaseAnalytics.instance;
+    // final analytics = FirebaseAnalytics.instance;
 
-    analytics.setCurrentScreen(
-      screenName: EnumParser.getString(widget.pageName),
-    );
+    // analytics.setCurrentScreen(
+    //   screenName: EnumParser.getString(widget.pageName),
+    // );
 
-    analytics.logScreenView(
-      screenName: EnumParser.getString(widget.pageName),
-    );
+    // analytics.logScreenView(
+    //   screenName: EnumParser.getString(widget.pageName),
+    // );
     super.initState();
   }
 

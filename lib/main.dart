@@ -1,67 +1,63 @@
-import 'package:flutter/material.dart';
+import 'dart:async';
 
-void main() {
-  runApp(const MyApp());
+import 'package:flutter/material.dart';
+import 'package:flutter_phoenix/configs/configs.dart';
+import 'package:flutter_phoenix/enums/page_name.dart';
+import 'package:flutter_phoenix/functions/routes.dart';
+import 'package:flutter_phoenix/functions/token_version.dart';
+import 'package:flutter_phoenix/widgets/animated_splash/animated_splash.dart';
+
+void main() async {
+  runZonedGuarded<Future<void>>(() async {
+    runApp(const MyApp());
+  }, (error, stack) => null);
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // final FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+    // final FirebaseMessaging messaging = FirebaseMessaging.instance;
+
+    // messaging.requestPermission(
+    //   alert: true,
+    //   announcement: true,
+    //   badge: true,
+    //   carPlay: false,
+    //   criticalAlert: false,
+    //   provisional: false,
+    //   sound: true,
+    // );
+
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: Configs.appName,
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        fontFamily: "Svenska",
+        primaryColor: Configs.primaryColor,
+        accentColor: Configs.secondaryColor,
+        errorColor: Configs.dangerColor,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: Builder(builder: (context) {
+        return AnimatedSplash(
+          imagePath: "assets/splash.png",
+          imageSize: const Size(325, 447),
+          duration: const Duration(milliseconds: 1500),
+          onReadyToGoNextScreen: () => getHomeScreen(context),
+          onAnimationCompleted: () {},
+          doInBackground: TokenVersion.init(),
+          curve: Curves.easeInOutCirc,
+          style: AnimationStyle.FadeIn,
+        );
+      }),
+      // navigatorObservers: [FirebaseAnalyticsObserver(analytics: analytics)],
     );
   }
-}
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
-    );
+  static void getHomeScreen(BuildContext context) {
+    Routes.pushReplacement(context, PageName.Home);
   }
 }

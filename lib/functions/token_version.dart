@@ -25,19 +25,19 @@ class TokenVersion {
   static Future<void> init() async {
     ConfigHelper _configHelper = ConfigHelper();
 
-    final futures = [
-      _configHelper.getSponsor(),
-      _configHelper.getBanner("mobile"),
-      _configHelper.getImage("mobile"),
-      _configHelper.getCCTenantId(),
-    ];
+    // final futures = [
+    //   _configHelper.getSponsor(),
+    //   _configHelper.getBanner("mobile"),
+    //   _configHelper.getImage("mobile"),
+    //   _configHelper.getCCTenantId(),
+    // ];
 
-    final results = await Future.wait(futures);
+    // final results = await Future.wait(futures);
 
-    instance!._sponsor = results[0] as bool;
-    instance!._banner = results[1] as String;
-    instance!._logo = results[2] as String;
-    instance!._ccTenantId = results[3] as String;
+    // instance!._sponsor = results[0] as bool;
+    // instance!._banner = results[1] as String;
+    // instance!._logo = results[2] as String;
+    // instance!._ccTenantId = results[3] as String;
   }
 
   static bool getSponsor() {

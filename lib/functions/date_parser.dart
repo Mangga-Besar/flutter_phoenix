@@ -18,7 +18,7 @@ class DateParser {
     "May",
     "June",
     "July",
-    "August",
+    "August", 
     "September",
     "October",
     "November",
