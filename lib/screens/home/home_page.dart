@@ -13,6 +13,14 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return SafeArea(
+      child: Center(
+        child: Column(
+          children: [
+            Text("AAAAAAAAAAAAAAAA"),
+          ],
+        ),
+      ),
+    );
   }
 }

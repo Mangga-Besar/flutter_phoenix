@@ -14,7 +14,7 @@ class HomeScreen extends BaseScreen {
 
   @override
   Widget content(BuildContext context) {
-    return HomePage();
+    return HomePage();    
   }
 
   @override
