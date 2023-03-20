@@ -47,13 +47,6 @@ abstract class BaseScreen extends StatefulWidget {
 class _BaseScreenState extends State<BaseScreen> {
   @override
   void initState() {
-    // analytics.setCurrentScreen(
-    //   screenName: EnumParser.getString(widget.pageName),
-    // );
-
-    // analytics.logScreenView(
-    //   screenName: EnumParser.getString(widget.pageName),
-    // );
     super.initState();
   }
 

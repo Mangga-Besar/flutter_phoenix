@@ -32,80 +32,21 @@ class HomeDrawer extends StatelessWidget {
                       onTap: () => getNavigation(context, PageName.Home),
                       selected: selected == PageName.Home,
                     ),
-                    NormalListTile(
-                      leading: const Icon(FontAwesomeIcons.calendarDays),
-                      title: const Text(
-                        "Jadwal Acara",
-                        style: TextStyle(fontSize: 16.0),
-                      ),
-                      onTap: () =>
-                          getNavigation(context, PageName.ScheduleList),
-                      selected: selected == PageName.ScheduleList,
-                    ),
-                    NormalListTile(
-                      leading: const Icon(FontAwesomeIcons.graduationCap),
-                      title: const Text(
-                        "Peserta",
-                        style: TextStyle(fontSize: 16.0),
-                      ),
-                      onTap: () => getNavigation(context, PageName.TenantList),
-                      selected: selected == PageName.TenantList,
-                    ),
-                    NormalListTile(
-                      leading: const Icon(FontAwesomeIcons.buildingColumns),
-                      title: const Text(
-                        "Jurusan",
-                        style: TextStyle(fontSize: 16.0),
-                      ),
-                      onTap: () => getNavigation(context, PageName.MajorList),
-                      selected: selected == PageName.MajorList,
-                    ),
-                    NormalListTile(
-                      leading: const Icon(FontAwesomeIcons.bookBookmark),
-                      title: const Text(
-                        "Ruang Konsultasi",
-                        style: TextStyle(fontSize: 16.0),
-                      ),
-                      onTap: () => getNavigation(context, PageName.LoungeList),
-                      selected: selected == PageName.LoungeList,
-                    ),
-                    Divider(
-                      height: 20,
-                      color: Colors.grey[300],
-                    ),
-                    NormalListTile(
-                      leading: const Icon(FontAwesomeIcons.music),
-                      title: const Text(
-                        "Tari Dero",
-                        style: TextStyle(fontSize: 16.0),
-                      ),
-                      onTap: () => getNavigation(context, PageName.Tarian),
-                      selected: selected == PageName.Tarian,
-                    ),
-                    NormalListTile(
-                      leading: const Icon(FontAwesomeIcons.users),
-                      title: const Text(
-                        "Daftar Panitia",
-                        style: TextStyle(fontSize: 16.0),
-                      ),
-                      onTap: () => getNavigation(context, PageName.Committee),
-                      selected: selected == PageName.Committee,
-                    ),
                     Divider(height: 20, color: Colors.grey[400]),
                   ],
                 ),
               ),
             ),
-            Align(
-              alignment: FractionalOffset.bottomCenter,
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 32.0),
-                child: Image.asset(
-                  'assets/logo_square.png',
-                  width: imageSize,
-                ),
-              ),
-            ),
+            // Align(
+            //   alignment: FractionalOffset.bottomCenter,
+            //   child: Padding(
+            //     padding: const EdgeInsets.only(bottom: 32.0),
+            //     child: Image.asset(
+            //       'assets/logo_square.png',
+            //       width: imageSize,
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),

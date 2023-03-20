@@ -62,8 +62,15 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 5),
             const CustomText(
+              "Selamat Datang",
+              fontSize: 36,
+              fontWeight: FontWeight.bold,
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            CustomText(
               'Nama Lengkap',
               fontSize: 15,
               fontWeight: FontWeight.bold,
@@ -76,12 +83,131 @@ class _HomePageState extends State<HomePage> {
                 _nameFocusNode.unfocus();
                 FocusScope.of(context).requestFocus(_emailFocusNode);
               },
-              // onChanged: (value) {
-              //   _registerData.name = value;
-              // },
-              // validator: (value) => _registerData.nameValidator(),
             ),
-            const SizedBox(height: 45),
+            const SizedBox(height: 15),
+            Row(
+              children: [
+                const Expanded(
+                  flex: 1,
+                  child: CustomText(
+                    'Tempat Lahir',
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(width: 10),
+                Expanded(
+                  flex: 4,
+                  child: NormalFormField(
+                    hintText: "ex. Jakarta",
+                    // text: _registerData.name,
+                    focusNode: _nameFocusNode,
+                    onFieldSubmitted: (value) {
+                      _nameFocusNode.unfocus();
+                    },
+
+                    // onChanged: (value) {
+                    //   _registerData.name = value;
+                    // },
+                    // validator: (value) => _registerData.nameValidator(),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 15),
+            Row(
+              children: [
+                const Expanded(
+                  flex: 1,
+                  child: CustomText(
+                    'Tanggal Lahir',
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(width: 10),
+                Expanded(
+                  flex: 4,
+                  child: NormalFormField(
+                    hintText: "ex. Budi Gunawan",
+                    // text: _registerData.name,
+                    focusNode: _nameFocusNode,
+                    onFieldSubmitted: (value) {
+                      _nameFocusNode.unfocus();
+                    },
+                    readOnly: true,
+
+                    // onChanged: (value) {
+                    //   _registerData.name = value;
+                    // },
+                    // validator: (value) => _registerData.nameValidator(),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 15),
+            Row(
+              children: [
+                const Expanded(
+                  flex: 1,
+                  child: CustomText(
+                    'Email',
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(width: 10),
+                Expanded(
+                  flex: 4,
+                  child: NormalFormField(
+                    hintText: "ex. xxx@sci.canisius.edu",
+                    // text: _registerData.name,
+                    focusNode: _nameFocusNode,
+                    onFieldSubmitted: (value) {
+                      _nameFocusNode.unfocus();
+                    },
+                    keyboardType: TextInputType.emailAddress,
+
+                    // onChanged: (value) {
+                    //   _registerData.name = value;
+                    // },
+                    // validator: (value) => _registerData.nameValidator(),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 15),
+            Row(
+              children: [
+                const Expanded(
+                  flex: 1,
+                  child: CustomText(
+                    'Nomor HP',
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(width: 10),
+                Expanded(
+                  flex: 4,
+                  child: NormalFormField(
+                    hintText: "ex. 08123456",
+                    // text: _registerData.name,
+                    focusNode: _nameFocusNode,
+                    onFieldSubmitted: (value) {
+                      _nameFocusNode.unfocus();
+                    },
+                    keyboardType: TextInputType.number,
+
+                    // onChanged: (value) {
+                    //   _registerData.name = value;
+                    // },
+                    // validator: (value) => _registerData.nameValidator(),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 15),
             Center(
               child: SizedBox(
                 height: 50,
