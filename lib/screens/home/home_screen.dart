@@ -28,7 +28,7 @@ class HomeScreen extends BaseScreenWithAppBar {
   AppBar? appBar(BuildContext context) {
     // TODO: implement appBar
     return AppBar(
-      backgroundColor: Colors.transparent,
+      // backgroundColor: Colors.transparent,
       elevation: 0,
     );
   }
