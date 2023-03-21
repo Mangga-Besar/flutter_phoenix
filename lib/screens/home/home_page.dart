@@ -6,6 +6,7 @@ import 'package:flutter_phoenix/configs/configs.dart';
 import 'package:flutter_phoenix/widgets/base_raised_button.dart';
 import 'package:flutter_phoenix/widgets/custom/custom_text.dart';
 import 'package:flutter_phoenix/widgets/normal_form_field.dart';
+import 'package:flutter_phoenix/widgets/section_part.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -112,110 +113,17 @@ class _HomePageState extends State<HomePage> {
               color: Colors.black54,
               thickness: 2.5,
             ),
-            Stack(
-              children: [
-                Column(
-                  children: [
-                    Row(
-                      children: [
-                        Expanded(
-                          flex: 5,
-                          child: CustomText(
-                            'Publikasi',
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 24,
-                          ),
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: IconButton(
-                            onPressed: () {
-                              print("EDIT PROFILE");
-                            },
-                            icon: const Icon(
-                              Icons.edit,
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-              ],
-            ),
+            SectionPart(),
             const Divider(
               color: Colors.black54,
               thickness: 2.5,
             ),
-            Stack(
-              children: [
-                Column(
-                  children: [
-                    Row(
-                      children: [
-                        Expanded(
-                          flex: 5,
-                          child: CustomText(
-                            'Sertifikasi',
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 24,
-                          ),
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: IconButton(
-                            onPressed: () {
-                              print("EDIT PROFILE");
-                            },
-                            icon: const Icon(
-                              Icons.edit,
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-              ],
-            ),
+            SectionPart(),
             const Divider(
               color: Colors.black54,
               thickness: 2.5,
             ),
-            Stack(
-              children: [
-                Column(
-                  children: [
-                    Row(
-                      children: [
-                        Expanded(
-                          flex: 5,
-                          child: CustomText(
-                            'Pekerjaan',
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 24,
-                          ),
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: IconButton(
-                            onPressed: () {
-                              print("EDIT PROFILE");
-                            },
-                            icon: const Icon(
-                              Icons.edit,
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-              ],
-            ),
+            SectionPart(),
             Row(
               children: [
                 const Expanded(
