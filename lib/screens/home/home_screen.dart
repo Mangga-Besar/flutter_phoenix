@@ -28,12 +28,8 @@ class HomeScreen extends BaseScreenWithAppBar {
   AppBar? appBar(BuildContext context) {
     // TODO: implement appBar
     return AppBar(
-      actions: [
-        IconButton(
-          onPressed: () {},
-          icon: Icon(Icons.edit),
-        )
-      ],
+      backgroundColor: Colors.transparent,
+      elevation: 0,
     );
   }
 }

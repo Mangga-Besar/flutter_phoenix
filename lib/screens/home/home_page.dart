@@ -3,7 +3,6 @@ import 'package:flutter_phoenix/basics/exceptions/http_exception.dart';
 import 'package:flutter_phoenix/functions/loading_function.dart';
 import 'package:flutter_phoenix/functions/toast_helper.dart';
 import 'package:flutter_phoenix/configs/configs.dart';
-import 'package:flutter_phoenix/models/user/user_helper.dart';
 import 'package:flutter_phoenix/widgets/base_raised_button.dart';
 import 'package:flutter_phoenix/widgets/custom/custom_text.dart';
 import 'package:flutter_phoenix/widgets/normal_form_field.dart';
@@ -14,28 +13,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late UserHelper _helper;
-
-  late GlobalKey<FormState> _formKey;
   late FocusNode _nameFocusNode;
-  late FocusNode _emailFocusNode;
-  late FocusNode _handPhoneFocusNode;
-  late FocusNode _institutionFocusNode;
-  late FocusNode _kelasFocusNode;
-  late FocusNode _passwordFocusNode;
-  late FocusNode _confirmPasswordFocusNode;
 
   @override
   void initState() {
-    _helper = UserHelper();
-    _formKey = GlobalKey<FormState>();
     _nameFocusNode = FocusNode();
-    _emailFocusNode = FocusNode();
-    _handPhoneFocusNode = FocusNode();
-    _institutionFocusNode = FocusNode();
-    _kelasFocusNode = FocusNode();
-    _passwordFocusNode = FocusNode();
-    _confirmPasswordFocusNode = FocusNode();
 
     super.initState();
   }
@@ -43,13 +25,6 @@ class _HomePageState extends State<HomePage> {
   @override
   void dispose() {
     _nameFocusNode.dispose();
-    _emailFocusNode.dispose();
-    _handPhoneFocusNode.dispose();
-    _institutionFocusNode.dispose();
-    _kelasFocusNode.dispose();
-    _passwordFocusNode.dispose();
-    _confirmPasswordFocusNode.dispose();
-
     super.dispose();
   }
 
@@ -62,121 +37,74 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const CustomText(
-              "Selamat Datang",
-              fontSize: 36,
-              fontWeight: FontWeight.bold,
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            CustomText(
-              'Nama Lengkap',
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
-            ),
-            NormalFormField(
-              hintText: "ex. Budi Gunawan",
-              // text: _registerData.name,
-              focusNode: _nameFocusNode,
-              onFieldSubmitted: (value) {
-                _nameFocusNode.unfocus();
-                FocusScope.of(context).requestFocus(_emailFocusNode);
-              },
-            ),
-            const SizedBox(height: 15),
-            Row(
+            Stack(
               children: [
-                const Expanded(
-                  flex: 1,
-                  child: CustomText(
-                    'Tempat Lahir',
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                  ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: const [
+                    CustomText(
+                      "BUDI GUNAWAN",
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    CustomText(
+                      'Budi@gunawan.com',
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    CustomText(
+                      '31730502030405',
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    CustomText(
+                      '082132456',
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    CustomText(
+                      'Jakarta ,15 Jan 2000',
+                      fontSize: 15,
+                      color: Colors.black54,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    CustomText(
+                      'Jln. Kijoko Bodo, No 17E, RT 01, RW 01, Kota Jakarta Timur',
+                      color: Colors.black54,
+                      fontWeight: FontWeight.normal,
+                      fontSize: 15,
+                    ),
+                    CustomText(
+                      'Katholik',
+                      color: Colors.black54,
+                      fontWeight: FontWeight.normal,
+                      fontSize: 15,
+                    ),
+                    CustomText(
+                      'Kontak Darurat : 082060123',
+                      color: Colors.black54,
+                      fontWeight: FontWeight.normal,
+                      fontSize: 15,
+                    ),
+                  ],
                 ),
-                SizedBox(width: 10),
-                Expanded(
-                  flex: 4,
-                  child: NormalFormField(
-                    hintText: "ex. Jakarta",
-                    // text: _registerData.name,
-                    focusNode: _nameFocusNode,
-                    onFieldSubmitted: (value) {
-                      _nameFocusNode.unfocus();
+                Positioned(
+                  right: 0,
+                  top: 0,
+                  child: IconButton(
+                    onPressed: () {
+                      print("EDIT PROFILE");
                     },
-
-                    // onChanged: (value) {
-                    //   _registerData.name = value;
-                    // },
-                    // validator: (value) => _registerData.nameValidator(),
+                    icon: const Icon(
+                      Icons.edit,
+                    ),
                   ),
-                ),
+                )
               ],
             ),
-            const SizedBox(height: 15),
-            Row(
-              children: [
-                const Expanded(
-                  flex: 1,
-                  child: CustomText(
-                    'Tanggal Lahir',
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(width: 10),
-                Expanded(
-                  flex: 4,
-                  child: NormalFormField(
-                    hintText: "ex. Budi Gunawan",
-                    // text: _registerData.name,
-                    focusNode: _nameFocusNode,
-                    onFieldSubmitted: (value) {
-                      _nameFocusNode.unfocus();
-                    },
-                    readOnly: true,
-
-                    // onChanged: (value) {
-                    //   _registerData.name = value;
-                    // },
-                    // validator: (value) => _registerData.nameValidator(),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 15),
-            Row(
-              children: [
-                const Expanded(
-                  flex: 1,
-                  child: CustomText(
-                    'Email',
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(width: 10),
-                Expanded(
-                  flex: 4,
-                  child: NormalFormField(
-                    hintText: "ex. xxx@sci.canisius.edu",
-                    // text: _registerData.name,
-                    focusNode: _nameFocusNode,
-                    onFieldSubmitted: (value) {
-                      _nameFocusNode.unfocus();
-                    },
-                    keyboardType: TextInputType.emailAddress,
-
-                    // onChanged: (value) {
-                    //   _registerData.name = value;
-                    // },
-                    // validator: (value) => _registerData.nameValidator(),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 15),
             Row(
               children: [
                 const Expanded(
