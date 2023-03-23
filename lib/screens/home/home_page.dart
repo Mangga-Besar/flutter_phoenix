@@ -31,10 +31,9 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      autovalidateMode: AutovalidateMode.onUserInteraction,
-      child: Padding(
-        padding: const EdgeInsets.all(20),
+    return Padding(
+      padding: const EdgeInsets.all(10),
+      child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -113,17 +112,37 @@ class _HomePageState extends State<HomePage> {
               color: Colors.black54,
               thickness: 2.5,
             ),
-            SectionPart(),
+            SectionPart(
+              title: "Kontak Darurat",
+            ),
             const Divider(
               color: Colors.black54,
               thickness: 2.5,
             ),
-            SectionPart(),
+            SectionPart(
+              title: "Pendidikan",
+            ),
             const Divider(
               color: Colors.black54,
               thickness: 2.5,
             ),
-            SectionPart(),
+            SectionPart(
+              title: "Pelatihan",
+            ),
+            const Divider(
+              color: Colors.black54,
+              thickness: 2.5,
+            ),
+            SectionPart(
+              title: "Publikasi",
+            ),
+            const Divider(
+              color: Colors.black54,
+              thickness: 2.5,
+            ),
+            SectionPart(
+              title: "Penugasan",
+            ),
             Row(
               children: [
                 const Expanded(

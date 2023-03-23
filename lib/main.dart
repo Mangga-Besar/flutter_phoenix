@@ -5,6 +5,7 @@ import 'package:flutter_phoenix/configs/configs.dart';
 import 'package:flutter_phoenix/enums/page_name.dart';
 import 'package:flutter_phoenix/functions/routes.dart';
 import 'package:flutter_phoenix/functions/token_version.dart';
+import 'package:flutter_phoenix/screens/home/home_screen.dart';
 import 'package:flutter_phoenix/widgets/animated_splash/animated_splash.dart';
 
 void main() async {
@@ -41,18 +42,20 @@ class MyApp extends StatelessWidget {
         errorColor: Configs.dangerColor,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Builder(builder: (context) {
-        return AnimatedSplash(
-          imagePath: "assets/splash.png",
-          imageSize: const Size(325, 447),
-          duration: const Duration(milliseconds: 1500),
-          onReadyToGoNextScreen: () => getHomeScreen(context),
-          onAnimationCompleted: () {},
-          doInBackground: TokenVersion.init(),
-          curve: Curves.easeInOutCirc,
-          style: AnimationStyle.FadeIn,
-        );
-      }),
+      // home: Builder(builder: (context) {
+      //   return AnimatedSplash(
+      //     imagePath: "assets/splash.png",
+      //     imageSize: const Size(325, 447),
+      //     duration: const Duration(milliseconds: 1500),
+      //     onReadyToGoNextScreen: () => getHomeScreen(context),
+      //     onAnimationCompleted: () {},
+      //     doInBackground: TokenVersion.init(),
+      //     curve: Curves.easeInOutCirc,
+      //     style: AnimationStyle.FadeIn,
+      //   );
+      //   // return HomeScreen();
+      // }),
+      home: HomeScreen(),
       // navigatorObservers: [FirebaseAnalyticsObserver(analytics: analytics)],
     );
   }

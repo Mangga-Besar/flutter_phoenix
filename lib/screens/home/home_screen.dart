@@ -24,12 +24,12 @@ class HomeScreen extends BaseScreenWithAppBar {
     return const HomeDrawer(selected: PageName.Home);
   }
 
-  @override
-  AppBar? appBar(BuildContext context) {
-    // TODO: implement appBar
-    return AppBar(
-      // backgroundColor: Colors.transparent,
-      elevation: 0,
-    );
-  }
+  // @override
+  // AppBar? appBar(BuildContext context) {
+  //   // TODO: implement appBar
+  //   return AppBar(
+  //     // backgroundColor: Colors.transparent,
+  //     elevation: 0,
+  //   );
+  // }
 }

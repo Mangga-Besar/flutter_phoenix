@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/widgets/custom/custom_text.dart';
 
 class SectionPart extends StatefulWidget {
-  const SectionPart({super.key});
+  SectionPart({this.title, super.key});
+
+  String? title;
 
   @override
   State<SectionPart> createState() => _SectionPartState();
@@ -20,7 +22,7 @@ class _SectionPartState extends State<SectionPart> {
                 Expanded(
                   flex: 5,
                   child: CustomText(
-                    'Sertifikasi',
+                    widget.title ?? "",
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
                     fontSize: 24,
@@ -39,6 +41,14 @@ class _SectionPartState extends State<SectionPart> {
                 )
               ],
             ),
+            ListView.builder(
+              itemBuilder: (context, i) {
+                return Container();
+              },
+              itemCount: 0,
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+            )
           ],
         ),
       ],
