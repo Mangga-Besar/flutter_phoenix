@@ -1,4 +1,0 @@
-enum RoomType {
-  S,
-  B,
-}

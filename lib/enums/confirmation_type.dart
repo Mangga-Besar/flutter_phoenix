@@ -1,1 +1,0 @@
-enum ConfirmationType { Confirm, Cancel }

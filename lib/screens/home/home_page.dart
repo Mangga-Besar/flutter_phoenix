@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/basics/exceptions/http_exception.dart';
+import 'package:flutter_phoenix/enums/pendidikan_level.dart';
 import 'package:flutter_phoenix/functions/loading_function.dart';
 import 'package:flutter_phoenix/functions/toast_helper.dart';
 import 'package:flutter_phoenix/configs/configs.dart';
+import 'package:flutter_phoenix/models/sections/kontak_section.dart';
+import 'package:flutter_phoenix/models/sections/pelatihan_section.dart';
+import 'package:flutter_phoenix/models/sections/pendidikan_section.dart';
+import 'package:flutter_phoenix/models/sections/penugasan_section.dart';
+import 'package:flutter_phoenix/models/sections/publikasi_section.dart';
 import 'package:flutter_phoenix/widgets/base_raised_button.dart';
 import 'package:flutter_phoenix/widgets/custom/custom_text.dart';
 import 'package:flutter_phoenix/widgets/normal_form_field.dart';
@@ -83,12 +89,6 @@ class _HomePageState extends State<HomePage> {
                       fontWeight: FontWeight.normal,
                       fontSize: 15,
                     ),
-                    CustomText(
-                      'Kontak Darurat : 082060123',
-                      color: Colors.black54,
-                      fontWeight: FontWeight.normal,
-                      fontSize: 15,
-                    ),
                     SizedBox(
                       height: 10,
                     ),
@@ -114,6 +114,13 @@ class _HomePageState extends State<HomePage> {
             ),
             SectionPart(
               title: "Kontak Darurat",
+              content: [
+                KontakSection(
+                    contactNumber: 120320130213,
+                    description: "ASDSADAWDSAD",
+                    hubungan: "AAAAAAAAAA",
+                    name: "JOKOBODO")
+              ],
             ),
             const Divider(
               color: Colors.black54,
@@ -121,6 +128,15 @@ class _HomePageState extends State<HomePage> {
             ),
             SectionPart(
               title: "Pendidikan",
+              content: [
+                PendidikanSection(
+                    description: "AAAA",
+                    jurusan: "S!SD",
+                    level: PendidikanLevel.S1,
+                    lokasi: "BANDUNG",
+                    name: "LULUS S1",
+                    tahun: DateTime.now())
+              ],
             ),
             const Divider(
               color: Colors.black54,
@@ -128,6 +144,16 @@ class _HomePageState extends State<HomePage> {
             ),
             SectionPart(
               title: "Pelatihan",
+              content: [
+                PelatihanSection(
+                  description: "AAAA",
+                  name: "ASDASDASD",
+                  topik: "MEMBACA BUKU",
+                  startDate: DateTime.now().subtract(Duration(days: 1)),
+                  endDate: DateTime.now(),
+                  pemberiSertifikat: "DIBERI TOKOPED",
+                )
+              ],
             ),
             const Divider(
               color: Colors.black54,
@@ -135,6 +161,14 @@ class _HomePageState extends State<HomePage> {
             ),
             SectionPart(
               title: "Publikasi",
+              content: [
+                PublikasiSection(
+                    bidangIlmu: "Biologi",
+                    description: "AAAAAAAAAAAA",
+                    name: "PAPER ABABABA",
+                    tanggal: DateTime.now(),
+                    topik: "DADASDASD")
+              ],
             ),
             const Divider(
               color: Colors.black54,
@@ -142,6 +176,14 @@ class _HomePageState extends State<HomePage> {
             ),
             SectionPart(
               title: "Penugasan",
+              content: [
+                PenugasanSection(
+                  description: "AAAAAAAAAA",
+                  name: "MENGARANG Cerita ANAK",
+                  startDate: DateTime.now().subtract(Duration(days: 1)),
+                  endDate: DateTime.now(),
+                )
+              ],
             ),
             Row(
               children: [

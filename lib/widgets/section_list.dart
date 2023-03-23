@@ -1,16 +1,22 @@
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter/material.dart';
 
-class SectionList extends StatefulWidget {
+abstract class SectionList extends StatefulWidget {
   const SectionList({super.key});
 
   @override
   State<SectionList> createState() => _SectionListState();
+  Widget? getContent(BuildContext context);
 }
 
 class _SectionListState extends State<SectionList> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Padding(
+      padding: EdgeInsets.symmetric(
+        vertical: 1.0,
+        horizontal: 2.0,
+      ),
+      child: widget.getContent(context),
+    );
   }
 }
