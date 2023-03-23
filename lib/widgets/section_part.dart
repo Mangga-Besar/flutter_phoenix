@@ -30,8 +30,15 @@ class SectionPart extends StatefulWidget {
 class _SectionPartState extends State<SectionPart> {
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    return Column(
       children: [
+        const Divider(
+          color: Colors.black54,
+          thickness: 2.5,
+        ),
+        SizedBox(
+          height: 5,
+        ),
         Column(
           children: [
             Row(
@@ -81,26 +88,30 @@ class _SectionPartState extends State<SectionPart> {
                       publikasi: (widget.content[i]) as PublikasiSection);
                 }
               },
-              itemCount: widget.content.length,
+              itemCount: widget.content.length > 2 ? 2 : widget.content.length,
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
             ),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton.icon(
-                  style: const ButtonStyle(
-                    backgroundColor:
-                        MaterialStatePropertyAll<Color>(Colors.transparent),
-                    elevation: MaterialStatePropertyAll<double>(0),
-                    iconColor: MaterialStatePropertyAll<Color>(Colors.black),
-                  ),
-                  onPressed: () {
-                    print("showmore");
-                  },
-                  icon: const Icon(Icons.arrow_drop_down),
-                  label: const CustomText("Show More")),
-            )
+            if (widget.content.length > 2)
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton.icon(
+                    style: const ButtonStyle(
+                      backgroundColor:
+                          MaterialStatePropertyAll<Color>(Colors.transparent),
+                      elevation: MaterialStatePropertyAll<double>(0),
+                      iconColor: MaterialStatePropertyAll<Color>(Colors.black),
+                    ),
+                    onPressed: () {
+                      print("showmore");
+                    },
+                    icon: const Icon(Icons.arrow_drop_down),
+                    label: const CustomText("Show More")),
+              )
           ],
+        ),
+        SizedBox(
+          height: 10,
         ),
       ],
     );

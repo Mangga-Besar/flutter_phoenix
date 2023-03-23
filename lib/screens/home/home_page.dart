@@ -38,7 +38,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -108,10 +108,6 @@ class _HomePageState extends State<HomePage> {
                 )
               ],
             ),
-            const Divider(
-              color: Colors.black54,
-              thickness: 2.5,
-            ),
             SectionPart(
               title: "Kontak Darurat",
               content: [
@@ -122,10 +118,6 @@ class _HomePageState extends State<HomePage> {
                     name: "JOKOBODO")
               ],
             ),
-            const Divider(
-              color: Colors.black54,
-              thickness: 2.5,
-            ),
             SectionPart(
               title: "Pendidikan",
               content: [
@@ -135,12 +127,15 @@ class _HomePageState extends State<HomePage> {
                     level: PendidikanLevel.S1,
                     lokasi: "BANDUNG",
                     name: "LULUS S1",
-                    tahun: DateTime.now())
+                    tahun: DateTime.now()),
+                PendidikanSection(
+                    description: "AAAA",
+                    jurusan: "S!SD",
+                    level: PendidikanLevel.S2,
+                    lokasi: "BANDUNG",
+                    name: "LULUS S1",
+                    tahun: DateTime.now()),
               ],
-            ),
-            const Divider(
-              color: Colors.black54,
-              thickness: 2.5,
             ),
             SectionPart(
               title: "Pelatihan",
@@ -155,10 +150,6 @@ class _HomePageState extends State<HomePage> {
                 )
               ],
             ),
-            const Divider(
-              color: Colors.black54,
-              thickness: 2.5,
-            ),
             SectionPart(
               title: "Publikasi",
               content: [
@@ -170,10 +161,6 @@ class _HomePageState extends State<HomePage> {
                     topik: "DADASDASD")
               ],
             ),
-            const Divider(
-              color: Colors.black54,
-              thickness: 2.5,
-            ),
             SectionPart(
               title: "Penugasan",
               content: [
@@ -182,7 +169,19 @@ class _HomePageState extends State<HomePage> {
                   name: "MENGARANG Cerita ANAK",
                   startDate: DateTime.now().subtract(Duration(days: 1)),
                   endDate: DateTime.now(),
-                )
+                ),
+                PenugasanSection(
+                  description: "AAAAAAAAAA",
+                  name: "MENGARANG Cerita ANAK",
+                  startDate: DateTime.now().subtract(Duration(days: 1)),
+                  endDate: DateTime.now(),
+                ),
+                PenugasanSection(
+                  description: "AAAAAAAAAA",
+                  name: "MENGARANG Cerita ANAK",
+                  startDate: DateTime.now().subtract(Duration(days: 1)),
+                  endDate: DateTime.now(),
+                ),
               ],
             ),
             Row(
