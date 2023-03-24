@@ -15,25 +15,25 @@ class KontakSectionList extends SectionList {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            CustomText(
-              kontak.name ?? "",
-              fontWeight: FontWeight.bold,
-              fontSize: 15,
-            ),
-            CustomText(
-              (kontak.contactNumber ?? "").toString(),
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
-            ),
-          ],
+        CustomText(
+          kontak.name ?? "",
+          fontWeight: FontWeight.w800,
+          fontSize: 15,
         ),
-        CustomText(kontak.hubungan ?? "", fontSize: 12),
+        CustomText(
+          (kontak.contactNumber ?? "").toString(),
+          fontSize: 12,
+          fontWeight: FontWeight.w500,
+        ),
+        CustomText(
+          kontak.hubungan ?? "",
+          fontSize: 12,
+          color: Colors.black87,
+        ),
         CustomText(
           kontak.description ?? "",
           fontSize: 12,
+          color: Colors.black87,
         ),
       ],
     );

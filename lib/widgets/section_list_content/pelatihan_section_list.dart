@@ -14,29 +14,39 @@ class PelatihanSectionList extends SectionList {
       children: [
         CustomText(
           pelatihan.name ?? "",
-          fontWeight: FontWeight.bold,
+          fontWeight: FontWeight.w800,
           fontSize: 15,
         ),
         CustomText(
           pelatihan.topik ?? "",
           fontSize: 12,
-          fontWeight: FontWeight.bold,
+          fontWeight: FontWeight.w500,
         ),
         CustomText(
           pelatihan.pemberiSertifikat ?? "",
           fontSize: 12,
+          color: Colors.black87,
         ),
         CustomText(
-          "Dimulai : " + pelatihan.startDate.toString(),
+          "Dimulai : " +
+              (pelatihan.startDate?.month.toString() ?? "") +
+              " - " +
+              (pelatihan.startDate?.year.toString() ?? ""),
           fontSize: 12,
+          color: Colors.black87,
         ),
         CustomText(
-          "Berakhir : " + pelatihan.endDate.toString(),
+          "Berakhir : " +
+              (pelatihan.endDate?.month.toString() ?? "") +
+              " - " +
+              (pelatihan.endDate?.year.toString() ?? ""),
           fontSize: 12,
+          color: Colors.black87,
         ),
         CustomText(
           pelatihan.description ?? "",
           fontSize: 12,
+          color: Colors.black87,
         ),
       ],
     );

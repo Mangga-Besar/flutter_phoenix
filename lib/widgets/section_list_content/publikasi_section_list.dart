@@ -12,29 +12,26 @@ class PublikasiSectionList extends SectionList {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            CustomText(
-              publikasi.name ?? "",
-              fontWeight: FontWeight.bold,
-              fontSize: 15,
-            ),
-            CustomText(
-              publikasi.tanggal?.year.toString() ?? "",
-              fontWeight: FontWeight.bold,
-              fontSize: 15,
-            ),
-          ],
+        CustomText(
+          publikasi.name ?? "",
+          fontWeight: FontWeight.w800,
+          fontSize: 15,
+        ),
+        CustomText(
+          publikasi.tanggal?.year.toString() ?? "",
+          fontWeight: FontWeight.w500,
+          fontSize: 15,
         ),
         CustomText(
           publikasi.topik ?? "",
           fontSize: 12,
           fontWeight: FontWeight.bold,
+          color: Colors.black87,
         ),
         CustomText(
           publikasi.description ?? "",
           fontSize: 12,
+          color: Colors.black87,
         ),
       ],
     );

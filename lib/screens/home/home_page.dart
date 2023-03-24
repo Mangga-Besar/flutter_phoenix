@@ -38,78 +38,85 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+      padding: const EdgeInsets.symmetric(
+        vertical: 10,
+      ),
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Stack(
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    CustomText(
-                      "BUDI GUNAWAN",
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    CustomText(
-                      'Budi@gunawan.com',
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    CustomText(
-                      '31730502030405',
-                      fontSize: 15,
-                      fontWeight: FontWeight.w500,
-                    ),
-                    CustomText(
-                      '082132456',
-                      fontSize: 15,
-                      fontWeight: FontWeight.w500,
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    CustomText(
-                      'Jakarta ,15 Jan 2000',
-                      fontSize: 15,
-                      color: Colors.black54,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    CustomText(
-                      'Jln. Kijoko Bodo, No 17E, RT 01, RW 01, Kota Jakarta Timur',
-                      color: Colors.black54,
-                      fontWeight: FontWeight.normal,
-                      fontSize: 15,
-                    ),
-                    CustomText(
-                      'Katholik',
-                      color: Colors.black54,
-                      fontWeight: FontWeight.normal,
-                      fontSize: 15,
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                  ],
-                ),
-                Positioned(
-                  right: 0,
-                  top: 0,
-                  child: IconButton(
-                    onPressed: () {
-                      print("EDIT PROFILE");
-                    },
-                    icon: const Icon(
-                      Icons.edit,
-                    ),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 10.0,
+              ),
+              child: Stack(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      CustomText(
+                        "BUDI GUNAWAN",
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      CustomText(
+                        'Budi@gunawan.com',
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      CustomText(
+                        '31730502030405',
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      CustomText(
+                        '082132456',
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      CustomText(
+                        'Jakarta ,15 Jan 2000',
+                        fontSize: 15,
+                        color: Colors.black54,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      CustomText(
+                        'Jln. Kijoko Bodo, No 17E, RT 01, RW 01, Kota Jakarta Timur',
+                        color: Colors.black54,
+                        fontWeight: FontWeight.normal,
+                        fontSize: 15,
+                      ),
+                      CustomText(
+                        'Katholik',
+                        color: Colors.black54,
+                        fontWeight: FontWeight.normal,
+                        fontSize: 15,
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                    ],
                   ),
-                )
-              ],
+                  Positioned(
+                    right: 0,
+                    top: 0,
+                    child: IconButton(
+                      onPressed: () {
+                        print("EDIT PROFILE");
+                      },
+                      icon: const Icon(
+                        Icons.edit,
+                      ),
+                    ),
+                  )
+                ],
+              ),
             ),
             SectionPart(
-              title: "Kontak Darurat",
+              title: "KONTAK DARURAT",
               content: [
                 KontakSection(
                     contactNumber: 120320130213,
@@ -119,7 +126,7 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
             SectionPart(
-              title: "Pendidikan",
+              title: "PENDIDIKAN",
               content: [
                 PendidikanSection(
                     description: "AAAA",
@@ -138,7 +145,7 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
             SectionPart(
-              title: "Pelatihan",
+              title: "PELATIHAN",
               content: [
                 PelatihanSection(
                   description: "AAAA",
@@ -151,7 +158,7 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
             SectionPart(
-              title: "Publikasi",
+              title: "PUBLIKASI",
               content: [
                 PublikasiSection(
                     bidangIlmu: "Biologi",
@@ -162,79 +169,82 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
             SectionPart(
-              title: "Penugasan",
+              title: "PENUGASAN",
               content: [
                 PenugasanSection(
                   description: "AAAAAAAAAA",
                   name: "MENGARANG Cerita ANAK",
+                  tipePekerjaan: "ASD",
                   startDate: DateTime.now().subtract(Duration(days: 1)),
                   endDate: DateTime.now(),
                 ),
                 PenugasanSection(
                   description: "AAAAAAAAAA",
+                  tipePekerjaan: "ASD",
                   name: "MENGARANG Cerita ANAK",
                   startDate: DateTime.now().subtract(Duration(days: 1)),
                   endDate: DateTime.now(),
                 ),
                 PenugasanSection(
                   description: "AAAAAAAAAA",
+                  tipePekerjaan: "ASD",
                   name: "MENGARANG Cerita ANAK",
                   startDate: DateTime.now().subtract(Duration(days: 1)),
                   endDate: DateTime.now(),
                 ),
               ],
             ),
-            Row(
-              children: [
-                const Expanded(
-                  flex: 1,
-                  child: CustomText(
-                    'Nomor HP',
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(width: 10),
-                Expanded(
-                  flex: 4,
-                  child: NormalFormField(
-                    hintText: "ex. 08123456",
-                    // text: _registerData.name,
-                    focusNode: _nameFocusNode,
-                    onFieldSubmitted: (value) {
-                      _nameFocusNode.unfocus();
-                    },
-                    keyboardType: TextInputType.number,
+            // Row(
+            //   children: [
+            //     const Expanded(
+            //       flex: 1,
+            //       child: CustomText(
+            //         'Nomor HP',
+            //         fontSize: 15,
+            //         fontWeight: FontWeight.bold,
+            //       ),
+            //     ),
+            //     SizedBox(width: 10),
+            //     Expanded(
+            //       flex: 4,
+            //       child: NormalFormField(
+            //         hintText: "ex. 08123456",
+            //         // text: _registerData.name,
+            //         focusNode: _nameFocusNode,
+            //         onFieldSubmitted: (value) {
+            //           _nameFocusNode.unfocus();
+            //         },
+            //         keyboardType: TextInputType.number,
 
-                    // onChanged: (value) {
-                    //   _registerData.name = value;
-                    // },
-                    // validator: (value) => _registerData.nameValidator(),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 15),
-            Center(
-              child: SizedBox(
-                height: 50,
-                child: BaseRaisedButton(
-                  ratio: 1 / 1.25,
-                  onPressed: () {
-                    register(context);
-                  },
-                  color: Configs.secondaryColor,
-                  child: const Text(
-                    "Save",
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
+            //         // onChanged: (value) {
+            //         //   _registerData.name = value;
+            //         // },
+            //         // validator: (value) => _registerData.nameValidator(),
+            //       ),
+            //     ),
+            //   ],
+            // ),
+            // const SizedBox(height: 15),
+            // Center(
+            //   child: SizedBox(
+            //     height: 50,
+            //     child: BaseRaisedButton(
+            //       ratio: 1 / 1.25,
+            //       onPressed: () {
+            //         register(context);
+            //       },
+            //       color: Configs.secondaryColor,
+            //       child: const Text(
+            //         "Save",
+            //         style: TextStyle(
+            //           fontSize: 18,
+            //           color: Colors.white,
+            //         ),
+            //       ),
+            //     ),
+            //   ),
+            // ),
+            // const SizedBox(height: 20),
           ],
         ),
       ),
