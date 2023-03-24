@@ -1,4 +1,5 @@
 enum PageName {
+  EditSection,
   EmailVerification,
   ForgetPassword,
   Home,

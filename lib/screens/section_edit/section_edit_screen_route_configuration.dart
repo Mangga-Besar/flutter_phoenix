@@ -5,5 +5,5 @@ import 'section_edit_screen.dart';
 
 class SectionEditScreenRouteConfiguration extends BaseRouteConfiguration {
   SectionEditScreenRouteConfiguration()
-      : super(PageName.Register, builder: (context) => SectionEditScreen());
+      : super(PageName.EditSection, builder: (context) => SectionEditScreen());
 }
