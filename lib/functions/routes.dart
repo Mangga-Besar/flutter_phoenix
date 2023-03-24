@@ -4,11 +4,13 @@ import 'package:flutter_phoenix/functions/enum_parser.dart';
 import 'package:flutter_phoenix/functions/loading_function.dart';
 import 'package:flutter_phoenix/interfaces/i_route_configuration.dart';
 import 'package:flutter_phoenix/screens/home/home_screen_route_configuration.dart';
+import 'package:flutter_phoenix/screens/section_list_view/section_list_view_screen_route_configuration.dart';
 import 'package:flutter_phoenix/widgets/builder/future_use.dart';
 
 class Routes {
   static List<IRouteConfiguration> listRoute = [
     HomeScreenRouteConfiguration(),
+    SectionListViewScreenRouteConfiguration(),
   ];
 
   static Future<T?> pushAndRemoveUntil<T>(

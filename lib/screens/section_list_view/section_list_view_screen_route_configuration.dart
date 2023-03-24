@@ -5,7 +5,7 @@ import 'package:flutter_phoenix/enums/page_name.dart';
 import 'section_list_view_screen.dart';
 
 class SectionListViewScreenRouteConfiguration extends BaseRouteConfiguration {
-  SectionListViewScreenRouteConfiguration() : super(PageName.Home);
+  SectionListViewScreenRouteConfiguration() : super(PageName.SectionList);
 
   @override
   Future<Widget> getScreen(BuildContext context) async {

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_phoenix/enums/page_name.dart';
+import 'package:flutter_phoenix/functions/routes.dart';
 import 'package:flutter_phoenix/interfaces/i_section.dart';
 import 'package:flutter_phoenix/models/sections/kontak_section.dart';
 import 'package:flutter_phoenix/models/sections/pelatihan_section.dart';
@@ -104,7 +106,11 @@ class _SectionPartState extends State<SectionPart> {
                             MaterialStatePropertyAll<Color>(Colors.black),
                       ),
                       onPressed: () {
-                        print("showmore");
+                        Routes.push(
+                          context,
+                          PageName.SectionList,
+                          arguments: {"content": widget.content},
+                        );
                       },
                       icon: const Icon(Icons.arrow_drop_down),
                       label: const CustomText("Show More")),
