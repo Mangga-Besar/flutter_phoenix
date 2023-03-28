@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_phoenix/configs/configs.dart';
-import 'package:flutter_phoenix/models/sections/kontak_section.dart';
+import 'package:flutter_phoenix/models/sections/publikasi_section.dart';
 import 'package:flutter_phoenix/screens/section_edit/section_edit_page.dart';
 import 'package:flutter_phoenix/widgets/base_raised_button.dart';
 import 'package:flutter_phoenix/widgets/custom/custom_text.dart';
 import 'package:flutter_phoenix/widgets/normal_form_field.dart';
 
-class SectionKontakEditPage extends SectionEditPage {
-  SectionKontakEditPage({this.kontak});
+class SectionPublikasiEditPage extends SectionEditPage {
+  SectionPublikasiEditPage({this.publikasi});
 
-  KontakSection? kontak;
+  PublikasiSection? publikasi;
 
   @override
   Widget formView(BuildContext context) {
@@ -26,7 +25,7 @@ class SectionKontakEditPage extends SectionEditPage {
         ),
         NormalFormField(
           hintText: "ex. Budi Gunawan",
-          text: kontak?.name ?? "",
+          text: publikasi?.name ?? "",
           focusNode: _nameFocusNode,
           onFieldSubmitted: (value) {
             _nameFocusNode.unfocus();
@@ -35,7 +34,7 @@ class SectionKontakEditPage extends SectionEditPage {
           // onChanged: (value) {
           //   _registerData.name = value;
           // },
-          validator: (value) => kontak!.nameValidator(),
+          // validator: (value) => pelatihan!.nameValidator(),
         ),
         const SizedBox(height: 45),
         Center(

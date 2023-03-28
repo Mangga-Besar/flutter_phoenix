@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_phoenix/enums/page_name.dart';
 import 'package:flutter_phoenix/functions/enum_parser.dart';
+import 'package:flutter_phoenix/functions/routes.dart';
 import 'package:flutter_phoenix/models/sections/pendidikan_section.dart';
 import 'package:flutter_phoenix/widgets/custom/custom_text.dart';
 import 'package:flutter_phoenix/widgets/section_list.dart';
@@ -17,7 +19,13 @@ class PendidikanSectionListEdit extends SectionList {
           right: 0,
           child: IconButton(
             icon: const Icon(Icons.edit),
-            onPressed: () {},
+            onPressed: () {
+              Routes.push(
+                context,
+                PageName.EditSection,
+                arguments: {"content": pendidikan},
+              );
+            },
           ),
         ),
         Column(

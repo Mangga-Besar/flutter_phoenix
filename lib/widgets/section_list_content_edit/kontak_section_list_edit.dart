@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_phoenix/enums/page_name.dart';
+import 'package:flutter_phoenix/functions/routes.dart';
 import 'package:flutter_phoenix/interfaces/i_section.dart';
 import 'package:flutter_phoenix/models/sections/kontak_section.dart';
 import 'package:flutter_phoenix/widgets/custom/custom_text.dart';
@@ -18,7 +20,13 @@ class KontakSectionListEdit extends SectionList {
           right: 0,
           child: IconButton(
             icon: const Icon(Icons.edit),
-            onPressed: () {},
+            onPressed: () {
+              Routes.push(
+                context,
+                PageName.EditSection,
+                arguments: {"content": kontak},
+              );
+            },
           ),
         ),
         Column(
