@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/basics/exceptions/http_exception.dart';
+import 'package:flutter_phoenix/enums/page_name.dart';
 import 'package:flutter_phoenix/enums/pendidikan_level.dart';
+import 'package:flutter_phoenix/enums/role_type.dart';
+import 'package:flutter_phoenix/enums/user_type.dart';
+import 'package:flutter_phoenix/functions/date_parser.dart';
 import 'package:flutter_phoenix/functions/loading_function.dart';
+import 'package:flutter_phoenix/functions/routes.dart';
 import 'package:flutter_phoenix/functions/toast_helper.dart';
 import 'package:flutter_phoenix/configs/configs.dart';
 import 'package:flutter_phoenix/models/sections/kontak_section.dart';
@@ -9,6 +14,7 @@ import 'package:flutter_phoenix/models/sections/pelatihan_section.dart';
 import 'package:flutter_phoenix/models/sections/pendidikan_section.dart';
 import 'package:flutter_phoenix/models/sections/penugasan_section.dart';
 import 'package:flutter_phoenix/models/sections/publikasi_section.dart';
+import 'package:flutter_phoenix/models/user/user.dart';
 import 'package:flutter_phoenix/widgets/base_raised_button.dart';
 import 'package:flutter_phoenix/widgets/custom/custom_text.dart';
 import 'package:flutter_phoenix/widgets/normal_form_field.dart';
@@ -22,9 +28,87 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   late FocusNode _nameFocusNode;
 
+  late User user;
   @override
   void initState() {
     _nameFocusNode = FocusNode();
+
+    user = User(
+      id: "ASD",
+      roleType: RoleType.Guru,
+      userType: UserType.Member,
+      name: "BUDI GUNAWAN",
+      email: 'Budi@gunawan.com',
+      nik: "31730502030405",
+      handPhone: "082132456",
+      dob: DateTime(2000, 1, 15),
+      address: "Jln. Kijoko Bodo, No 17E, RT 01, RW 01, Kota Jakarta Timur",
+      agama: "Katholik",
+      kontak: [
+        KontakSection(
+            contactNumber: 120320130213,
+            description: "ASDSADAWDSAD",
+            hubungan: "AAAAAAAAAA",
+            name: "JOKOBODO"),
+      ],
+      pelatihan: [
+        PelatihanSection(
+          description: "AAAA",
+          name: "ASDASDASD",
+          topik: "MEMBACA BUKU",
+          startDate: DateTime.now().subtract(Duration(days: 1)),
+          endDate: DateTime.now(),
+          pemberiSertifikat: "DIBERI TOKOPED",
+        ),
+      ],
+      pendidikan: [
+        PendidikanSection(
+            description: "AAAA",
+            jurusan: "S!SD",
+            level: PendidikanLevel.S1,
+            lokasi: "BANDUNG",
+            name: "LULUS S1",
+            tahun: DateTime.now()),
+        PendidikanSection(
+            description: "AAAA",
+            jurusan: "S!SD",
+            level: PendidikanLevel.S2,
+            lokasi: "BANDUNG",
+            name: "LULUS S1",
+            tahun: DateTime.now()),
+      ],
+      penugasan: [
+        PenugasanSection(
+          description: "AAAAAAAAAA",
+          name: "MENGARANG Cerita ANAK",
+          tipePekerjaan: "ASD",
+          startDate: DateTime.now().subtract(Duration(days: 1)),
+          endDate: DateTime.now(),
+        ),
+        PenugasanSection(
+          description: "AAAAAAAAAA",
+          tipePekerjaan: "ASD",
+          name: "MENGARANG Cerita ANAK",
+          startDate: DateTime.now().subtract(Duration(days: 1)),
+          endDate: DateTime.now(),
+        ),
+        PenugasanSection(
+          description: "AAAAAAAAAA",
+          tipePekerjaan: "ASD",
+          name: "MENGARANG Cerita ANAK",
+          startDate: DateTime.now().subtract(Duration(days: 1)),
+          endDate: DateTime.now(),
+        ),
+      ],
+      publikasi: [
+        PublikasiSection(
+            bidangIlmu: "Biologi",
+            description: "AAAAAAAAAAAA",
+            name: "PAPER ABABABA",
+            tanggal: DateTime.now(),
+            topik: "DADASDASD"),
+      ],
+    );
 
     super.initState();
   }
@@ -53,44 +137,44 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
+                    children: [
                       CustomText(
-                        "BUDI GUNAWAN",
+                        user.name ?? "",
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
                       ),
                       CustomText(
-                        'Budi@gunawan.com',
+                        user.email ?? "",
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
                       ),
                       CustomText(
-                        '31730502030405',
+                        user.nik ?? "",
                         fontSize: 15,
                         fontWeight: FontWeight.w500,
                       ),
                       CustomText(
-                        '082132456',
+                        user.handPhone ?? "",
                         fontSize: 15,
                         fontWeight: FontWeight.w500,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       CustomText(
-                        'Jakarta ,15 Jan 2000',
+                        DateParser.parseDateOnly(user.dob ?? DateTime.now()),
                         fontSize: 15,
                         color: Colors.black54,
                         fontWeight: FontWeight.bold,
                       ),
                       CustomText(
-                        'Jln. Kijoko Bodo, No 17E, RT 01, RW 01, Kota Jakarta Timur',
+                        user.address ?? "",
                         color: Colors.black54,
                         fontWeight: FontWeight.normal,
                         fontSize: 15,
                       ),
                       CustomText(
-                        'Katholik',
+                        user.agama ?? "",
                         color: Colors.black54,
                         fontWeight: FontWeight.normal,
                         fontSize: 15,
@@ -105,7 +189,9 @@ class _HomePageState extends State<HomePage> {
                     top: 0,
                     child: IconButton(
                       onPressed: () {
-                        print("EDIT PROFILE");
+                        Routes.push(context, PageName.EditSection, arguments: {
+                          "content": user,
+                        });
                       },
                       icon: const Icon(
                         Icons.edit,
@@ -117,82 +203,23 @@ class _HomePageState extends State<HomePage> {
             ),
             SectionPart(
               title: "KONTAK DARURAT",
-              content: [
-                KontakSection(
-                    contactNumber: 120320130213,
-                    description: "ASDSADAWDSAD",
-                    hubungan: "AAAAAAAAAA",
-                    name: "JOKOBODO")
-              ],
+              content: user.kontak ?? [],
             ),
             SectionPart(
               title: "PENDIDIKAN",
-              content: [
-                PendidikanSection(
-                    description: "AAAA",
-                    jurusan: "S!SD",
-                    level: PendidikanLevel.S1,
-                    lokasi: "BANDUNG",
-                    name: "LULUS S1",
-                    tahun: DateTime.now()),
-                PendidikanSection(
-                    description: "AAAA",
-                    jurusan: "S!SD",
-                    level: PendidikanLevel.S2,
-                    lokasi: "BANDUNG",
-                    name: "LULUS S1",
-                    tahun: DateTime.now()),
-              ],
+              content: user.pendidikan ?? [],
             ),
             SectionPart(
               title: "PELATIHAN",
-              content: [
-                PelatihanSection(
-                  description: "AAAA",
-                  name: "ASDASDASD",
-                  topik: "MEMBACA BUKU",
-                  startDate: DateTime.now().subtract(Duration(days: 1)),
-                  endDate: DateTime.now(),
-                  pemberiSertifikat: "DIBERI TOKOPED",
-                )
-              ],
+              content: user.pelatihan ?? [],
             ),
             SectionPart(
               title: "PUBLIKASI",
-              content: [
-                PublikasiSection(
-                    bidangIlmu: "Biologi",
-                    description: "AAAAAAAAAAAA",
-                    name: "PAPER ABABABA",
-                    tanggal: DateTime.now(),
-                    topik: "DADASDASD")
-              ],
+              content: user.publikasi ?? [],
             ),
             SectionPart(
               title: "PENUGASAN",
-              content: [
-                PenugasanSection(
-                  description: "AAAAAAAAAA",
-                  name: "MENGARANG Cerita ANAK",
-                  tipePekerjaan: "ASD",
-                  startDate: DateTime.now().subtract(Duration(days: 1)),
-                  endDate: DateTime.now(),
-                ),
-                PenugasanSection(
-                  description: "AAAAAAAAAA",
-                  tipePekerjaan: "ASD",
-                  name: "MENGARANG Cerita ANAK",
-                  startDate: DateTime.now().subtract(Duration(days: 1)),
-                  endDate: DateTime.now(),
-                ),
-                PenugasanSection(
-                  description: "AAAAAAAAAA",
-                  tipePekerjaan: "ASD",
-                  name: "MENGARANG Cerita ANAK",
-                  startDate: DateTime.now().subtract(Duration(days: 1)),
-                  endDate: DateTime.now(),
-                ),
-              ],
+              content: user.penugasan ?? [],
             ),
             // Row(
             //   children: [

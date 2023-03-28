@@ -1,1 +1,1 @@
-enum UserType { Member, Committee, Finance, Super }
+enum UserType { Member, Committee, Super }

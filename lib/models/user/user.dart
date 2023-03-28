@@ -1,29 +1,54 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_phoenix/configs/configs.dart';
+import 'package:flutter_phoenix/enums/role_type.dart';
 import 'package:flutter_phoenix/enums/user_type.dart';
 import 'package:flutter_phoenix/functions/enum_parser.dart';
+import 'package:flutter_phoenix/interfaces/i_section.dart';
+import 'package:flutter_phoenix/models/sections/kontak_section.dart';
+import 'package:flutter_phoenix/models/sections/pelatihan_section.dart';
+import 'package:flutter_phoenix/models/sections/pendidikan_section.dart';
+import 'package:flutter_phoenix/models/sections/penugasan_section.dart';
+import 'package:flutter_phoenix/models/sections/publikasi_section.dart';
 
 class User with ChangeNotifier {
   static User? _empty;
-  final String? id;
-  final String? name;
-  final String? subName;
-  final String? email;
-  final String? handPhone;
-  final UserType type;
-  String? messagingToken;
-  bool? isBlocked;
+  String? id;
+  String? name;
+  String? nik;
+  String? email;
+  String? handPhone;
+  String? schoolId;
+  String? password;
+  String? address;
+  String? agama;
+  DateTime? dob;
+  RoleType roleType;
+  UserType userType;
+
+  List<ISection>? kontak;
+  List<ISection>? pendidikan;
+  List<ISection>? pelatihan;
+  List<ISection>? publikasi;
+  List<ISection>? penugasan;
 
   User({
     this.id,
     this.name,
+    this.nik,
     this.email,
     this.handPhone,
-    this.type = UserType.Member,
-    this.messagingToken,
-    this.isBlocked = false,
-  })  : subName = getInitial(name!),
-        assert(name.isNotEmpty);
+    this.schoolId,
+    this.password,
+    this.address,
+    this.agama,
+    this.dob,
+    this.userType = UserType.Committee,
+    this.roleType = RoleType.Karyawan,
+    this.kontak,
+    this.pelatihan,
+    this.pendidikan,
+    this.penugasan,
+    this.publikasi,
+  });
 
   static User empty() {
     return _empty ??= User(name: "EMPTY");
@@ -31,9 +56,8 @@ class User with ChangeNotifier {
 
   bool get isEmpty => this == User.empty();
 
-  bool get isCommitee => type == UserType.Committee;
-  bool get isSuper => type == UserType.Super;
-  bool get isFinance => type == UserType.Finance;
+  bool get isCommitee => userType == UserType.Committee;
+  bool get isSuper => userType == UserType.Super;
 
   static User? fromMap(Map<String, dynamic>? data) {
     return data == null
@@ -41,11 +65,18 @@ class User with ChangeNotifier {
         : User(
             id: data["id"] ?? "",
             name: data["name"] ?? "",
+            nik: data["nik"] ?? "",
             email: data["email"] ?? "",
             handPhone: data["handPhone"] ?? "",
-            type: EnumParser.getEnum(UserType.values, data["type"] ?? "Member"),
-            messagingToken: data["messagingToken"] ?? "",
-            isBlocked: data["isBlocked"] ?? false,
+            userType: EnumParser.getEnum(
+                UserType.values, data["userType"] ?? "Member"),
+            roleType:
+                EnumParser.getEnum(RoleType.values, data["roleType"] ?? "Guru"),
+            dob: DateTime.tryParse(data["dob"]),
+            address: data["address"],
+            agama: data["agama"],
+            password: data["password"],
+            schoolId: data["schoolId"],
           );
   }
 
@@ -53,34 +84,17 @@ class User with ChangeNotifier {
     return {
       "id": id,
       "name": name,
+      "nik": nik,
       "email": email,
       "handPhone": handPhone,
-      "type": EnumParser.getString(type),
-      "messagingToken": messagingToken,
-      "isBlocked": isBlocked,
+      "schoolId": schoolId,
+      "userType": EnumParser.getString(userType),
+      "roleType": EnumParser.getString(roleType),
+      "dob": dob.toString(),
+      "address": address,
+      "agama": agama,
+      "password": password,
     };
-  }
-
-  Map<String, dynamic> toChatVariables() {
-    return {
-      "id": id,
-      "name": name,
-      "messagingToken": messagingToken,
-    };
-  }
-
-  static String getInitial(String name) {
-    var chunks = name.toUpperCase().split(" ");
-    if (chunks.length < 2) {
-      return chunks[0].substring(0, 1);
-    } else {
-      return chunks[0].substring(0, 1) + chunks[1].substring(0, 1);
-    }
-  }
-
-  static Color getAvatarColor(String name) {
-    var length = name.length % Configs.colorAvatars.length;
-    return Configs.colorAvatars[length];
   }
 
   Future<void> update() async {
