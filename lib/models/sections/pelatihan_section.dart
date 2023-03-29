@@ -1,6 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/interfaces/i_section.dart';
 
-class PelatihanSection implements ISection {
+class PelatihanSection with ChangeNotifier implements ISection {
   PelatihanSection({
     this.description,
     this.endDate,

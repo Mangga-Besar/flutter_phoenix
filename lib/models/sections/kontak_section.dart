@@ -1,6 +1,9 @@
+import 'dart:ui';
+
+import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/interfaces/i_section.dart';
 
-class KontakSection implements ISection {
+class KontakSection with ChangeNotifier implements ISection {
   KontakSection(
       {this.description,
       this.contactNumber,

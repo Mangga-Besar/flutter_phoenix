@@ -1,6 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/interfaces/i_section.dart';
 
-class PenugasanSection implements ISection {
+class PenugasanSection with ChangeNotifier implements ISection {
   PenugasanSection(
       {this.description,
       this.endDate,

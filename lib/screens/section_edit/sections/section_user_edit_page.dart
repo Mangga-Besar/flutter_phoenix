@@ -9,11 +9,9 @@ import 'package:flutter_phoenix/widgets/date_time_picker_form_field.dart';
 import 'package:flutter_phoenix/widgets/normal_form_field.dart';
 
 class SectionUserEditPage extends SectionEditPage {
-  SectionUserEditPage({this.user}) {
-    newUser = User();
-  }
+  SectionUserEditPage({this.user}) {}
 
-  User? user, newUser;
+  User? user;
 
   @override
   Widget formView(BuildContext context) {
@@ -122,7 +120,7 @@ class SectionUserEditPage extends SectionEditPage {
         ),
         DateTimePickerFormField(
           initialDate: user?.dob ?? DateTime.now(),
-          onChanged: (val) => user!.dob = val,
+          onChanged: (val) => {user!.dob = val},
         ),
         const CustomText(
           'Agama',

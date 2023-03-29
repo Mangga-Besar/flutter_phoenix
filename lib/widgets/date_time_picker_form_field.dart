@@ -53,7 +53,10 @@ class DateTimePickerFormField extends StatefulWidget {
     this.decoration,
     this.controller,
     this.withDivider = 1,
-  });
+  }) {
+    _textEditingController.text =
+        DateParser.parseDateOnly(initialDate ?? DateTime.now());
+  }
 
   @override
   _DateTimePickerFormFieldState createState() =>
@@ -109,8 +112,8 @@ class _DateTimePickerFormFieldState extends State<DateTimePickerFormField> {
                 color: Colors.transparent,
                 child: IgnorePointer(
                   child: TextFormField(
-                    enabled: false,
-                    readOnly: widget.readOnly ?? false,
+                    // enabled: false,
+                    readOnly: true,
                     textInputAction: widget.textInputAction,
                     onFieldSubmitted: widget.onFieldSubmitted,
                     textCapitalization:

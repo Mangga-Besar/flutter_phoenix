@@ -3,11 +3,6 @@ import 'package:flutter_phoenix/enums/role_type.dart';
 import 'package:flutter_phoenix/enums/user_type.dart';
 import 'package:flutter_phoenix/functions/enum_parser.dart';
 import 'package:flutter_phoenix/interfaces/i_section.dart';
-import 'package:flutter_phoenix/models/sections/kontak_section.dart';
-import 'package:flutter_phoenix/models/sections/pelatihan_section.dart';
-import 'package:flutter_phoenix/models/sections/pendidikan_section.dart';
-import 'package:flutter_phoenix/models/sections/penugasan_section.dart';
-import 'package:flutter_phoenix/models/sections/publikasi_section.dart';
 
 class User with ChangeNotifier {
   static User? _empty;

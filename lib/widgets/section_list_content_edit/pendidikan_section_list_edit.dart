@@ -6,6 +6,7 @@ import 'package:flutter_phoenix/functions/routes.dart';
 import 'package:flutter_phoenix/models/sections/pendidikan_section.dart';
 import 'package:flutter_phoenix/widgets/custom/custom_text.dart';
 import 'package:flutter_phoenix/widgets/section_list.dart';
+import 'package:provider/provider.dart';
 
 class PendidikanSectionListEdit extends SectionList {
   PendidikanSectionListEdit({required this.pendidikan, super.key});
@@ -17,15 +18,18 @@ class PendidikanSectionListEdit extends SectionList {
       children: [
         Positioned(
           right: 0,
-          child: IconButton(
-            icon: const Icon(Icons.edit),
-            onPressed: () {
-              Routes.push(
-                context,
-                PageName.EditSection,
-                arguments: {"content": pendidikan},
-              );
-            },
+          child: ChangeNotifierProvider.value(
+            value: pendidikan,
+            builder: (context, _) => IconButton(
+              icon: const Icon(Icons.edit),
+              onPressed: () {
+                Routes.push(
+                  context,
+                  PageName.EditSection,
+                  arguments: {"content": pendidikan},
+                );
+              },
+            ),
           ),
         ),
         Column(

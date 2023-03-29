@@ -8,17 +8,15 @@ import 'package:flutter_phoenix/functions/date_parser.dart';
 import 'package:flutter_phoenix/functions/loading_function.dart';
 import 'package:flutter_phoenix/functions/routes.dart';
 import 'package:flutter_phoenix/functions/toast_helper.dart';
-import 'package:flutter_phoenix/configs/configs.dart';
 import 'package:flutter_phoenix/models/sections/kontak_section.dart';
 import 'package:flutter_phoenix/models/sections/pelatihan_section.dart';
 import 'package:flutter_phoenix/models/sections/pendidikan_section.dart';
 import 'package:flutter_phoenix/models/sections/penugasan_section.dart';
 import 'package:flutter_phoenix/models/sections/publikasi_section.dart';
 import 'package:flutter_phoenix/models/user/user.dart';
-import 'package:flutter_phoenix/widgets/base_raised_button.dart';
 import 'package:flutter_phoenix/widgets/custom/custom_text.dart';
-import 'package:flutter_phoenix/widgets/normal_form_field.dart';
 import 'package:flutter_phoenix/widgets/section_part.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -187,17 +185,23 @@ class _HomePageState extends State<HomePage> {
                   Positioned(
                     right: 0,
                     top: 0,
-                    child: IconButton(
-                      onPressed: () {
-                        Routes.push(context, PageName.EditSection, arguments: {
-                          "content": user,
-                        });
+                    child: ChangeNotifierProvider(
+                      create: (context) => user,
+                      builder: (context, child) {
+                        return IconButton(
+                          onPressed: () {
+                            Routes.push(context, PageName.EditSection,
+                                arguments: {
+                                  "content": user,
+                                });
+                          },
+                          icon: const Icon(
+                            Icons.edit,
+                          ),
+                        );
                       },
-                      icon: const Icon(
-                        Icons.edit,
-                      ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),

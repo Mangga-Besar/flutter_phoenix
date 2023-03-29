@@ -4,6 +4,7 @@ import 'package:flutter_phoenix/functions/routes.dart';
 import 'package:flutter_phoenix/models/sections/pelatihan_section.dart';
 import 'package:flutter_phoenix/widgets/custom/custom_text.dart';
 import 'package:flutter_phoenix/widgets/section_list.dart';
+import 'package:provider/provider.dart';
 
 class PelatihanSectionListEdit extends SectionList {
   PelatihanSectionListEdit({required this.pelatihan, super.key});
@@ -15,15 +16,18 @@ class PelatihanSectionListEdit extends SectionList {
       children: [
         Positioned(
           right: 0,
-          child: IconButton(
-            icon: const Icon(Icons.edit),
-            onPressed: () {
-              Routes.push(
-                context,
-                PageName.EditSection,
-                arguments: {"content": pelatihan},
-              );
-            },
+          child: ChangeNotifierProvider.value(
+            value: pelatihan,
+            builder: (context, _) => IconButton(
+              icon: const Icon(Icons.edit),
+              onPressed: () {
+                Routes.push(
+                  context,
+                  PageName.EditSection,
+                  arguments: {"content": pelatihan},
+                );
+              },
+            ),
           ),
         ),
         Column(
