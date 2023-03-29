@@ -7,159 +7,166 @@ import 'package:flutter_phoenix/widgets/base_raised_button.dart';
 import 'package:flutter_phoenix/widgets/custom/custom_text.dart';
 import 'package:flutter_phoenix/widgets/date_time_picker_form_field.dart';
 import 'package:flutter_phoenix/widgets/normal_form_field.dart';
+import 'package:provider/provider.dart';
 
 class SectionUserEditPage extends SectionEditPage {
-  SectionUserEditPage({this.user}) {}
-
-  User? user;
-
   @override
   Widget formView(BuildContext context) {
     FocusNode _nameFocusNode = FocusNode();
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const SizedBox(height: 5),
-        const CustomText(
-          'Nama Lengkap',
-          fontSize: 15,
-          fontWeight: FontWeight.bold,
-        ),
-        NormalFormField(
-          hintText: "ex. Budi Gunawan",
-          text: user?.name ?? "",
-          focusNode: _nameFocusNode,
-          onFieldSubmitted: (value) {
-            _nameFocusNode.unfocus();
-            // FocusScope.of(context).requestFocus(_emailFocusNode);
-          },
-          // onChanged: (value) {
-          //   _registerData.name = value;
-          // },
-          // validator: (value) => user!.nameValidator(),
-        ),
-        const CustomText(
-          'Nomor Induk Kependudukan (NIK)',
-          fontSize: 15,
-          fontWeight: FontWeight.bold,
-        ),
-        NormalFormField(
-          hintText: "ex. 31730xxxxxx",
-          text: user?.nik ?? "",
-          focusNode: _nameFocusNode,
-          onFieldSubmitted: (value) {
-            _nameFocusNode.unfocus();
-            // FocusScope.of(context).requestFocus(_emailFocusNode);
-          },
-          // onChanged: (value) {
-          //   _registerData.name = value;
-          // },
-          // validator: (value) => user!.nameValidator(),
-        ),
-        const CustomText(
-          'E-Mail',
-          fontSize: 15,
-          fontWeight: FontWeight.bold,
-        ),
-        NormalFormField(
-          hintText: "ex. xxxx@kanisius.edu",
-          text: user?.email ?? "",
-          focusNode: _nameFocusNode,
-          onFieldSubmitted: (value) {
-            _nameFocusNode.unfocus();
-            // FocusScope.of(context).requestFocus(_emailFocusNode);
-          },
-          keyboardType: TextInputType.emailAddress,
-          // onChanged: (value) {
-          //   _registerData.name = value;
-          // },
-          // validator: (value) => user!.nameValidator(),
-        ),
-        const CustomText(
-          'Handphone',
-          fontSize: 15,
-          fontWeight: FontWeight.bold,
-        ),
-        NormalFormField(
-          hintText: "ex. 081234567",
-          text: user?.handPhone ?? "",
-          focusNode: _nameFocusNode,
-          onFieldSubmitted: (value) {
-            _nameFocusNode.unfocus();
-            // FocusScope.of(context).requestFocus(_emailFocusNode);
-          },
-          keyboardType: TextInputType.phone,
-          // onChanged: (value) {
-          //   _registerData.name = value;
-          // },
-          // validator: (value) => user!.nameValidator(),
-        ),
-        const CustomText(
-          'Address',
-          fontSize: 15,
-          fontWeight: FontWeight.bold,
-        ),
-        NormalFormField(
-          hintText: "ex. Jln. Menteng Raya, No. 64",
-          text: user?.address ?? "",
-          focusNode: _nameFocusNode,
-          onFieldSubmitted: (value) {
-            _nameFocusNode.unfocus();
-            // FocusScope.of(context).requestFocus(_emailFocusNode);
-          },
-          keyboardType: TextInputType.emailAddress,
-          // onChanged: (value) {
-          //   _registerData.name = value;
-          // },
-          // validator: (value) => user!.nameValidator(),
-        ),
-        const CustomText(
-          'Tanggal Lahir',
-          fontSize: 15,
-          fontWeight: FontWeight.bold,
-        ),
-        DateTimePickerFormField(
-          initialDate: user?.dob ?? DateTime.now(),
-          onChanged: (val) => {user!.dob = val},
-        ),
-        const CustomText(
-          'Agama',
-          fontSize: 15,
-          fontWeight: FontWeight.bold,
-        ),
-        NormalFormField(
-          hintText: "ex. Katholik",
-          text: user?.agama ?? "",
-          focusNode: _nameFocusNode,
-          onFieldSubmitted: (value) {
-            _nameFocusNode.unfocus();
-            // FocusScope.of(context).requestFocus(_emailFocusNode);
-          },
-          // onChanged: (value) {
-          //   _registerData.name = value;
-          // },
-          // validator: (value) => user!.nameValidator(),
-        ),
-        const SizedBox(height: 45),
-        Center(
-          child: SizedBox(
-            height: 50,
-            child: BaseRaisedButton(
-              ratio: 1 / 1.25,
-              onPressed: () {},
-              color: Configs.secondaryColor,
-              child: const Text(
-                "SIMPAN",
-                style: TextStyle(
-                  fontSize: 18,
-                  color: Colors.white,
+    return Consumer<User>(builder: (_, user, __) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const CustomText(
+            'Nama Lengkap',
+            fontSize: 15,
+            fontWeight: FontWeight.bold,
+          ),
+          NormalFormField(
+            hintText: "ex. Budi Gunawan",
+            text: user.name ?? "",
+            focusNode: _nameFocusNode,
+            onFieldSubmitted: (value) {
+              _nameFocusNode.unfocus();
+              // FocusScope.of(context).requestFocus(_emailFocusNode);
+            },
+            // onChanged: (value) {
+            //   _registerData.name = value;
+            // },
+            // validator: (value) => user!.nameValidator(),
+          ),
+          const SizedBox(height: 10),
+          const CustomText(
+            'Nomor Induk Kependudukan (NIK)',
+            fontSize: 15,
+            fontWeight: FontWeight.bold,
+          ),
+          NormalFormField(
+            hintText: "ex. 31730xxxxxx",
+            text: user.nik ?? "",
+            focusNode: _nameFocusNode,
+            onFieldSubmitted: (value) {
+              _nameFocusNode.unfocus();
+              // FocusScope.of(context).requestFocus(_emailFocusNode);
+            },
+            // onChanged: (value) {
+            //   _registerData.name = value;
+            // },
+            // validator: (value) => user!.nameValidator(),
+          ),
+          const SizedBox(height: 10),
+          const CustomText(
+            'E-Mail',
+            fontSize: 15,
+            fontWeight: FontWeight.bold,
+          ),
+          NormalFormField(
+            hintText: "ex. xxxx@kanisius.edu",
+            text: user.email ?? "",
+            focusNode: _nameFocusNode,
+            onFieldSubmitted: (value) {
+              _nameFocusNode.unfocus();
+              // FocusScope.of(context).requestFocus(_emailFocusNode);
+            },
+            keyboardType: TextInputType.emailAddress,
+            // onChanged: (value) {
+            //   _registerData.name = value;
+            // },
+            // validator: (value) => user!.nameValidator(),
+          ),
+          const SizedBox(height: 10),
+          const CustomText(
+            'Handphone',
+            fontSize: 15,
+            fontWeight: FontWeight.bold,
+          ),
+          NormalFormField(
+            hintText: "ex. 081234567",
+            text: user.handPhone ?? "",
+            focusNode: _nameFocusNode,
+            onFieldSubmitted: (value) {
+              _nameFocusNode.unfocus();
+              // FocusScope.of(context).requestFocus(_emailFocusNode);
+            },
+            keyboardType: TextInputType.phone,
+            // onChanged: (value) {
+            //   _registerData.name = value;
+            // },
+            // validator: (value) => user!.nameValidator(),
+          ),
+          const SizedBox(height: 10),
+          const CustomText(
+            'Address',
+            fontSize: 15,
+            fontWeight: FontWeight.bold,
+          ),
+          NormalFormField(
+            hintText: "ex. Jln. Menteng Raya, No. 64",
+            text: user.address ?? "",
+            focusNode: _nameFocusNode,
+            onFieldSubmitted: (value) {
+              _nameFocusNode.unfocus();
+              // FocusScope.of(context).requestFocus(_emailFocusNode);
+            },
+            keyboardType: TextInputType.emailAddress,
+            // onChanged: (value) {
+            //   _registerData.name = value;
+            // },
+            // validator: (value) => user!.nameValidator(),
+          ),
+          const SizedBox(height: 10),
+          const CustomText(
+            'Tanggal Lahir',
+            fontSize: 15,
+            fontWeight: FontWeight.bold,
+          ),
+          DateTimePickerFormField(
+            initialDate: user.dob ?? DateTime.now(),
+            onChanged: (val) {
+              user.dob = val;
+              user.notifyListeners();
+            },
+          ),
+          const SizedBox(height: 10),
+          const CustomText(
+            'Agama',
+            fontSize: 15,
+            fontWeight: FontWeight.bold,
+          ),
+          NormalFormField(
+            hintText: "ex. Katholik",
+            text: user.agama ?? "",
+            focusNode: _nameFocusNode,
+            onFieldSubmitted: (value) {
+              _nameFocusNode.unfocus();
+              // FocusScope.of(context).requestFocus(_emailFocusNode);
+            },
+            // onChanged: (value) {
+            //   _registerData.name = value;
+            // },
+            // validator: (value) => user!.nameValidator(),
+          ),
+          const SizedBox(height: 45),
+          Center(
+            child: SizedBox(
+              height: 50,
+              child: BaseRaisedButton(
+                ratio: 1 / 1.25,
+                onPressed: () {},
+                color: Configs.secondaryColor,
+                child: const Text(
+                  "SIMPAN",
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-        const SizedBox(height: 20),
-      ],
-    );
+          const SizedBox(height: 20),
+        ],
+      );
+    });
   }
 }

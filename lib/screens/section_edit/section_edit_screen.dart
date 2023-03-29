@@ -15,6 +15,7 @@ import 'package:flutter_phoenix/screens/section_edit/sections/section_penugasan_
 import 'package:flutter_phoenix/screens/section_edit/sections/section_publikasi_edit_page.dart';
 import 'package:flutter_phoenix/screens/section_edit/sections/section_user_edit_page.dart';
 import 'package:flutter_phoenix/widgets/custom/custom_text.dart';
+import 'package:provider/provider.dart';
 
 class SectionEditScreen extends BaseScreenWithAppBar {
   SectionEditScreen()
@@ -34,30 +35,35 @@ class SectionEditScreen extends BaseScreenWithAppBar {
     try {
       tipe = content.ofType();
     } catch (e) {
-      return SectionUserEditPage(
-        user: (content as User),
+      return ChangeNotifierProvider<User>.value(
+        value: (content as User),
+        child: SectionUserEditPage(),
       );
     }
 
     if (tipe == "Kontak") {
-      return SectionKontakEditPage(
-        kontak: (content as KontakSection),
+      return ChangeNotifierProvider<KontakSection>.value(
+        value: (content as KontakSection),
+        child: SectionKontakEditPage(),
       );
     } else if (tipe == "Pelatihan") {
-      return SectionPelatihanEditPage(
-        pelatihan: (content as PelatihanSection),
-      );
+      return ChangeNotifierProvider<PelatihanSection>.value(
+          value: (content as PelatihanSection),
+          child: SectionPelatihanEditPage());
     } else if (tipe == "Pendidikan") {
-      return SectionPendidikanEditPage(
-        pendidikan: (content as PendidikanSection),
+      return ChangeNotifierProvider<PendidikanSection>.value(
+        value: (content as PendidikanSection),
+        child: SectionPendidikanEditPage(),
       );
     } else if (tipe == "Penugasan") {
-      return SectionPenugasanEditPage(
-        penugasan: (content as PenugasanSection),
+      return ChangeNotifierProvider<PenugasanSection>.value(
+        value: (content as PenugasanSection),
+        child: SectionPenugasanEditPage(),
       );
     } else if (tipe == "Publikasi") {
-      return SectionPublikasiEditPage(
-        publikasi: (content as PublikasiSection),
+      return ChangeNotifierProvider<PublikasiSection>.value(
+        value: (content as PublikasiSection),
+        child: SectionPublikasiEditPage(),
       );
     } else {
       return Container();

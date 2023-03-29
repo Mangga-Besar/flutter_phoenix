@@ -185,21 +185,15 @@ class _HomePageState extends State<HomePage> {
                   Positioned(
                     right: 0,
                     top: 0,
-                    child: ChangeNotifierProvider(
-                      create: (context) => user,
-                      builder: (context, child) {
-                        return IconButton(
-                          onPressed: () {
-                            Routes.push(context, PageName.EditSection,
-                                arguments: {
-                                  "content": user,
-                                });
-                          },
-                          icon: const Icon(
-                            Icons.edit,
-                          ),
-                        );
+                    child: IconButton(
+                      onPressed: () {
+                        Routes.push(context, PageName.EditSection, arguments: {
+                          "content": user,
+                        });
                       },
+                      icon: const Icon(
+                        Icons.edit,
+                      ),
                     ),
                   ),
                 ],

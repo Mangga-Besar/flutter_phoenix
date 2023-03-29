@@ -85,26 +85,17 @@ class _DateTimePickerFormFieldState extends State<DateTimePickerFormField> {
                 var date = await showDatePicker(
                   context: context,
                   initialDate: dateTime ?? DateTime.now(),
-                  firstDate: widget.firstDate ?? DateTime(2020),
+                  firstDate: widget.firstDate ?? DateTime(1950),
                   lastDate: widget.lastDate ?? DateTime(2099),
                 );
                 if (date != null) {
-                  var time = await showTimePicker(
-                    context: context,
-                    initialTime:
-                        TimeOfDay.fromDateTime(dateTime ?? DateTime.now()),
+                  dateTime = DateTime(
+                    date.year,
+                    date.month,
+                    date.day,
                   );
-                  if (time != null) {
-                    dateTime = DateTime(
-                      date.year,
-                      date.month,
-                      date.day,
-                      time.hour,
-                      time.minute,
-                    );
-                    setState(() {});
-                    widget.onChanged(dateTime!);
-                  }
+                  setState(() {});
+                  widget.onChanged(dateTime!);
                 }
               },
               child: Container(
@@ -162,7 +153,6 @@ class _DateTimePickerFormFieldState extends State<DateTimePickerFormField> {
               ),
           ],
         ),
-        const SizedBox(height: 10),
       ],
     );
   }
