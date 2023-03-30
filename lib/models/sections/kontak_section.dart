@@ -5,10 +5,7 @@ import 'package:flutter_phoenix/interfaces/i_section.dart';
 
 class KontakSection with ChangeNotifier implements ISection {
   KontakSection(
-      {this.description,
-      this.contactNumber,
-      this.hubungan,
-      required this.name});
+      {this.description, this.contactNumber, this.hubungan, this.name});
 
   static KontakSection? _empty;
 
