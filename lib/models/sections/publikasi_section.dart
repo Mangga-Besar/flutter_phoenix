@@ -28,4 +28,17 @@ class PublikasiSection with ChangeNotifier implements ISection {
   String? ofType() {
     return "Publikasi";
   }
+
+  @override
+  ISection? copy() {
+    return PublikasiSection(
+      bidangIlmu: bidangIlmu,
+      description: description,
+      link: link,
+      name: name,
+      tag: tag,
+      tanggal: tanggal,
+      topik: topik,
+    );
+  }
 }

@@ -28,4 +28,14 @@ class KontakSection with ChangeNotifier implements ISection {
   String? nameValidator() {
     return name!.isEmpty ? "Nama Lengkap tidak boleh kosong" : null;
   }
+
+  @override
+  ISection? copy() {
+    return KontakSection(
+      name: name,
+      contactNumber: contactNumber,
+      description: description,
+      hubungan: hubungan,
+    );
+  }
 }

@@ -5,4 +5,6 @@ abstract class ISection {
   String? description;
 
   String? ofType() {}
+
+  ISection? copy() {}
 }

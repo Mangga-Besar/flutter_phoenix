@@ -30,4 +30,17 @@ class PendidikanSection with ChangeNotifier implements ISection {
   String? ofType() {
     return "Pendidikan";
   }
+
+  @override
+  ISection? copy() {
+    return PendidikanSection(
+      description: description,
+      jurusan: jurusan,
+      level: level,
+      link: link,
+      lokasi: lokasi,
+      name: name,
+      tahun: tahun,
+    );
+  }
 }

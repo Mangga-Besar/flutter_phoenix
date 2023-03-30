@@ -1,3 +1,5 @@
+import 'dart:js_util';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/enums/role_type.dart';
 import 'package:flutter_phoenix/enums/user_type.dart';
@@ -53,6 +55,23 @@ class User with ChangeNotifier {
 
   bool get isCommitee => userType == UserType.Committee;
   bool get isSuper => userType == UserType.Super;
+
+  User copy() {
+    return User(
+      id: id,
+      name: name,
+      nik: nik,
+      email: email,
+      handPhone: handPhone,
+      userType: userType,
+      roleType: roleType,
+      dob: dob,
+      address: address,
+      agama: agama,
+      password: password,
+      schoolId: schoolId,
+    );
+  }
 
   static User? fromMap(Map<String, dynamic>? data) {
     return data == null

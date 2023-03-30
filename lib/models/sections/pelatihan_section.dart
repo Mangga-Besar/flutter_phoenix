@@ -29,4 +29,18 @@ class PelatihanSection with ChangeNotifier implements ISection {
   String? ofType() {
     return "Pelatihan";
   }
+
+  @override
+  ISection? copy() {
+    return PelatihanSection(
+      description: description,
+      endDate: endDate,
+      link: link,
+      name: name,
+      pemberiSertifikat: pemberiSertifikat,
+      startDate: startDate,
+      tag: tag,
+      topik: topik,
+    );
+  }
 }

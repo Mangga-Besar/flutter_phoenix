@@ -13,7 +13,14 @@ class SectionUserEditPage extends SectionEditPage {
   @override
   Widget formView(BuildContext context) {
     FocusNode _nameFocusNode = FocusNode();
+    FocusNode _nikFocusNode = FocusNode();
+    FocusNode _emailFocusNode = FocusNode();
+    FocusNode _handPhoneFocusNode = FocusNode();
+    FocusNode _addressFocusNode = FocusNode();
+    FocusNode _dobFocusNode = FocusNode();
+    FocusNode _agamaFocusNode = FocusNode();
     return Consumer<User>(builder: (_, user, __) {
+      User newUser = user.copy();
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -24,16 +31,15 @@ class SectionUserEditPage extends SectionEditPage {
           ),
           NormalFormField(
             hintText: "ex. Budi Gunawan",
-            text: user.name ?? "",
+            text: newUser.name ?? "",
             focusNode: _nameFocusNode,
             onFieldSubmitted: (value) {
               _nameFocusNode.unfocus();
-              // FocusScope.of(context).requestFocus(_emailFocusNode);
+              FocusScope.of(context).requestFocus(_nikFocusNode);
             },
-            // onChanged: (value) {
-            //   _registerData.name = value;
-            // },
-            // validator: (value) => user!.nameValidator(),
+            onChanged: (value) {
+              newUser.name = value;
+            },
           ),
           const SizedBox(height: 10),
           const CustomText(
@@ -43,16 +49,16 @@ class SectionUserEditPage extends SectionEditPage {
           ),
           NormalFormField(
             hintText: "ex. 31730xxxxxx",
-            text: user.nik ?? "",
-            focusNode: _nameFocusNode,
+            text: newUser.nik ?? "",
+            focusNode: _nikFocusNode,
             onFieldSubmitted: (value) {
-              _nameFocusNode.unfocus();
-              // FocusScope.of(context).requestFocus(_emailFocusNode);
+              _nikFocusNode.unfocus();
+              FocusScope.of(context).requestFocus(_emailFocusNode);
             },
-            // onChanged: (value) {
-            //   _registerData.name = value;
-            // },
-            // validator: (value) => user!.nameValidator(),
+            onChanged: (value) {
+              newUser.nik = value;
+            },
+            // validator: (value) => newUser!.nameValidator(),
           ),
           const SizedBox(height: 10),
           const CustomText(
@@ -62,17 +68,17 @@ class SectionUserEditPage extends SectionEditPage {
           ),
           NormalFormField(
             hintText: "ex. xxxx@kanisius.edu",
-            text: user.email ?? "",
-            focusNode: _nameFocusNode,
+            text: newUser.email ?? "",
+            focusNode: _emailFocusNode,
             onFieldSubmitted: (value) {
-              _nameFocusNode.unfocus();
-              // FocusScope.of(context).requestFocus(_emailFocusNode);
+              _emailFocusNode.unfocus();
+              FocusScope.of(context).requestFocus(_handPhoneFocusNode);
             },
             keyboardType: TextInputType.emailAddress,
-            // onChanged: (value) {
-            //   _registerData.name = value;
-            // },
-            // validator: (value) => user!.nameValidator(),
+            onChanged: (value) {
+              newUser.email = value;
+            },
+            // validator: (value) => newUser!.nameValidator(),
           ),
           const SizedBox(height: 10),
           const CustomText(
@@ -82,17 +88,17 @@ class SectionUserEditPage extends SectionEditPage {
           ),
           NormalFormField(
             hintText: "ex. 081234567",
-            text: user.handPhone ?? "",
-            focusNode: _nameFocusNode,
+            text: newUser.handPhone ?? "",
+            focusNode: _handPhoneFocusNode,
             onFieldSubmitted: (value) {
-              _nameFocusNode.unfocus();
-              // FocusScope.of(context).requestFocus(_emailFocusNode);
+              _handPhoneFocusNode.unfocus();
+              FocusScope.of(context).requestFocus(_addressFocusNode);
             },
             keyboardType: TextInputType.phone,
-            // onChanged: (value) {
-            //   _registerData.name = value;
-            // },
-            // validator: (value) => user!.nameValidator(),
+            onChanged: (value) {
+              newUser.handPhone = value;
+            },
+            // validator: (value) => newUser!.nameValidator(),
           ),
           const SizedBox(height: 10),
           const CustomText(
@@ -102,17 +108,17 @@ class SectionUserEditPage extends SectionEditPage {
           ),
           NormalFormField(
             hintText: "ex. Jln. Menteng Raya, No. 64",
-            text: user.address ?? "",
-            focusNode: _nameFocusNode,
+            text: newUser.address ?? "",
+            focusNode: _addressFocusNode,
             onFieldSubmitted: (value) {
-              _nameFocusNode.unfocus();
-              // FocusScope.of(context).requestFocus(_emailFocusNode);
+              _addressFocusNode.unfocus();
+              FocusScope.of(context).requestFocus(_dobFocusNode);
             },
             keyboardType: TextInputType.emailAddress,
-            // onChanged: (value) {
-            //   _registerData.name = value;
-            // },
-            // validator: (value) => user!.nameValidator(),
+            onChanged: (value) {
+              newUser.address = value;
+            },
+            // validator: (value) => newUser!.nameValidator(),
           ),
           const SizedBox(height: 10),
           const CustomText(
@@ -121,10 +127,11 @@ class SectionUserEditPage extends SectionEditPage {
             fontWeight: FontWeight.bold,
           ),
           DateTimePickerFormField(
-            initialDate: user.dob ?? DateTime.now(),
+            focusNode: _dobFocusNode,
+            initialDate: newUser.dob ?? DateTime.now(),
             onChanged: (val) {
-              user.dob = val;
-              user.notifyListeners();
+              newUser.dob = val;
+              newUser.notifyListeners();
             },
           ),
           const SizedBox(height: 10),
@@ -135,16 +142,16 @@ class SectionUserEditPage extends SectionEditPage {
           ),
           NormalFormField(
             hintText: "ex. Katholik",
-            text: user.agama ?? "",
-            focusNode: _nameFocusNode,
+            text: newUser.agama ?? "",
+            focusNode: _agamaFocusNode,
             onFieldSubmitted: (value) {
-              _nameFocusNode.unfocus();
-              // FocusScope.of(context).requestFocus(_emailFocusNode);
+              _agamaFocusNode.unfocus();
+              FocusScope.of(context).requestFocus(_agamaFocusNode);
             },
-            // onChanged: (value) {
-            //   _registerData.name = value;
-            // },
-            // validator: (value) => user!.nameValidator(),
+            onChanged: (value) {
+              newUser.agama = value;
+            },
+            // validator: (value) => newUser!.nameValidator(),
           ),
           const SizedBox(height: 45),
           Center(
