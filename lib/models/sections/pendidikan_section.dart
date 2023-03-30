@@ -12,6 +12,10 @@ class PendidikanSection with ChangeNotifier implements ISection {
     this.name,
     this.tahun,
   });
+  static PendidikanSection? _empty;
+  static PendidikanSection empty() {
+    return _empty ??= PendidikanSection(name: "EMPTY");
+  }
 
   @override
   String? description;

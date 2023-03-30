@@ -12,6 +12,10 @@ class PublikasiSection with ChangeNotifier implements ISection {
     this.tanggal,
     this.topik,
   });
+  static PublikasiSection? _empty;
+  static PublikasiSection empty() {
+    return _empty ??= PublikasiSection(name: "EMPTY");
+  }
 
   @override
   String? description;

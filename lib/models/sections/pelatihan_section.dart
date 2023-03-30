@@ -13,6 +13,11 @@ class PelatihanSection with ChangeNotifier implements ISection {
     this.topik,
   });
 
+  static PelatihanSection? _empty;
+  static PelatihanSection empty() {
+    return _empty ??= PelatihanSection(name: "EMPTY");
+  }
+
   @override
   String? description;
 

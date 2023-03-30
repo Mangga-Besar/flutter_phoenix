@@ -83,6 +83,7 @@ class _DateTimePickerFormFieldState extends State<DateTimePickerFormField> {
             GestureDetector(
               onTap: () async {
                 var date = await showDatePicker(
+                  // initialDatePickerMode: DatePickerMode.year,
                   context: context,
                   initialDate: dateTime ?? DateTime.now(),
                   firstDate: widget.firstDate ?? DateTime(1950),

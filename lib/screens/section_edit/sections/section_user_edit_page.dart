@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/configs/configs.dart';
+import 'package:flutter_phoenix/functions/routes.dart';
 import 'package:flutter_phoenix/models/sections/kontak_section.dart';
 import 'package:flutter_phoenix/models/user/user.dart';
 import 'package:flutter_phoenix/screens/section_edit/section_edit_page.dart';
@@ -20,7 +21,6 @@ class SectionUserEditPage extends SectionEditPage {
     FocusNode _dobFocusNode = FocusNode();
     FocusNode _agamaFocusNode = FocusNode();
     return Consumer<User>(builder: (_, user, __) {
-      User newUser = user.copy();
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -31,14 +31,14 @@ class SectionUserEditPage extends SectionEditPage {
           ),
           NormalFormField(
             hintText: "ex. Budi Gunawan",
-            text: newUser.name ?? "",
+            text: user.name ?? "",
             focusNode: _nameFocusNode,
             onFieldSubmitted: (value) {
               _nameFocusNode.unfocus();
               FocusScope.of(context).requestFocus(_nikFocusNode);
             },
             onChanged: (value) {
-              newUser.name = value;
+              user.name = value;
             },
           ),
           const SizedBox(height: 10),
@@ -49,16 +49,16 @@ class SectionUserEditPage extends SectionEditPage {
           ),
           NormalFormField(
             hintText: "ex. 31730xxxxxx",
-            text: newUser.nik ?? "",
+            text: user.nik ?? "",
             focusNode: _nikFocusNode,
             onFieldSubmitted: (value) {
               _nikFocusNode.unfocus();
               FocusScope.of(context).requestFocus(_emailFocusNode);
             },
             onChanged: (value) {
-              newUser.nik = value;
+              user.nik = value;
             },
-            // validator: (value) => newUser!.nameValidator(),
+            // validator: (value) => user!.nameValidator(),
           ),
           const SizedBox(height: 10),
           const CustomText(
@@ -68,7 +68,7 @@ class SectionUserEditPage extends SectionEditPage {
           ),
           NormalFormField(
             hintText: "ex. xxxx@kanisius.edu",
-            text: newUser.email ?? "",
+            text: user.email ?? "",
             focusNode: _emailFocusNode,
             onFieldSubmitted: (value) {
               _emailFocusNode.unfocus();
@@ -76,9 +76,9 @@ class SectionUserEditPage extends SectionEditPage {
             },
             keyboardType: TextInputType.emailAddress,
             onChanged: (value) {
-              newUser.email = value;
+              user.email = value;
             },
-            // validator: (value) => newUser!.nameValidator(),
+            // validator: (value) => user!.nameValidator(),
           ),
           const SizedBox(height: 10),
           const CustomText(
@@ -88,7 +88,7 @@ class SectionUserEditPage extends SectionEditPage {
           ),
           NormalFormField(
             hintText: "ex. 081234567",
-            text: newUser.handPhone ?? "",
+            text: user.handPhone ?? "",
             focusNode: _handPhoneFocusNode,
             onFieldSubmitted: (value) {
               _handPhoneFocusNode.unfocus();
@@ -96,9 +96,9 @@ class SectionUserEditPage extends SectionEditPage {
             },
             keyboardType: TextInputType.phone,
             onChanged: (value) {
-              newUser.handPhone = value;
+              user.handPhone = value;
             },
-            // validator: (value) => newUser!.nameValidator(),
+            // validator: (value) => user!.nameValidator(),
           ),
           const SizedBox(height: 10),
           const CustomText(
@@ -108,7 +108,7 @@ class SectionUserEditPage extends SectionEditPage {
           ),
           NormalFormField(
             hintText: "ex. Jln. Menteng Raya, No. 64",
-            text: newUser.address ?? "",
+            text: user.address ?? "",
             focusNode: _addressFocusNode,
             onFieldSubmitted: (value) {
               _addressFocusNode.unfocus();
@@ -116,9 +116,9 @@ class SectionUserEditPage extends SectionEditPage {
             },
             keyboardType: TextInputType.emailAddress,
             onChanged: (value) {
-              newUser.address = value;
+              user.address = value;
             },
-            // validator: (value) => newUser!.nameValidator(),
+            // validator: (value) => user!.nameValidator(),
           ),
           const SizedBox(height: 10),
           const CustomText(
@@ -128,10 +128,10 @@ class SectionUserEditPage extends SectionEditPage {
           ),
           DateTimePickerFormField(
             focusNode: _dobFocusNode,
-            initialDate: newUser.dob ?? DateTime.now(),
+            initialDate: user.dob ?? DateTime.now(),
             onChanged: (val) {
-              newUser.dob = val;
-              newUser.notifyListeners();
+              user.dob = val;
+              user.notifyListeners();
             },
           ),
           const SizedBox(height: 10),
@@ -142,16 +142,16 @@ class SectionUserEditPage extends SectionEditPage {
           ),
           NormalFormField(
             hintText: "ex. Katholik",
-            text: newUser.agama ?? "",
+            text: user.agama ?? "",
             focusNode: _agamaFocusNode,
             onFieldSubmitted: (value) {
               _agamaFocusNode.unfocus();
               FocusScope.of(context).requestFocus(_agamaFocusNode);
             },
             onChanged: (value) {
-              newUser.agama = value;
+              user.agama = value;
             },
-            // validator: (value) => newUser!.nameValidator(),
+            // validator: (value) => user!.nameValidator(),
           ),
           const SizedBox(height: 45),
           Center(
@@ -159,7 +159,11 @@ class SectionUserEditPage extends SectionEditPage {
               height: 50,
               child: BaseRaisedButton(
                 ratio: 1 / 1.25,
-                onPressed: () {},
+                onPressed: () {
+                  print("IMPLEMENT UPDATE");
+
+                  Routes.pop(context);
+                },
                 color: Configs.secondaryColor,
                 child: const Text(
                   "SIMPAN",

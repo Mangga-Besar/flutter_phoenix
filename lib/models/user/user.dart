@@ -1,5 +1,3 @@
-import 'dart:js_util';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/enums/role_type.dart';
 import 'package:flutter_phoenix/enums/user_type.dart';

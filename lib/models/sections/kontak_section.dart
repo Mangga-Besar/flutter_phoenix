@@ -10,6 +10,12 @@ class KontakSection with ChangeNotifier implements ISection {
       this.hubungan,
       required this.name});
 
+  static KontakSection? _empty;
+
+  static KontakSection empty() {
+    return _empty ??= KontakSection(name: "EMPTY");
+  }
+
   @override
   String? description;
 

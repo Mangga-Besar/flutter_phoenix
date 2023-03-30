@@ -12,6 +12,11 @@ class PenugasanSection with ChangeNotifier implements ISection {
       this.tag,
       this.tipePekerjaan});
 
+  static PenugasanSection? _empty;
+  static PenugasanSection empty() {
+    return _empty ??= PenugasanSection(name: "EMPTY");
+  }
+
   @override
   String? description;
 

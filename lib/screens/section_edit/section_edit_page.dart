@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 
 abstract class SectionEditPage extends StatefulWidget {
+  @override
+  initState() {
+    initState();
+  }
+
   Widget formView(BuildContext context);
 
   @override

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_phoenix/configs/configs.dart';
+import 'package:flutter_phoenix/functions/routes.dart';
 import 'package:flutter_phoenix/models/sections/kontak_section.dart';
 import 'package:flutter_phoenix/screens/section_edit/section_edit_page.dart';
 import 'package:flutter_phoenix/widgets/base_raised_button.dart';
@@ -10,13 +11,20 @@ import 'package:provider/provider.dart';
 
 class SectionKontakEditPage extends SectionEditPage {
   @override
+  initState() {
+    return super.initState();
+  }
+
+  @override
   Widget formView(BuildContext context) {
     FocusNode _nameFocusNode = FocusNode();
+    FocusNode _descriptionFocusNode = FocusNode();
+    FocusNode _contactNumberFocusNode = FocusNode();
+    FocusNode _hubunganFocusNode = FocusNode();
     return Consumer<KontakSection>(builder: (_, kontak, __) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 5),
           const CustomText(
             'Nama Lengkap',
             fontSize: 15,
@@ -28,10 +36,60 @@ class SectionKontakEditPage extends SectionEditPage {
             focusNode: _nameFocusNode,
             onFieldSubmitted: (value) {
               _nameFocusNode.unfocus();
-              // FocusScope.of(context).requestFocus(_emailFocusNode);
+              FocusScope.of(context).requestFocus(_contactNumberFocusNode);
+            },
+            onChanged: (value) {},
+            validator: (value) => kontak.nameValidator(),
+          ),
+          const SizedBox(height: 10),
+          const CustomText(
+            'Nomor Kontak',
+            fontSize: 15,
+            fontWeight: FontWeight.bold,
+          ),
+          NormalFormField(
+            hintText: "ex. 0812345678",
+            text: kontak.contactNumber.toString(),
+            focusNode: _contactNumberFocusNode,
+            onFieldSubmitted: (value) {
+              _contactNumberFocusNode.unfocus();
+              FocusScope.of(context).requestFocus(_hubunganFocusNode);
+            },
+            keyboardType: TextInputType.number,
+            onChanged: (value) {},
+            validator: (value) => kontak.nameValidator(),
+          ),
+          const SizedBox(height: 10),
+          const CustomText(
+            'Hubungan',
+            fontSize: 15,
+            fontWeight: FontWeight.bold,
+          ),
+          NormalFormField(
+            hintText: "ex. Anak",
+            text: kontak.hubungan ?? "",
+            focusNode: _hubunganFocusNode,
+            onFieldSubmitted: (value) {
+              _hubunganFocusNode.unfocus();
+              FocusScope.of(context).requestFocus(_descriptionFocusNode);
+            },
+            onChanged: (value) {},
+            validator: (value) => kontak.nameValidator(),
+          ),
+          const SizedBox(height: 10),
+          const CustomText(
+            'Deskripsi',
+            fontSize: 15,
+            fontWeight: FontWeight.bold,
+          ),
+          NormalFormField(
+            hintText: "ex. Deskripsi",
+            text: kontak.name ?? "",
+            focusNode: _descriptionFocusNode,
+            onFieldSubmitted: (value) {
+              _descriptionFocusNode.unfocus();
             },
             // onChanged: (value) {
-            //   _registerData.name = value;
             // },
             validator: (value) => kontak.nameValidator(),
           ),
@@ -41,7 +99,12 @@ class SectionKontakEditPage extends SectionEditPage {
               height: 50,
               child: BaseRaisedButton(
                 ratio: 1 / 1.25,
-                onPressed: () {},
+                onPressed: () {
+                  kontak.notifyListeners();
+                  print("IMPLEMENT UPDATE");
+
+                  Routes.pop(context);
+                },
                 color: Configs.secondaryColor,
                 child: const Text(
                   "SIMPAN",

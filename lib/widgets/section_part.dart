@@ -13,6 +13,7 @@ import 'package:flutter_phoenix/widgets/section_list_content/pelatihan_section_l
 import 'package:flutter_phoenix/widgets/section_list_content/pendidikan_section_list.dart';
 import 'package:flutter_phoenix/widgets/section_list_content/penugasan_section_list.dart';
 import 'package:flutter_phoenix/widgets/section_list_content/publikasi_section_list.dart';
+import "package:flutter_phoenix/extensions/string_extensions.dart";
 
 class SectionPart extends StatefulWidget {
   SectionPart({
@@ -32,6 +33,7 @@ class SectionPart extends StatefulWidget {
 class _SectionPartState extends State<SectionPart> {
   @override
   Widget build(BuildContext context) {
+    String tipe = (widget.title ?? "").capitalize();
     return Column(
       children: [
         const Divider(
@@ -57,7 +59,14 @@ class _SectionPartState extends State<SectionPart> {
                     flex: 1,
                     child: IconButton(
                       onPressed: () {
-                        print("EDIT PROFILE");
+                        Routes.push(
+                          context,
+                          PageName.SectionList,
+                          arguments: {
+                            "content":
+                                widget.content.isEmpty ? tipe : widget.content
+                          },
+                        );
                       },
                       icon: const Icon(
                         Icons.edit,
