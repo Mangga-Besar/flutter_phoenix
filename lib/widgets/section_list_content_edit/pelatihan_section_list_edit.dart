@@ -3,6 +3,7 @@ import 'package:flutter_phoenix/enums/page_name.dart';
 import 'package:flutter_phoenix/functions/routes.dart';
 import 'package:flutter_phoenix/models/sections/pelatihan_section.dart';
 import 'package:flutter_phoenix/widgets/custom/custom_text.dart';
+import 'package:flutter_phoenix/widgets/link_text_span.dart';
 import 'package:flutter_phoenix/widgets/section_list.dart';
 import 'package:provider/provider.dart';
 
@@ -68,6 +69,29 @@ class PelatihanSectionListEdit extends SectionList {
               pelatihan.description ?? "",
               fontSize: 12,
               color: Colors.black87,
+            ),
+            const CustomText(
+              "Link Terkait :",
+              fontSize: 12,
+              color: Colors.black87,
+            ),
+            ListView.builder(
+              itemCount: pelatihan.link?.length ?? 0,
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 5.0,
+                  ),
+                  child: RichText(
+                    text: LinkTextSpan(
+                      text: "Link #${index.toString()}",
+                      url: pelatihan.link?[index] ?? "",
+                    ),
+                  ),
+                );
+              },
             ),
           ],
         ),

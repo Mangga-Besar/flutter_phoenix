@@ -40,95 +40,94 @@ class _SectionPartState extends State<SectionPart> {
           color: Colors.black87,
           thickness: 5,
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10.0),
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  Expanded(
-                    flex: 5,
-                    child: CustomText(
-                      widget.title ?? "",
-                      color: Colors.black,
-                      fontWeight: FontWeight.w800,
-                      fontSize: 20,
+        InkWell(
+          onTap: () {
+            Routes.push(
+              context,
+              PageName.SectionList,
+              arguments: {"content": widget.content},
+            );
+          },
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      flex: 5,
+                      child: CustomText(
+                        widget.title ?? "",
+                        color: Colors.black,
+                        fontWeight: FontWeight.w800,
+                        fontSize: 20,
+                      ),
                     ),
+                    Expanded(
+                      flex: 1,
+                      child: IconButton(
+                        onPressed: () {
+                          Routes.push(
+                            context,
+                            PageName.SectionList,
+                            arguments: {
+                              "content":
+                                  widget.content.isEmpty ? tipe : widget.content
+                            },
+                          );
+                        },
+                        icon: const Icon(
+                          Icons.edit,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                ListView.builder(
+                  itemBuilder: (context, i) {
+                    if (widget.content[i].ofType() == "Kontak") {
+                      return KontakSectionList(
+                          kontak: (widget.content[i]) as KontakSection);
+                    }
+                    if (widget.content[i].ofType() == "Pendidikan") {
+                      return PendidikanSectionList(
+                          pendidikan: (widget.content[i]) as PendidikanSection);
+                    }
+                    if (widget.content[i].ofType() == "Penugasan") {
+                      return PenugasanSectionList(
+                          penugasan: (widget.content[i]) as PenugasanSection);
+                    }
+                    if (widget.content[i].ofType() == "Pelatihan") {
+                      return PelatihanSectionList(
+                          pelatihan: (widget.content[i]) as PelatihanSection);
+                    }
+                    if (widget.content[i].ofType() == "Publikasi") {
+                      return PublikasiSectionList(
+                          publikasi: (widget.content[i]) as PublikasiSection);
+                    }
+                  },
+                  itemCount:
+                      widget.content.length > 2 ? 2 : widget.content.length,
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                ),
+                if (widget.content.length > 2)
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Icon(Icons.arrow_drop_down),
+                      CustomText(
+                        "Show More",
+                        fontWeight: FontWeight.w600,
+                      )
+                    ],
                   ),
-                  Expanded(
-                    flex: 1,
-                    child: IconButton(
-                      onPressed: () {
-                        Routes.push(
-                          context,
-                          PageName.SectionList,
-                          arguments: {
-                            "content":
-                                widget.content.isEmpty ? tipe : widget.content
-                          },
-                        );
-                      },
-                      icon: const Icon(
-                        Icons.edit,
-                      ),
-                    ),
-                  )
-                ],
-              ),
-              ListView.builder(
-                itemBuilder: (context, i) {
-                  if (widget.content[i].ofType() == "Kontak") {
-                    return KontakSectionList(
-                        kontak: (widget.content[i]) as KontakSection);
-                  }
-                  if (widget.content[i].ofType() == "Pendidikan") {
-                    return PendidikanSectionList(
-                        pendidikan: (widget.content[i]) as PendidikanSection);
-                  }
-                  if (widget.content[i].ofType() == "Penugasan") {
-                    return PenugasanSectionList(
-                        penugasan: (widget.content[i]) as PenugasanSection);
-                  }
-                  if (widget.content[i].ofType() == "Pelatihan") {
-                    return PelatihanSectionList(
-                        pelatihan: (widget.content[i]) as PelatihanSection);
-                  }
-                  if (widget.content[i].ofType() == "Publikasi") {
-                    return PublikasiSectionList(
-                        publikasi: (widget.content[i]) as PublikasiSection);
-                  }
-                },
-                itemCount:
-                    widget.content.length > 2 ? 2 : widget.content.length,
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-              ),
-              if (widget.content.length > 2)
                 SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton.icon(
-                      style: const ButtonStyle(
-                        backgroundColor:
-                            MaterialStatePropertyAll<Color>(Colors.transparent),
-                        elevation: MaterialStatePropertyAll<double>(0),
-                        iconColor:
-                            MaterialStatePropertyAll<Color>(Colors.black),
-                      ),
-                      onPressed: () {
-                        Routes.push(
-                          context,
-                          PageName.SectionList,
-                          arguments: {"content": widget.content},
-                        );
-                      },
-                      icon: const Icon(Icons.arrow_drop_down),
-                      label: const CustomText("Show More")),
-                )
-            ],
+                  height: 10,
+                ),
+              ],
+            ),
           ),
-        ),
-        SizedBox(
-          height: 10,
         ),
       ],
     );

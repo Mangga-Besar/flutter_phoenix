@@ -5,6 +5,7 @@ import 'package:flutter_phoenix/functions/enum_parser.dart';
 import 'package:flutter_phoenix/functions/routes.dart';
 import 'package:flutter_phoenix/models/sections/pendidikan_section.dart';
 import 'package:flutter_phoenix/widgets/custom/custom_text.dart';
+import 'package:flutter_phoenix/widgets/link_text_span.dart';
 import 'package:flutter_phoenix/widgets/section_list.dart';
 import 'package:provider/provider.dart';
 
@@ -60,6 +61,29 @@ class PendidikanSectionListEdit extends SectionList {
               pendidikan.description ?? "",
               fontSize: 12,
               color: Colors.black87,
+            ),
+            const CustomText(
+              "Link Terkait :",
+              fontSize: 12,
+              color: Colors.black87,
+            ),
+            ListView.builder(
+              itemCount: pendidikan.link?.length ?? 0,
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 5.0,
+                  ),
+                  child: RichText(
+                    text: LinkTextSpan(
+                      text: "Link #${index.toString()}",
+                      url: pendidikan.link?[index] ?? "",
+                    ),
+                  ),
+                );
+              },
             ),
           ],
         ),
