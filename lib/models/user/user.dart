@@ -84,7 +84,7 @@ class User with ChangeNotifier {
                 UserType.values, data["userType"] ?? "Member"),
             roleType:
                 EnumParser.getEnum(RoleType.values, data["roleType"] ?? "Guru"),
-            dob: DateTime.tryParse(data["dob"]),
+            dob: DateTime.tryParse(data["dob"] ?? ""),
             address: data["address"],
             agama: data["agama"],
             password: data["password"],

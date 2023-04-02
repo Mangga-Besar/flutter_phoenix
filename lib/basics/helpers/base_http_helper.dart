@@ -35,7 +35,7 @@ abstract class BaseHTTPHelper {
       );
       if (response.statusCode == 200) {
         var map = jsonDecode(response.body);
-        return map['data'];
+        return map;
       } else {
         throw HTTPException.fromHTTPError(jsonDecode(response.body));
       }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/basics/screens/base_screen.dart';
 import 'package:flutter_phoenix/basics/screens/base_screen_with_app_bar.dart';
 import 'package:flutter_phoenix/enums/page_name.dart';
+import 'package:flutter_phoenix/functions/token_version.dart';
 import 'package:flutter_phoenix/screens/home/home_page.dart';
 import 'package:flutter_phoenix/widgets/home_drawer.dart';
 
@@ -16,7 +17,7 @@ class HomeScreen extends BaseScreenWithAppBar {
 
   @override
   Widget content(BuildContext context) {
-    return HomePage();
+    return const HomePage();
   }
 
   @override

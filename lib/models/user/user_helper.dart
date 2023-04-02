@@ -1,7 +1,9 @@
 import 'dart:convert';
 
-import 'package:flutter_phoenix/models/user/user.dart';
+import 'package:flutter_phoenix/models/login/login_data.dart';
+import 'package:flutter_phoenix/models/login/login_result.dart';
 import 'package:flutter_phoenix/basics/helpers/base_http_helper.dart';
+import 'package:flutter_phoenix/models/user/user.dart';
 
 class UserHelper extends BaseHTTPHelper {
   // final instance = FirebaseFirestore.instance;
@@ -24,16 +26,18 @@ class UserHelper extends BaseHTTPHelper {
   //   return true;
   // }
 
-  // Future<LoginResult> login(LoginData data) async {
-  //   var result = await post(endpoint: "login", json: data.toJSON());
-  //   return LoginResult.fromMap(result);
-  // }
+  Future<LoginResult> login(LoginData data) async {
+    var map = data.toJSON();
+    var result = await post(endpoint: "login", json: map);
+    return LoginResult.fromMap(result);
+  }
 
-  // Future<User?> register(RegisterData data) async {
-  //   var result =
-  //       await post(endpoint: "register", json: data.toRegistrationJSON());
-  //   return User.fromMap(result);
-  // }
+  Future<User> getUser(String id) async {
+    var map = {"id": id};
+    var jsonMap = jsonEncode(map);
+    var result = await post(endpoint: "load", json: jsonMap);
+    return User.fromMap(result) ?? User.empty();
+  }
 
   Future<bool> forgetPassword(String email) async {
     var map = {"email": email};
@@ -65,35 +69,5 @@ class UserHelper extends BaseHTTPHelper {
       json: jsonEncode(map),
     );
     return result['result'] as bool;
-  }
-
-  Future<bool> verifyEmail(String email, String code) async {
-    var map = {"email": email, "code": code};
-    var result = await post(
-      endpoint: "verify",
-      json: jsonEncode(map),
-    );
-    return result['result'] as bool;
-  }
-
-  Future<void> resendEmail(String email) async {
-    await postVoid(
-      endpoint: "sendverification",
-      json: jsonEncode({"email": email}),
-    );
-  }
-
-  Future<void> updateMessagingToken(String messagingToken) async {
-    await postVoid(
-      endpoint: "updatemessagingtoken",
-      json: jsonEncode({"messagingToken": messagingToken}),
-    );
-  }
-
-  Future<void> block(String userId) async {
-    await postVoid(
-      endpoint: "setBlocked",
-      json: jsonEncode({"id": userId}),
-    );
   }
 }

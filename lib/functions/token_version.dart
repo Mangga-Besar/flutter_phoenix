@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter_phoenix/models/config/config_helper.dart';
 import 'package:flutter_phoenix/models/user/user.dart';
+import 'package:flutter_phoenix/models/user/user_helper.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import 'shared_preferences_function.dart';
@@ -13,7 +14,7 @@ class TokenVersion {
 
   String? _token;
   String? _os;
-  User? _user;
+  String? _userId;
   String? _version;
   String? _path;
   String? _banner;
@@ -24,20 +25,6 @@ class TokenVersion {
 
   static Future<void> init() async {
     ConfigHelper _configHelper = ConfigHelper();
-
-    // final futures = [
-    //   _configHelper.getSponsor(),
-    //   _configHelper.getBanner("mobile"),
-    //   _configHelper.getImage("mobile"),
-    //   _configHelper.getCCTenantId(),
-    // ];
-
-    // final results = await Future.wait(futures);
-
-    // instance!._sponsor = results[0] as bool;
-    // instance!._banner = results[1] as String;
-    // instance!._logo = results[2] as String;
-    // instance!._ccTenantId = results[3] as String;
   }
 
   static bool getSponsor() {
@@ -91,49 +78,32 @@ class TokenVersion {
     return instance!._token ?? "";
   }
 
-  static Future<User?> getUser() async {
-    if (instance!._user == null) {
-      var userString =
-          await instance!._sharedPreferencesHelper.getValue('user');
-      Map<String, dynamic>? userMap;
-      try {
-        userMap = jsonDecode(userString!);
-      } catch (err) {
-        userMap = null;
-      }
-      instance!._user =
-          (userMap == null ? User.empty() : User.fromMap(userMap))!;
-    }
-    return instance!._user;
+  static Future<String> getUserId() async {
+    instance?._userId ??=
+        await instance!._sharedPreferencesHelper.getValue('userId');
+    return instance!._userId ?? "";
   }
 
-  static Future<String?> getUserId() async {
-    var user = await getUser();
-    return user?.id;
-  }
-
-  static Future<void> setTokenAndUser(String token, User user) async {
+  static Future<void> setTokenAndUserId(String token, String userId) async {
     await instance!._sharedPreferencesHelper.setStringValue('token', token);
-    await setUser(user);
+    await setUserId(userId);
     instance!._token = token;
-    instance!._user = user;
+    instance!._userId = userId;
   }
 
-  static Future<void> setUser(User user) async {
-    var userVariables = user.toVariables();
-    var userString = jsonEncode(userVariables);
-    await instance!._sharedPreferencesHelper.setStringValue('user', userString);
+  static Future<void> setUserId(String userId) async {
+    await instance!._sharedPreferencesHelper.setStringValue('userId', userId);
   }
 
-  static Future<void> clearTokenAndUser() async {
-    await instance!._sharedPreferencesHelper.removeValue('user');
+  static Future<void> clearTokenAndUserId() async {
+    await instance!._sharedPreferencesHelper.removeValue('userId');
     await instance!._sharedPreferencesHelper.removeValue('token');
     instance!._token = null;
-    instance!._user = null;
+    instance!._userId = null;
   }
 
   static Future<bool> hasUser() async {
-    return (await getUser()) != null;
+    return (await getUserId()) != null;
   }
 
   static Future<void> setSponsor(String sponsor) async {}
