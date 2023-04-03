@@ -70,10 +70,7 @@ class _SectionPartState extends State<SectionPart> {
                           Routes.push(
                             context,
                             PageName.SectionList,
-                            arguments: {
-                              "content":
-                                  widget.content.isEmpty ? tipe : widget.content
-                            },
+                            arguments: {"content": widget.content},
                           );
                         },
                         icon: const Icon(
