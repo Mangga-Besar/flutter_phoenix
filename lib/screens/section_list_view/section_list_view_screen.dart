@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/basics/screens/base_screen.dart';
 import 'package:flutter_phoenix/basics/screens/base_screen_with_app_bar.dart';
 import 'package:flutter_phoenix/enums/page_name.dart';
+import 'package:flutter_phoenix/interfaces/i_section.dart';
 import 'package:flutter_phoenix/models/sections/kontak_section.dart';
 import 'package:flutter_phoenix/models/sections/pelatihan_section.dart';
 import 'package:flutter_phoenix/models/sections/pendidikan_section.dart';
@@ -37,23 +38,15 @@ class SectionListViewScreen extends BaseScreenWithAppBar {
 
   @override
   AppBar? appBar(BuildContext context) {
-    // TODO: implement appBar
     return AppBar(
       elevation: 0,
       actions: [
         Builder(builder: (context) {
           Map<String, dynamic> args = ModalRoute.of(context)!.settings.arguments
               as Map<String, dynamic>;
-          var content = args["content"];
-          String tipe;
+          List<ISection> content = args["content"];
 
-          try {
-            tipe = content[0].ofType();
-          } catch (e) {
-            tipe = content;
-          }
-
-          if (tipe == "Kontak") {
+          if (content is List<KontakSection>) {
             return ChangeNotifierProvider<KontakSection>(
               create: (context) => KontakSection(),
               child: IconButton(
@@ -70,7 +63,7 @@ class SectionListViewScreen extends BaseScreenWithAppBar {
                     );
                   }),
             );
-          } else if (tipe == "Pelatihan") {
+          } else if (content is List<PelatihanSection>) {
             return ChangeNotifierProvider<PelatihanSection>(
               create: (context) => PelatihanSection(),
               child: IconButton(
@@ -87,7 +80,7 @@ class SectionListViewScreen extends BaseScreenWithAppBar {
                     );
                   }),
             );
-          } else if (tipe == "Pendidikan") {
+          } else if (content is List<PendidikanSection>) {
             return ChangeNotifierProvider<PendidikanSection>(
               create: (context) => PendidikanSection(),
               child: IconButton(
@@ -104,7 +97,7 @@ class SectionListViewScreen extends BaseScreenWithAppBar {
                     );
                   }),
             );
-          } else if (tipe == "Penugasan") {
+          } else if (content is List<PenugasanSection>) {
             return ChangeNotifierProvider<PenugasanSection>(
               create: (context) => PenugasanSection(),
               child: IconButton(
@@ -121,7 +114,7 @@ class SectionListViewScreen extends BaseScreenWithAppBar {
                     );
                   }),
             );
-          } else if (tipe == "Publikasi") {
+          } else if (content is List<PublikasiSection>) {
             return ChangeNotifierProvider<PublikasiSection>(
               create: (context) => PublikasiSection(),
               child: IconButton(

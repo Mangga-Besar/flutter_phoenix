@@ -85,23 +85,23 @@ class _SectionPartState extends State<SectionPart> {
                 ),
                 ListView.builder(
                   itemBuilder: (context, i) {
-                    if (widget.content[i].ofType() == "Kontak") {
+                    if (widget.content is List<KontakSection>) {
                       return KontakSectionList(
                           kontak: (widget.content[i]) as KontakSection);
                     }
-                    if (widget.content[i].ofType() == "Pendidikan") {
+                    if (widget.content is List<PendidikanSection>) {
                       return PendidikanSectionList(
                           pendidikan: (widget.content[i]) as PendidikanSection);
                     }
-                    if (widget.content[i].ofType() == "Penugasan") {
+                    if (widget.content is List<PenugasanSection>) {
                       return PenugasanSectionList(
                           penugasan: (widget.content[i]) as PenugasanSection);
                     }
-                    if (widget.content[i].ofType() == "Pelatihan") {
+                    if (widget.content is List<PelatihanSection>) {
                       return PelatihanSectionList(
                           pelatihan: (widget.content[i]) as PelatihanSection);
                     }
-                    if (widget.content[i].ofType() == "Publikasi") {
+                    if (widget.content is List<PublikasiSection>) {
                       return PublikasiSectionList(
                           publikasi: (widget.content[i]) as PublikasiSection);
                     }
