@@ -27,10 +27,10 @@ class SectionEditScreen extends BaseScreenWithAppBar {
 
   @override
   Widget content(BuildContext context) {
-    Map<String, dynamic> args =
+    var args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-
     var content = args["content"];
+    User user = args["user"] ?? content;
     String tipe;
     try {
       tipe = content.ofType();
@@ -42,28 +42,43 @@ class SectionEditScreen extends BaseScreenWithAppBar {
     }
 
     if (tipe == "Kontak") {
-      return ChangeNotifierProvider<KontakSection>.value(
-        value: (content as KontakSection),
-        child: SectionKontakEditPage(),
+      return ChangeNotifierProvider<User>.value(
+        value: user,
+        child: ChangeNotifierProvider<KontakSection>.value(
+          value: (content as KontakSection),
+          child: SectionKontakEditPage(),
+        ),
       );
     } else if (tipe == "Pelatihan") {
-      return ChangeNotifierProvider<PelatihanSection>.value(
-          value: (content as PelatihanSection),
-          child: SectionPelatihanEditPage());
+      return ChangeNotifierProvider<User>.value(
+        value: user,
+        child: ChangeNotifierProvider<PelatihanSection>.value(
+            value: (content as PelatihanSection),
+            child: SectionPelatihanEditPage()),
+      );
     } else if (tipe == "Pendidikan") {
-      return ChangeNotifierProvider<PendidikanSection>.value(
-        value: (content as PendidikanSection),
-        child: SectionPendidikanEditPage(),
+      return ChangeNotifierProvider<User>.value(
+        value: user,
+        child: ChangeNotifierProvider<PendidikanSection>.value(
+          value: (content as PendidikanSection),
+          child: SectionPendidikanEditPage(),
+        ),
       );
     } else if (tipe == "Penugasan") {
-      return ChangeNotifierProvider<PenugasanSection>.value(
-        value: (content as PenugasanSection),
-        child: SectionPenugasanEditPage(),
+      return ChangeNotifierProvider<User>.value(
+        value: user,
+        child: ChangeNotifierProvider<PenugasanSection>.value(
+          value: (content as PenugasanSection),
+          child: SectionPenugasanEditPage(),
+        ),
       );
     } else if (tipe == "Publikasi") {
-      return ChangeNotifierProvider<PublikasiSection>.value(
-        value: (content as PublikasiSection),
-        child: SectionPublikasiEditPage(),
+      return ChangeNotifierProvider<User>.value(
+        value: user,
+        child: ChangeNotifierProvider<PublikasiSection>.value(
+          value: (content as PublikasiSection),
+          child: SectionPublikasiEditPage(),
+        ),
       );
     } else {
       return Container();

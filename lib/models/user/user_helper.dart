@@ -26,6 +26,13 @@ class UserHelper extends BaseHTTPHelper {
   //   return true;
   // }
 
+  Future<void> updateUser(String id, User user) async {
+    var map = jsonEncode(user.toVariables());
+    var result = await post(endpoint: "update", json: map);
+    print(result);
+    // return result;
+  }
+
   Future<LoginResult> login(LoginData data) async {
     var map = data.toJSON();
     var result = await post(endpoint: "login", json: map);

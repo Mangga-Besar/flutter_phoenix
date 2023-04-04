@@ -41,4 +41,28 @@ class KontakSection with ChangeNotifier implements ISection {
       hubungan: hubungan,
     );
   }
+
+  Map<String, dynamic> toVariables() {
+    return {
+      "name": name,
+      "contactNumber": contactNumber,
+      "description": description,
+      "hubungan": hubungan,
+    };
+  }
+
+  static KontakSection? fromMap(Map<String, dynamic>? data) {
+    return data == null
+        ? null
+        : KontakSection(
+            name: data["name"] ?? "",
+            contactNumber: data["contactNumber"] ?? "",
+            description: data["description"] ?? "",
+            hubungan: data["hubungan"] ?? "",
+          );
+  }
+
+  static List<KontakSection?> fromMapList(List<dynamic>? data) {
+    return data == null ? [] : data.map((e) => fromMap(e)).toList();
+  }
 }

@@ -1,8 +1,15 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/enums/role_type.dart';
 import 'package:flutter_phoenix/enums/user_type.dart';
 import 'package:flutter_phoenix/functions/enum_parser.dart';
 import 'package:flutter_phoenix/interfaces/i_section.dart';
+import 'package:flutter_phoenix/models/sections/kontak_section.dart';
+import 'package:flutter_phoenix/models/sections/pelatihan_section.dart';
+import 'package:flutter_phoenix/models/sections/pendidikan_section.dart';
+import 'package:flutter_phoenix/models/sections/penugasan_section.dart';
+import 'package:flutter_phoenix/models/sections/publikasi_section.dart';
 
 class User with ChangeNotifier {
   static User? _empty;
@@ -19,11 +26,11 @@ class User with ChangeNotifier {
   RoleType roleType;
   UserType userType;
 
-  List<ISection>? kontak;
-  List<ISection>? pendidikan;
-  List<ISection>? pelatihan;
-  List<ISection>? publikasi;
-  List<ISection>? penugasan;
+  List<KontakSection?>? kontak;
+  List<PendidikanSection?>? pendidikan;
+  List<PelatihanSection?>? pelatihan;
+  List<PublikasiSection?>? publikasi;
+  List<PenugasanSection?>? penugasan;
 
   User({
     this.id,
@@ -68,10 +75,21 @@ class User with ChangeNotifier {
       agama: agama,
       password: password,
       schoolId: schoolId,
+      kontak: kontak,
+      pelatihan: pelatihan,
+      pendidikan: pendidikan,
+      penugasan: penugasan,
+      publikasi: publikasi,
     );
   }
 
   static User? fromMap(Map<String, dynamic>? data) {
+    List<String> a = [];
+    data!["kontak"] = data["kontak"].map((e) => jsonDecode(e)).toList();
+    data["pelatihan"] = data["pelatihan"].map((e) => jsonDecode(e)).toList();
+    data["pendidikan"] = data["pendidikan"].map((e) => jsonDecode(e)).toList();
+    data["penugasan"] = data["penugasan"].map((e) => jsonDecode(e)).toList();
+    data["publikasi"] = data["publikasi"].map((e) => jsonDecode(e)).toList();
     return data == null
         ? null
         : User(
@@ -89,10 +107,19 @@ class User with ChangeNotifier {
             agama: data["agama"],
             password: data["password"],
             schoolId: data["schoolId"],
+            kontak: KontakSection.fromMapList(data["kontak"]),
+            pelatihan: PelatihanSection.fromMapList(data["pelatihan"]),
+            pendidikan: PendidikanSection.fromMapList(data["pendidikan"]),
+            penugasan: PenugasanSection.fromMapList(data["penugasan"]),
+            publikasi: PublikasiSection.fromMapList(data["publikasi"]),
           );
   }
 
   Map<String, dynamic> toVariables() {
+    var pen = penugasan!.map<String>((e) {
+      var map = e!.toVariables();
+      return jsonEncode(map);
+    }).toList();
     return {
       "id": id,
       "name": name,
@@ -102,10 +129,30 @@ class User with ChangeNotifier {
       "schoolId": schoolId,
       "userType": EnumParser.getString(userType),
       "roleType": EnumParser.getString(roleType),
-      "dob": dob.toString(),
+      "dob": dob?.toIso8601String(),
       "address": address,
       "agama": agama,
       "password": password,
+      "kontak": kontak!.map<String>((e) {
+        var map = e!.toVariables();
+        return jsonEncode(map);
+      }).toList(),
+      "pelatihan": pelatihan!.map<String>((e) {
+        var map = e!.toVariables();
+        return jsonEncode(map);
+      }).toList(),
+      "pendidikan": pendidikan!.map<String>((e) {
+        var map = e!.toVariables();
+        return jsonEncode(map);
+      }).toList(),
+      "penugasan": penugasan!.map<String>((e) {
+        var map = e!.toVariables();
+        return jsonEncode(map);
+      }).toList(),
+      "publikasi": publikasi!.map<String>((e) {
+        var map = e!.toVariables();
+        return jsonEncode(map);
+      }).toList(),
     };
   }
 

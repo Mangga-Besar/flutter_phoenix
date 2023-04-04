@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/enums/pendidikan_level.dart';
+import 'package:flutter_phoenix/functions/enum_parser.dart';
 import 'package:flutter_phoenix/interfaces/i_section.dart';
 
 class PendidikanSection with ChangeNotifier implements ISection {
@@ -46,5 +47,35 @@ class PendidikanSection with ChangeNotifier implements ISection {
       name: name,
       tahun: tahun,
     );
+  }
+
+  Map<String, dynamic> toVariables() {
+    return {
+      "name": name,
+      "tahun": (tahun ?? DateTime.now()).toIso8601String(),
+      "description": description,
+      "level": EnumParser.getString(level),
+      "lokasi": lokasi,
+      "jurusan": jurusan,
+      "link": link,
+    };
+  }
+
+  static PendidikanSection? fromMap(Map<String, dynamic>? data) {
+    return data == null
+        ? null
+        : PendidikanSection(
+            name: data["name"] ?? "",
+            description: data["description"] ?? "",
+            tahun: DateTime.tryParse(data["tahun"]),
+            link: data["link"] ?? "",
+            level: data["level"] ?? "",
+            lokasi: data["lokasi"] ?? "",
+            jurusan: data["jurusan"] ?? "",
+          );
+  }
+
+  static List<PendidikanSection?> fromMapList(List<dynamic>? data) {
+    return data == null ? [] : data.map((e) => fromMap(e)).toList();
   }
 }

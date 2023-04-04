@@ -43,4 +43,32 @@ class PenugasanSection with ChangeNotifier implements ISection {
       tipePekerjaan: tipePekerjaan,
     );
   }
+
+  Map<String, dynamic> toVariables() {
+    return {
+      "name": name,
+      "startDate": (startDate ?? DateTime.now()).toIso8601String(),
+      "endDate": (endDate ?? DateTime.now()).toIso8601String(),
+      "description": description,
+      "tipePekerjaan": tipePekerjaan,
+      "tag": tag,
+    };
+  }
+
+  static PenugasanSection? fromMap(Map<String, dynamic>? data) {
+    return data == null
+        ? null
+        : PenugasanSection(
+            name: data["name"] ?? "",
+            description: data["description"] ?? "",
+            startDate: DateTime.tryParse(data["startDate"]),
+            endDate: DateTime.tryParse(data["endDate"]),
+            tag: data["tag"] ?? [],
+            tipePekerjaan: data["tipePekerjaan"] ?? "",
+          );
+  }
+
+  static List<PenugasanSection?> fromMapList(List<dynamic>? data) {
+    return data == null ? [] : data.map((e) => fromMap(e)).toList();
+  }
 }

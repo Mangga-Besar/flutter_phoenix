@@ -3,6 +3,7 @@ import 'package:flutter_phoenix/configs/configs.dart';
 import 'package:flutter_phoenix/functions/routes.dart';
 import 'package:flutter_phoenix/models/sections/kontak_section.dart';
 import 'package:flutter_phoenix/models/user/user.dart';
+import 'package:flutter_phoenix/models/user/user_helper.dart';
 import 'package:flutter_phoenix/screens/section_edit/section_edit_page.dart';
 import 'package:flutter_phoenix/widgets/base_raised_button.dart';
 import 'package:flutter_phoenix/widgets/custom/custom_text.dart';
@@ -20,6 +21,7 @@ class SectionUserEditPage extends SectionEditPage {
     FocusNode _addressFocusNode = FocusNode();
     FocusNode _dobFocusNode = FocusNode();
     FocusNode _agamaFocusNode = FocusNode();
+    UserHelper _userHelper = UserHelper();
     return Consumer<User>(builder: (_, user, __) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -58,7 +60,7 @@ class SectionUserEditPage extends SectionEditPage {
             onChanged: (value) {
               user.nik = value;
             },
-            // validator: (value) => user!.nameValidator(),
+            // validator: (value) => newUser!.nameValidator(),
           ),
           const SizedBox(height: 10),
           const CustomText(
@@ -78,7 +80,7 @@ class SectionUserEditPage extends SectionEditPage {
             onChanged: (value) {
               user.email = value;
             },
-            // validator: (value) => user!.nameValidator(),
+            // validator: (value) => newUser!.nameValidator(),
           ),
           const SizedBox(height: 10),
           const CustomText(
@@ -98,7 +100,7 @@ class SectionUserEditPage extends SectionEditPage {
             onChanged: (value) {
               user.handPhone = value;
             },
-            // validator: (value) => user!.nameValidator(),
+            // validator: (value) => newUser!.nameValidator(),
           ),
           const SizedBox(height: 10),
           const CustomText(
@@ -118,7 +120,7 @@ class SectionUserEditPage extends SectionEditPage {
             onChanged: (value) {
               user.address = value;
             },
-            // validator: (value) => user!.nameValidator(),
+            // validator: (value) => newUser!.nameValidator(),
           ),
           const SizedBox(height: 10),
           const CustomText(
@@ -151,7 +153,7 @@ class SectionUserEditPage extends SectionEditPage {
             onChanged: (value) {
               user.agama = value;
             },
-            // validator: (value) => user!.nameValidator(),
+            // validator: (value) => newUser!.nameValidator(),
           ),
           const SizedBox(height: 45),
           Center(
@@ -160,8 +162,7 @@ class SectionUserEditPage extends SectionEditPage {
               child: BaseRaisedButton(
                 ratio: 1 / 1.25,
                 onPressed: () {
-                  print("IMPLEMENT UPDATE");
-
+                  _userHelper.updateUser(user.id ?? "", user);
                   Routes.pop(context);
                 },
                 color: Configs.secondaryColor,

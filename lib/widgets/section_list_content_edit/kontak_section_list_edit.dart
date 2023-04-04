@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/enums/page_name.dart';
 import 'package:flutter_phoenix/functions/routes.dart';
 import 'package:flutter_phoenix/models/sections/kontak_section.dart';
+import 'package:flutter_phoenix/models/user/user.dart';
 import 'package:flutter_phoenix/widgets/custom/custom_text.dart';
 import 'package:flutter_phoenix/widgets/section_list.dart';
 import 'package:provider/provider.dart';
 
 class KontakSectionListEdit extends SectionList {
-  KontakSectionListEdit({required this.kontak, super.key});
+  KontakSectionListEdit({required this.kontak, required this.user, super.key});
   KontakSection kontak;
-
+  User user;
   @override
   Widget getContent(BuildContext context) {
     return Stack(
@@ -24,7 +25,10 @@ class KontakSectionListEdit extends SectionList {
                 Routes.push(
                   context,
                   PageName.EditSection,
-                  arguments: {"content": kontak},
+                  arguments: {
+                    "content": kontak,
+                    "user": user,
+                  },
                 );
               },
             ),

@@ -49,7 +49,7 @@ class SectionKontakEditPage extends SectionEditPage {
           ),
           NormalFormField(
             hintText: "ex. 0812345678",
-            text: kontak.contactNumber.toString(),
+            text: kontak.contactNumber?.toString() ?? "",
             focusNode: _contactNumberFocusNode,
             onFieldSubmitted: (value) {
               _contactNumberFocusNode.unfocus();
@@ -101,7 +101,6 @@ class SectionKontakEditPage extends SectionEditPage {
                 ratio: 1 / 1.25,
                 onPressed: () {
                   kontak.notifyListeners();
-                  print("IMPLEMENT UPDATE");
 
                   Routes.pop(context);
                 },

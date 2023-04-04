@@ -45,4 +45,34 @@ class PublikasiSection with ChangeNotifier implements ISection {
       topik: topik,
     );
   }
+
+  Map<String, dynamic> toVariables() {
+    return {
+      "name": name,
+      "tanggal": (tanggal ?? DateTime.now()).toIso8601String(),
+      "bidangIlmu": bidangIlmu,
+      "description": description,
+      "tag": tag,
+      "topik": topik,
+      "link": link,
+    };
+  }
+
+  static PublikasiSection? fromMap(Map<String, dynamic>? data) {
+    return data == null
+        ? null
+        : PublikasiSection(
+            name: data["name"] ?? "",
+            description: data["description"] ?? "",
+            tanggal: DateTime.tryParse(data["tanggal"]),
+            tag: data["tag"] ?? "",
+            topik: data["topik"] ?? "",
+            link: data["link"] ?? "",
+            bidangIlmu: data["bidangIlmu"] ?? "",
+          );
+  }
+
+  static List<PublikasiSection?> fromMapList(List<dynamic>? data) {
+    return data == null ? [] : data.map((e) => fromMap(e)).toList();
+  }
 }

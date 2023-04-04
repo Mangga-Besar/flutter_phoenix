@@ -8,6 +8,7 @@ import 'package:flutter_phoenix/models/sections/pelatihan_section.dart';
 import 'package:flutter_phoenix/models/sections/pendidikan_section.dart';
 import 'package:flutter_phoenix/models/sections/penugasan_section.dart';
 import 'package:flutter_phoenix/models/sections/publikasi_section.dart';
+import 'package:flutter_phoenix/models/user/user.dart';
 import 'package:flutter_phoenix/screens/section_edit/section_edit_screen.dart';
 import 'package:flutter_phoenix/screens/section_list_view/section_list_view_page.dart';
 import 'package:provider/provider.dart';
@@ -26,8 +27,11 @@ class SectionListViewScreen extends BaseScreenWithAppBar {
     Map<String, dynamic> args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
 
+    User user = args["user"];
+
     return SectionListViewPage(
       content: args["content"],
+      user: user,
     );
   }
 
@@ -44,9 +48,10 @@ class SectionListViewScreen extends BaseScreenWithAppBar {
         Builder(builder: (context) {
           Map<String, dynamic> args = ModalRoute.of(context)!.settings.arguments
               as Map<String, dynamic>;
-          List<ISection> content = args["content"];
+          List<ISection?> content = args["content"];
+          User user = args["user"];
 
-          if (content is List<KontakSection>) {
+          if (content is List<KontakSection?>) {
             return ChangeNotifierProvider<KontakSection>(
               create: (context) => KontakSection(),
               child: IconButton(
@@ -57,13 +62,15 @@ class SectionListViewScreen extends BaseScreenWithAppBar {
                         builder: (context) {
                           return SectionEditScreen();
                         },
-                        settings: RouteSettings(
-                            arguments: {"content": KontakSection()}),
+                        settings: RouteSettings(arguments: {
+                          "content": KontakSection(),
+                          "user": user,
+                        }),
                       ),
                     );
                   }),
             );
-          } else if (content is List<PelatihanSection>) {
+          } else if (content is List<PelatihanSection?>) {
             return ChangeNotifierProvider<PelatihanSection>(
               create: (context) => PelatihanSection(),
               child: IconButton(
@@ -74,13 +81,15 @@ class SectionListViewScreen extends BaseScreenWithAppBar {
                         builder: (context) {
                           return SectionEditScreen();
                         },
-                        settings: RouteSettings(
-                            arguments: {"content": PelatihanSection()}),
+                        settings: RouteSettings(arguments: {
+                          "content": PelatihanSection(),
+                          "user": user,
+                        }),
                       ),
                     );
                   }),
             );
-          } else if (content is List<PendidikanSection>) {
+          } else if (content is List<PendidikanSection?>) {
             return ChangeNotifierProvider<PendidikanSection>(
               create: (context) => PendidikanSection(),
               child: IconButton(
@@ -91,13 +100,15 @@ class SectionListViewScreen extends BaseScreenWithAppBar {
                         builder: (context) {
                           return SectionEditScreen();
                         },
-                        settings: RouteSettings(
-                            arguments: {"content": PendidikanSection()}),
+                        settings: RouteSettings(arguments: {
+                          "content": PendidikanSection(),
+                          "user": user,
+                        }),
                       ),
                     );
                   }),
             );
-          } else if (content is List<PenugasanSection>) {
+          } else if (content is List<PenugasanSection?>) {
             return ChangeNotifierProvider<PenugasanSection>(
               create: (context) => PenugasanSection(),
               child: IconButton(
@@ -108,13 +119,15 @@ class SectionListViewScreen extends BaseScreenWithAppBar {
                         builder: (context) {
                           return SectionEditScreen();
                         },
-                        settings: RouteSettings(
-                            arguments: {"content": PenugasanSection()}),
+                        settings: RouteSettings(arguments: {
+                          "content": PenugasanSection(),
+                          "user": user,
+                        }),
                       ),
                     );
                   }),
             );
-          } else if (content is List<PublikasiSection>) {
+          } else if (content is List<PublikasiSection?>) {
             return ChangeNotifierProvider<PublikasiSection>(
               create: (context) => PublikasiSection(),
               child: IconButton(
@@ -125,8 +138,10 @@ class SectionListViewScreen extends BaseScreenWithAppBar {
                         builder: (context) {
                           return SectionEditScreen();
                         },
-                        settings: RouteSettings(
-                            arguments: {"content": PublikasiSection()}),
+                        settings: RouteSettings(arguments: {
+                          "content": PublikasiSection(),
+                          "user": user,
+                        }),
                       ),
                     );
                   }),

@@ -4,14 +4,17 @@ import 'package:flutter_phoenix/enums/page_name.dart';
 import 'package:flutter_phoenix/functions/enum_parser.dart';
 import 'package:flutter_phoenix/functions/routes.dart';
 import 'package:flutter_phoenix/models/sections/pendidikan_section.dart';
+import 'package:flutter_phoenix/models/user/user.dart';
 import 'package:flutter_phoenix/widgets/custom/custom_text.dart';
 import 'package:flutter_phoenix/widgets/link_text_span.dart';
 import 'package:flutter_phoenix/widgets/section_list.dart';
 import 'package:provider/provider.dart';
 
 class PendidikanSectionListEdit extends SectionList {
-  PendidikanSectionListEdit({required this.pendidikan, super.key});
+  PendidikanSectionListEdit(
+      {required this.pendidikan, required this.user, super.key});
   PendidikanSection pendidikan;
+  User user;
 
   @override
   Widget getContent(BuildContext context) {
@@ -27,7 +30,10 @@ class PendidikanSectionListEdit extends SectionList {
                 Routes.push(
                   context,
                   PageName.EditSection,
-                  arguments: {"content": pendidikan},
+                  arguments: {
+                    "content": pendidikan,
+                    "user": user,
+                  },
                 );
               },
             ),

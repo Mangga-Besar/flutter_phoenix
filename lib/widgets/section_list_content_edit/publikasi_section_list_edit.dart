@@ -2,14 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/enums/page_name.dart';
 import 'package:flutter_phoenix/functions/routes.dart';
 import 'package:flutter_phoenix/models/sections/publikasi_section.dart';
+import 'package:flutter_phoenix/models/user/user.dart';
 import 'package:flutter_phoenix/widgets/custom/custom_text.dart';
 import 'package:flutter_phoenix/widgets/link_text_span.dart';
 import 'package:flutter_phoenix/widgets/section_list.dart';
 import 'package:provider/provider.dart';
 
 class PublikasiSectionListEdit extends SectionList {
-  PublikasiSectionListEdit({required this.publikasi, super.key});
+  PublikasiSectionListEdit(
+      {required this.publikasi, required this.user, super.key});
   PublikasiSection publikasi;
+  User user;
 
   @override
   Widget getContent(BuildContext context) {
@@ -25,7 +28,10 @@ class PublikasiSectionListEdit extends SectionList {
                 Routes.push(
                   context,
                   PageName.EditSection,
-                  arguments: {"content": publikasi},
+                  arguments: {
+                    "content": publikasi,
+                    "user": user,
+                  },
                 );
               },
             ),

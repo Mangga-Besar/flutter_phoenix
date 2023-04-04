@@ -48,4 +48,36 @@ class PelatihanSection with ChangeNotifier implements ISection {
       topik: topik,
     );
   }
+
+  Map<String, dynamic> toVariables() {
+    return {
+      "name": name,
+      "endDate": (endDate ?? DateTime.now()).toIso8601String(),
+      "startDate": (startDate ?? DateTime.now()).toIso8601String(),
+      "description": description,
+      "pemberiSertifikat": pemberiSertifikat,
+      "tag": tag,
+      "topik": topik,
+      "link": link,
+    };
+  }
+
+  static PelatihanSection? fromMap(Map<String, dynamic>? data) {
+    return data == null
+        ? null
+        : PelatihanSection(
+            name: data["name"] ?? "",
+            description: data["description"] ?? "",
+            endDate: DateTime.tryParse(data["endDate"]),
+            startDate: DateTime.tryParse(data["startDate"]),
+            pemberiSertifikat: data["pemberiSertifikat"] ?? "",
+            link: data["link"] ?? "",
+            tag: data["tag"] ?? "",
+            topik: data["topik"] ?? "",
+          );
+  }
+
+  static List<PelatihanSection?> fromMapList(List<dynamic>? data) {
+    return data == null ? [] : data.map((e) => fromMap(e)).toList();
+  }
 }

@@ -8,6 +8,7 @@ import 'package:flutter_phoenix/models/sections/pelatihan_section.dart';
 import 'package:flutter_phoenix/models/sections/pendidikan_section.dart';
 import 'package:flutter_phoenix/models/sections/penugasan_section.dart';
 import 'package:flutter_phoenix/models/sections/publikasi_section.dart';
+import 'package:flutter_phoenix/models/user/user.dart';
 import 'package:flutter_phoenix/widgets/section_list_content_edit/kontak_section_list_edit.dart';
 import 'package:flutter_phoenix/widgets/section_list_content_edit/pelatihan_section_list_edit.dart';
 import 'package:flutter_phoenix/widgets/section_list_content_edit/pendidikan_section_list_edit.dart';
@@ -15,12 +16,13 @@ import 'package:flutter_phoenix/widgets/section_list_content_edit/penugasan_sect
 import 'package:flutter_phoenix/widgets/section_list_content_edit/publikasi_section_list_edit.dart';
 
 class SectionListViewPage extends StatefulWidget {
-  SectionListViewPage({required this.content, super.key});
+  SectionListViewPage({required this.content, required this.user, super.key});
 
   @override
   _SectionListViewPageState createState() => _SectionListViewPageState();
 
-  List<ISection> content;
+  List<ISection?> content;
+  User user;
 }
 
 class _SectionListViewPageState extends State<SectionListViewPage> {
@@ -44,7 +46,7 @@ class _SectionListViewPageState extends State<SectionListViewPage> {
     return SingleChildScrollView(
       child: ListView.builder(
         itemBuilder: (context, i) {
-          if (widget.content[i].ofType() == "Kontak") {
+          if (widget.content[i]?.ofType() == "Kontak") {
             return Card(
               child: Padding(
                 padding: const EdgeInsets.symmetric(
@@ -52,11 +54,13 @@ class _SectionListViewPageState extends State<SectionListViewPage> {
                   horizontal: 20,
                 ),
                 child: KontakSectionListEdit(
-                    kontak: (widget.content[i]) as KontakSection),
+                  kontak: (widget.content[i]) as KontakSection,
+                  user: widget.user,
+                ),
               ),
             );
           }
-          if (widget.content[i].ofType() == "Pendidikan") {
+          if (widget.content[i]?.ofType() == "Pendidikan") {
             return Card(
               child: Padding(
                 padding: const EdgeInsets.symmetric(
@@ -64,11 +68,13 @@ class _SectionListViewPageState extends State<SectionListViewPage> {
                   horizontal: 20,
                 ),
                 child: PendidikanSectionListEdit(
-                    pendidikan: (widget.content[i]) as PendidikanSection),
+                  pendidikan: (widget.content[i]) as PendidikanSection,
+                  user: widget.user,
+                ),
               ),
             );
           }
-          if (widget.content[i].ofType() == "Penugasan") {
+          if (widget.content[i]?.ofType() == "Penugasan") {
             return Card(
               child: Padding(
                 padding: const EdgeInsets.symmetric(
@@ -76,11 +82,13 @@ class _SectionListViewPageState extends State<SectionListViewPage> {
                   horizontal: 20,
                 ),
                 child: PenugasanSectionListEdit(
-                    penugasan: (widget.content[i]) as PenugasanSection),
+                  penugasan: (widget.content[i]) as PenugasanSection,
+                  user: widget.user,
+                ),
               ),
             );
           }
-          if (widget.content[i].ofType() == "Pelatihan") {
+          if (widget.content[i]?.ofType() == "Pelatihan") {
             return Card(
               child: Padding(
                 padding: const EdgeInsets.symmetric(
@@ -88,11 +96,12 @@ class _SectionListViewPageState extends State<SectionListViewPage> {
                   horizontal: 20,
                 ),
                 child: PelatihanSectionListEdit(
-                    pelatihan: (widget.content[i]) as PelatihanSection),
+                    pelatihan: (widget.content[i]) as PelatihanSection,
+                    user: widget.user),
               ),
             );
           }
-          if (widget.content[i].ofType() == "Publikasi") {
+          if (widget.content[i]?.ofType() == "Publikasi") {
             return Card(
               child: Padding(
                 padding: const EdgeInsets.symmetric(
@@ -100,7 +109,9 @@ class _SectionListViewPageState extends State<SectionListViewPage> {
                   horizontal: 20,
                 ),
                 child: PublikasiSectionListEdit(
-                    publikasi: (widget.content[i]) as PublikasiSection),
+                  publikasi: (widget.content[i]) as PublikasiSection,
+                  user: widget.user,
+                ),
               ),
             );
           }

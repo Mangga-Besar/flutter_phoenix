@@ -2,14 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/enums/page_name.dart';
 import 'package:flutter_phoenix/functions/routes.dart';
 import 'package:flutter_phoenix/models/sections/pelatihan_section.dart';
+import 'package:flutter_phoenix/models/user/user.dart';
 import 'package:flutter_phoenix/widgets/custom/custom_text.dart';
 import 'package:flutter_phoenix/widgets/link_text_span.dart';
 import 'package:flutter_phoenix/widgets/section_list.dart';
 import 'package:provider/provider.dart';
 
 class PelatihanSectionListEdit extends SectionList {
-  PelatihanSectionListEdit({required this.pelatihan, super.key});
+  PelatihanSectionListEdit(
+      {required this.pelatihan, required this.user, super.key});
   PelatihanSection pelatihan;
+  User user;
 
   @override
   Widget getContent(BuildContext context) {
@@ -25,7 +28,10 @@ class PelatihanSectionListEdit extends SectionList {
                 Routes.push(
                   context,
                   PageName.EditSection,
-                  arguments: {"content": pelatihan},
+                  arguments: {
+                    "content": pelatihan,
+                    "user": user,
+                  },
                 );
               },
             ),

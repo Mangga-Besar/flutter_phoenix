@@ -133,95 +133,102 @@ class _HomePageState extends State<HomePage> {
                       padding: const EdgeInsets.symmetric(
                         horizontal: 10.0,
                       ),
-                      child: Stack(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                          Row(
                             children: [
-                              CustomText(
-                                user?.name ?? "",
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
+                              Expanded(
+                                child: CustomText(
+                                  user?.name ?? "",
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                              CustomText(
-                                user?.email ?? "",
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                              ),
-                              CustomText(
-                                user?.nik ?? "",
-                                fontSize: 15,
-                                fontWeight: FontWeight.w500,
-                              ),
-                              CustomText(
-                                user?.handPhone ?? "",
-                                fontSize: 15,
-                                fontWeight: FontWeight.w500,
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              CustomText(
-                                DateParser.parseDateOnly(
-                                    user?.dob ?? DateTime.now()),
-                                fontSize: 15,
-                                color: Colors.black54,
-                                fontWeight: FontWeight.bold,
-                              ),
-                              CustomText(
-                                user?.address ?? "",
-                                color: Colors.black54,
-                                fontWeight: FontWeight.normal,
-                                fontSize: 15,
-                              ),
-                              CustomText(
-                                user?.agama ?? "",
-                                color: Colors.black54,
-                                fontWeight: FontWeight.normal,
-                                fontSize: 15,
-                              ),
-                              SizedBox(
-                                height: 10,
+                              IconButton(
+                                onPressed: () async {
+                                  await Routes.push(
+                                      context, PageName.EditSection,
+                                      arguments: {
+                                        "content": user,
+                                      });
+                                  setState(() {
+                                    super.setState(() {});
+                                  });
+                                },
+                                icon: const Icon(
+                                  Icons.edit,
+                                ),
                               ),
                             ],
                           ),
-                          Positioned(
-                            right: 0,
-                            top: 0,
-                            child: IconButton(
-                              onPressed: () {
-                                Routes.push(context, PageName.EditSection,
-                                    arguments: {
-                                      "content": user,
-                                    });
-                              },
-                              icon: const Icon(
-                                Icons.edit,
-                              ),
-                            ),
+                          CustomText(
+                            user?.email ?? "",
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          CustomText(
+                            user?.nik ?? "",
+                            fontSize: 15,
+                            fontWeight: FontWeight.w500,
+                          ),
+                          CustomText(
+                            user?.handPhone ?? "",
+                            fontSize: 15,
+                            fontWeight: FontWeight.w500,
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          CustomText(
+                            DateParser.parseDateOnly(
+                                user?.dob ?? DateTime.now()),
+                            fontSize: 15,
+                            color: Colors.black54,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          CustomText(
+                            user?.address ?? "",
+                            color: Colors.black54,
+                            fontWeight: FontWeight.normal,
+                            fontSize: 15,
+                          ),
+                          CustomText(
+                            user?.agama ?? "",
+                            color: Colors.black54,
+                            fontWeight: FontWeight.normal,
+                            fontSize: 15,
+                          ),
+                          SizedBox(
+                            height: 10,
                           ),
                         ],
                       ),
                     ),
                     SectionPart(
                       title: "KONTAK DARURAT",
-                      content: user?.kontak ?? <KontakSection>[],
+                      user: user!,
+                      content: user.kontak ?? <KontakSection>[],
                     ),
                     SectionPart(
                       title: "PENDIDIKAN",
-                      content: user?.pendidikan ?? <PendidikanSection>[],
+                      user: user,
+                      content: user.pendidikan ?? <PendidikanSection>[],
                     ),
                     SectionPart(
                       title: "PELATIHAN",
-                      content: user?.pelatihan ?? <PelatihanSection>[],
+                      user: user,
+                      content: user.pelatihan ?? <PelatihanSection>[],
                     ),
                     SectionPart(
                       title: "PUBLIKASI",
-                      content: user?.publikasi ?? <PublikasiSection>[],
+                      user: user,
+                      content: user.publikasi ?? <PublikasiSection>[],
                     ),
                     SectionPart(
                       title: "PENUGASAN",
-                      content: user?.penugasan ?? <PenugasanSection>[],
+                      user: user,
+                      content: user.penugasan ?? <PenugasanSection>[],
                     ),
                   ],
                 ),

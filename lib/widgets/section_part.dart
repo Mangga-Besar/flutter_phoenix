@@ -7,6 +7,7 @@ import 'package:flutter_phoenix/models/sections/pelatihan_section.dart';
 import 'package:flutter_phoenix/models/sections/pendidikan_section.dart';
 import 'package:flutter_phoenix/models/sections/penugasan_section.dart';
 import 'package:flutter_phoenix/models/sections/publikasi_section.dart';
+import 'package:flutter_phoenix/models/user/user.dart';
 import 'package:flutter_phoenix/widgets/custom/custom_text.dart';
 import 'package:flutter_phoenix/widgets/section_list_content/kontak_section_list.dart';
 import 'package:flutter_phoenix/widgets/section_list_content/pelatihan_section_list.dart';
@@ -20,10 +21,11 @@ class SectionPart extends StatefulWidget {
     this.title,
     super.key,
     required this.content,
+    required this.user,
   });
 
-  List<ISection> content;
-
+  List<ISection?> content;
+  User user;
   String? title;
 
   @override
@@ -41,14 +43,16 @@ class _SectionPartState extends State<SectionPart> {
           thickness: 5,
         ),
         InkWell(
-          onTap: () {
-            Routes.push(
+          onTap: () async {
+            await Routes.push(
               context,
               PageName.SectionList,
               arguments: {
                 "content": widget.content,
+                "user": widget.user,
               },
             );
+            setState(() {});
           },
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -72,7 +76,10 @@ class _SectionPartState extends State<SectionPart> {
                           Routes.push(
                             context,
                             PageName.SectionList,
-                            arguments: {"content": widget.content},
+                            arguments: {
+                              "content": widget.content,
+                              "user": widget.user,
+                            },
                           );
                         },
                         icon: const Icon(
@@ -84,23 +91,23 @@ class _SectionPartState extends State<SectionPart> {
                 ),
                 ListView.builder(
                   itemBuilder: (context, i) {
-                    if (widget.content is List<KontakSection>) {
+                    if (widget.content is List<KontakSection?>) {
                       return KontakSectionList(
                           kontak: (widget.content[i]) as KontakSection);
                     }
-                    if (widget.content is List<PendidikanSection>) {
+                    if (widget.content is List<PendidikanSection?>) {
                       return PendidikanSectionList(
                           pendidikan: (widget.content[i]) as PendidikanSection);
                     }
-                    if (widget.content is List<PenugasanSection>) {
+                    if (widget.content is List<PenugasanSection?>) {
                       return PenugasanSectionList(
                           penugasan: (widget.content[i]) as PenugasanSection);
                     }
-                    if (widget.content is List<PelatihanSection>) {
+                    if (widget.content is List<PelatihanSection?>) {
                       return PelatihanSectionList(
                           pelatihan: (widget.content[i]) as PelatihanSection);
                     }
-                    if (widget.content is List<PublikasiSection>) {
+                    if (widget.content is List<PublikasiSection?>) {
                       return PublikasiSectionList(
                           publikasi: (widget.content[i]) as PublikasiSection);
                     }
