@@ -205,23 +205,23 @@ class _HomePageState extends State<HomePage> {
                     ),
                     SectionPart(
                       title: "KONTAK DARURAT",
-                      content: user?.kontak ?? [],
+                      content: user?.kontak ?? <KontakSection>[],
                     ),
                     SectionPart(
                       title: "PENDIDIKAN",
-                      content: user?.pendidikan ?? [],
+                      content: user?.pendidikan ?? <PendidikanSection>[],
                     ),
                     SectionPart(
                       title: "PELATIHAN",
-                      content: user?.pelatihan ?? [],
+                      content: user?.pelatihan ?? <PelatihanSection>[],
                     ),
                     SectionPart(
                       title: "PUBLIKASI",
-                      content: user?.publikasi ?? [],
+                      content: user?.publikasi ?? <PublikasiSection>[],
                     ),
                     SectionPart(
                       title: "PENUGASAN",
-                      content: user?.penugasan ?? [],
+                      content: user?.penugasan ?? <PenugasanSection>[],
                     ),
                   ],
                 ),

@@ -45,7 +45,9 @@ class _SectionPartState extends State<SectionPart> {
             Routes.push(
               context,
               PageName.SectionList,
-              arguments: {"content": widget.content},
+              arguments: {
+                "content": widget.content,
+              },
             );
           },
           child: Padding(
