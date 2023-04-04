@@ -9,7 +9,7 @@ class PenugasanSection with ChangeNotifier implements ISection {
       this.endDate,
       this.name,
       this.startDate,
-      this.tag,
+      // this.tag,
       this.tipePekerjaan});
 
   static PenugasanSection? _empty;
@@ -22,7 +22,7 @@ class PenugasanSection with ChangeNotifier implements ISection {
 
   @override
   String? name;
-  List<String>? tag;
+  // List<String>? tag;
   DateTime? startDate;
   DateTime? endDate;
   String? tipePekerjaan;
@@ -39,7 +39,7 @@ class PenugasanSection with ChangeNotifier implements ISection {
       endDate: endDate,
       name: name,
       startDate: startDate,
-      tag: tag,
+      // tag: tag,
       tipePekerjaan: tipePekerjaan,
     );
   }
@@ -51,7 +51,7 @@ class PenugasanSection with ChangeNotifier implements ISection {
       "endDate": (endDate ?? DateTime.now()).toIso8601String(),
       "description": description,
       "tipePekerjaan": tipePekerjaan,
-      "tag": tag,
+      // "tag": tag,
     };
   }
 
@@ -63,7 +63,7 @@ class PenugasanSection with ChangeNotifier implements ISection {
             description: data["description"] ?? "",
             startDate: DateTime.tryParse(data["startDate"]),
             endDate: DateTime.tryParse(data["endDate"]),
-            tag: data["tag"] ?? [],
+            // tag: (data["tag"] as List<String>),
             tipePekerjaan: data["tipePekerjaan"] ?? "",
           );
   }

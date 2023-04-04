@@ -68,8 +68,9 @@ class PendidikanSection with ChangeNotifier implements ISection {
             name: data["name"] ?? "",
             description: data["description"] ?? "",
             tahun: DateTime.tryParse(data["tahun"]),
-            link: data["link"] ?? "",
-            level: data["level"] ?? "",
+            link: data["link"] ?? [],
+            level:
+                EnumParser.getEnum(PendidikanLevel.values, data["level"] ?? ""),
             lokasi: data["lokasi"] ?? "",
             jurusan: data["jurusan"] ?? "",
           );

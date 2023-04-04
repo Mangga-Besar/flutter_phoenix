@@ -43,7 +43,7 @@ class PendidikanSectionListEdit extends SectionList {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CustomText(
-              pendidikan.jurusan ?? "",
+              pendidikan.name ?? "",
               fontWeight: FontWeight.w800,
               fontSize: 15,
             ),
@@ -51,6 +51,12 @@ class PendidikanSectionListEdit extends SectionList {
               pendidikan.tahun?.year.toString() ?? "",
               fontSize: 15,
               fontWeight: FontWeight.w500,
+            ),
+            CustomText(
+              pendidikan.jurusan ?? "",
+              fontSize: 15,
+              fontWeight: FontWeight.w500,
+              color: Colors.black87,
             ),
             CustomText(
               EnumParser.getString(pendidikan.level),
@@ -68,11 +74,13 @@ class PendidikanSectionListEdit extends SectionList {
               fontSize: 12,
               color: Colors.black87,
             ),
-            const CustomText(
-              "Link Terkait :",
-              fontSize: 12,
-              color: Colors.black87,
-            ),
+            pendidikan.link?.isNotEmpty ?? false
+                ? const CustomText(
+                    "Link Terkait :",
+                    fontSize: 12,
+                    color: Colors.black87,
+                  )
+                : Container(),
             ListView.builder(
               itemCount: pendidikan.link?.length ?? 0,
               physics: NeverScrollableScrollPhysics(),

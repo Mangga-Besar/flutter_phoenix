@@ -31,6 +31,7 @@ class SectionPenugasanEditPage extends SectionEditPage {
               fontWeight: FontWeight.bold,
             ),
             NormalFormField(
+              text: penugasan.name,
               hintText: "ex. Mengajar",
               focusNode: _nameFocusNode,
               onFieldSubmitted: (value) {
@@ -48,6 +49,7 @@ class SectionPenugasanEditPage extends SectionEditPage {
               fontWeight: FontWeight.bold,
             ),
             NormalFormField(
+              text: penugasan.tipePekerjaan,
               hintText: "ex. Pengajar",
               focusNode: _tipePekerjaanFocusNode,
               onFieldSubmitted: (value) {
@@ -93,6 +95,7 @@ class SectionPenugasanEditPage extends SectionEditPage {
               fontWeight: FontWeight.bold,
             ),
             NormalFormField(
+              text: penugasan.description,
               hintText: "ex. Deskripsi",
               focusNode: _descriptionFocusNode,
               onFieldSubmitted: (value) {
