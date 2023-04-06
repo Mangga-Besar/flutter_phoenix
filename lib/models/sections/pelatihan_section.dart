@@ -9,7 +9,7 @@ class PelatihanSection with ChangeNotifier implements ISection {
     this.name,
     this.pemberiSertifikat,
     this.startDate,
-    this.tag,
+    // this.tag,
     this.topik,
   });
 
@@ -25,7 +25,7 @@ class PelatihanSection with ChangeNotifier implements ISection {
   String? name;
   String? topik;
   List<String>? link;
-  List<String>? tag;
+  // List<String>? tag;
   DateTime? startDate;
   DateTime? endDate;
   String? pemberiSertifikat;
@@ -44,7 +44,7 @@ class PelatihanSection with ChangeNotifier implements ISection {
       name: name,
       pemberiSertifikat: pemberiSertifikat,
       startDate: startDate,
-      tag: tag,
+      // tag: tag,
       topik: topik,
     );
   }
@@ -56,13 +56,15 @@ class PelatihanSection with ChangeNotifier implements ISection {
       "startDate": (startDate ?? DateTime.now()).toIso8601String(),
       "description": description,
       "pemberiSertifikat": pemberiSertifikat,
-      "tag": tag,
+      // "tag": tag,
       "topik": topik,
       "link": link,
     };
   }
 
   static PelatihanSection? fromMap(Map<String, dynamic>? data) {
+    List<String> link = data?["link"].isEmpty ? <String>[] : data?["link"];
+
     return data == null
         ? null
         : PelatihanSection(
@@ -71,8 +73,8 @@ class PelatihanSection with ChangeNotifier implements ISection {
             endDate: DateTime.tryParse(data["endDate"]),
             startDate: DateTime.tryParse(data["startDate"]),
             pemberiSertifikat: data["pemberiSertifikat"] ?? "",
-            link: data["link"] ?? "",
-            tag: data["tag"] ?? "",
+            link: link,
+            // tag: data["tag"] ?? "",
             topik: data["topik"] ?? "",
           );
   }

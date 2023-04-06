@@ -62,13 +62,15 @@ class PendidikanSection with ChangeNotifier implements ISection {
   }
 
   static PendidikanSection? fromMap(Map<String, dynamic>? data) {
+    List<String> link = data?["link"].isEmpty ? <String>[] : data?["link"];
+
     return data == null
         ? null
         : PendidikanSection(
             name: data["name"] ?? "",
             description: data["description"] ?? "",
             tahun: DateTime.tryParse(data["tahun"]),
-            link: data["link"] ?? [],
+            link: link,
             level:
                 EnumParser.getEnum(PendidikanLevel.values, data["level"] ?? ""),
             lokasi: data["lokasi"] ?? "",

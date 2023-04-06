@@ -8,7 +8,7 @@ class PublikasiSection with ChangeNotifier implements ISection {
     this.description,
     this.link,
     this.name,
-    this.tag,
+    // this.tag,
     this.tanggal,
     this.topik,
   });
@@ -25,7 +25,7 @@ class PublikasiSection with ChangeNotifier implements ISection {
   String? topik;
   String? bidangIlmu;
   List<String>? link;
-  List<String>? tag;
+  // List<String>? tag;
   DateTime? tanggal;
 
   @override
@@ -40,7 +40,7 @@ class PublikasiSection with ChangeNotifier implements ISection {
       description: description,
       link: link,
       name: name,
-      tag: tag,
+      // tag: tag,
       tanggal: tanggal,
       topik: topik,
     );
@@ -52,22 +52,24 @@ class PublikasiSection with ChangeNotifier implements ISection {
       "tanggal": (tanggal ?? DateTime.now()).toIso8601String(),
       "bidangIlmu": bidangIlmu,
       "description": description,
-      "tag": tag,
+      // "tag": tag,
       "topik": topik,
       "link": link,
     };
   }
 
   static PublikasiSection? fromMap(Map<String, dynamic>? data) {
+    List<String> link = data?["link"].isEmpty ? <String>[] : data?["link"];
+
     return data == null
         ? null
         : PublikasiSection(
             name: data["name"] ?? "",
             description: data["description"] ?? "",
             tanggal: DateTime.tryParse(data["tanggal"]),
-            tag: data["tag"] ?? "",
+            // tag: data["tag"] ?? "",
             topik: data["topik"] ?? "",
-            link: data["link"] ?? "",
+            link: link,
             bidangIlmu: data["bidangIlmu"] ?? "",
           );
   }
