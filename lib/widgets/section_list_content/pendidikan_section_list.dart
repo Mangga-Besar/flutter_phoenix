@@ -15,12 +15,12 @@ class PendidikanSectionList extends SectionList {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CustomText(
-          pendidikan.jurusan ?? "",
+          pendidikan.jurusan ?? "NULL",
           fontWeight: FontWeight.w800,
           fontSize: 15,
         ),
         CustomText(
-          pendidikan.tahun?.year.toString() ?? "",
+          pendidikan.tahun?.year.toString() ?? "NULL",
           fontSize: 15,
           fontWeight: FontWeight.w500,
         ),
@@ -31,12 +31,12 @@ class PendidikanSectionList extends SectionList {
           color: Colors.black87,
         ),
         CustomText(
-          pendidikan.lokasi ?? "",
+          pendidikan.lokasi ?? "NULL",
           fontSize: 12,
           color: Colors.black87,
         ),
         CustomText(
-          pendidikan.description ?? "",
+          pendidikan.description ?? "NULL",
           fontSize: 12,
           color: Colors.black87,
         ),

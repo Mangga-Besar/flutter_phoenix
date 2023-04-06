@@ -24,7 +24,7 @@ class PublikasiSection with ChangeNotifier implements ISection {
   String? name;
   String? topik;
   String? bidangIlmu;
-  List<String>? link;
+  List<String>? link = [];
   // List<String>? tag;
   DateTime? tanggal;
 

@@ -116,7 +116,7 @@ class User with ChangeNotifier {
   }
 
   Map<String, dynamic> toVariables() {
-    var pen = penugasan!.map<String>((e) {
+    var pen = pendidikan!.map<String>((e) {
       var map = e!.toVariables();
       return jsonEncode(map);
     }).toList();

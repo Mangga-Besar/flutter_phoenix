@@ -24,7 +24,7 @@ class PelatihanSection with ChangeNotifier implements ISection {
   @override
   String? name;
   String? topik;
-  List<String>? link;
+  List<String>? link = [];
   // List<String>? tag;
   DateTime? startDate;
   DateTime? endDate;

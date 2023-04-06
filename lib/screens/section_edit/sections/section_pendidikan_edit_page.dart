@@ -105,8 +105,7 @@ class SectionPendidikanEditPage extends SectionEditPage {
               selected: dropdownClass,
               list: list,
               onChanged: (val) {
-                pendidikan.level =
-                    EnumParser.getEnum(PendidikanLevel.values, val!.name ?? "");
+                dropdownClass = val ?? list[0];
               },
             ),
             const SizedBox(height: 10),
@@ -126,6 +125,59 @@ class SectionPendidikanEditPage extends SectionEditPage {
                 pendidikan.jurusan = value;
               },
             ),
+            SizedBox(
+              height: 5,
+            ),
+            Row(
+              children: [
+                const CustomText(
+                  'Link Terkait*',
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                ),
+                IconButton(
+                  onPressed: () {
+                    pendidikan.link ??= <String>[];
+                    pendidikan.link!.add("");
+                    pendidikan.notifyListeners();
+                  },
+                  icon: Icon(Icons.add),
+                )
+              ],
+            ),
+            ListView.builder(
+              itemCount: pendidikan.link?.length ?? 0,
+              itemBuilder: (context, i) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 5.0),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: NormalFormField(
+                          hintText: "Link #$i",
+                          text: pendidikan.link![i],
+                          onChanged: (value) {
+                            pendidikan.link![i] = value;
+                          },
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          pendidikan.link!.removeAt(i);
+                          pendidikan.notifyListeners();
+                        },
+                        icon: Icon(
+                          Icons.remove_circle,
+                          color: Colors.red,
+                        ),
+                      )
+                    ],
+                  ),
+                );
+              },
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+            ),
             const SizedBox(height: 45),
             Center(
               child: SizedBox(
@@ -133,12 +185,14 @@ class SectionPendidikanEditPage extends SectionEditPage {
                 child: BaseRaisedButton(
                   ratio: 1 / 1.25,
                   onPressed: () {
-                    if (before != null) {
-                      user.pendidikan!.remove(user.pendidikan!.firstWhere(
-                          (element) => element?.name == before?.name));
+                    pendidikan.level = EnumParser.getEnum(
+                        PendidikanLevel.values, dropdownClass.name ?? "");
+                    if (before?.name == null) {
+                      user.pendidikan!.add(pendidikan);
                     }
-                    user.pendidikan!.add(pendidikan);
+                    pendidikan.notifyListeners();
                     UserHelper().updateUser(user.id ?? "", user);
+                    user.notifyListeners();
                     Routes.pop(context);
                   },
                   color: Configs.secondaryColor,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_phoenix/configs/configs.dart';
 import 'package:flutter_phoenix/enums/page_name.dart';
 import 'package:flutter_phoenix/functions/enum_parser.dart';
 import 'package:flutter_phoenix/functions/routes.dart';
@@ -43,17 +44,17 @@ class PendidikanSectionListEdit extends SectionList {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CustomText(
-              pendidikan.name ?? "",
+              pendidikan.name ?? "NULL",
               fontWeight: FontWeight.w800,
               fontSize: 15,
             ),
             CustomText(
-              pendidikan.tahun?.year.toString() ?? "",
+              pendidikan.tahun?.year.toString() ?? "NULL",
               fontSize: 15,
               fontWeight: FontWeight.w500,
             ),
             CustomText(
-              pendidikan.jurusan ?? "",
+              pendidikan.jurusan ?? "NULL",
               fontSize: 15,
               fontWeight: FontWeight.w500,
               color: Colors.black87,
@@ -65,12 +66,12 @@ class PendidikanSectionListEdit extends SectionList {
               color: Colors.black87,
             ),
             CustomText(
-              pendidikan.lokasi ?? "",
+              pendidikan.lokasi ?? "NULL",
               fontSize: 12,
               color: Colors.black87,
             ),
             CustomText(
-              pendidikan.description ?? "",
+              pendidikan.description ?? "NULL",
               fontSize: 12,
               color: Colors.black87,
             ),
@@ -92,7 +93,10 @@ class PendidikanSectionListEdit extends SectionList {
                   ),
                   child: RichText(
                     text: LinkTextSpan(
-                      text: "Link #${index.toString()}",
+                      style: TextStyle(
+                        color: Configs.linkColor,
+                      ),
+                      text: "Link #${(index + 1).toString()}",
                       url: pendidikan.link?[index] ?? "",
                     ),
                   ),
