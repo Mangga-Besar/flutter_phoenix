@@ -44,7 +44,7 @@ class PendidikanSectionListEdit extends SectionList {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CustomText(
-              pendidikan.name ?? "NULL",
+              pendidikan.name == "" ? "NULL" : pendidikan.name ?? "",
               fontWeight: FontWeight.w800,
               fontSize: 15,
             ),
@@ -53,12 +53,14 @@ class PendidikanSectionListEdit extends SectionList {
               fontSize: 15,
               fontWeight: FontWeight.w500,
             ),
-            CustomText(
-              pendidikan.jurusan ?? "NULL",
-              fontSize: 15,
-              fontWeight: FontWeight.w500,
-              color: Colors.black87,
-            ),
+            pendidikan.jurusan?.isNotEmpty ?? false
+                ? CustomText(
+                    pendidikan.jurusan ?? "",
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.black87,
+                  )
+                : Container(),
             CustomText(
               EnumParser.getString(pendidikan.level),
               fontSize: 12,
@@ -66,12 +68,14 @@ class PendidikanSectionListEdit extends SectionList {
               color: Colors.black87,
             ),
             CustomText(
-              pendidikan.lokasi ?? "NULL",
+              pendidikan.lokasi == "" ? "NULL" : pendidikan.lokasi ?? "",
               fontSize: 12,
               color: Colors.black87,
             ),
             CustomText(
-              pendidikan.description ?? "NULL",
+              pendidikan.description == ""
+                  ? "NULL"
+                  : pendidikan.description ?? "",
               fontSize: 12,
               color: Colors.black87,
             ),
@@ -89,7 +93,7 @@ class PendidikanSectionListEdit extends SectionList {
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.symmetric(
-                    vertical: 5.0,
+                    vertical: 2.5,
                   ),
                   child: RichText(
                     text: LinkTextSpan(

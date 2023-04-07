@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_phoenix/configs/configs.dart';
 import 'package:flutter_phoenix/enums/page_name.dart';
 import 'package:flutter_phoenix/functions/routes.dart';
 import 'package:flutter_phoenix/models/sections/publikasi_section.dart';
@@ -73,11 +74,14 @@ class PublikasiSectionListEdit extends SectionList {
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.symmetric(
-                    vertical: 5.0,
+                    vertical: 2.5,
                   ),
                   child: RichText(
                     text: LinkTextSpan(
-                      text: "Link #${index.toString()}",
+                      style: TextStyle(
+                        color: Configs.linkColor,
+                      ),
+                      text: "Link #${(index + 1).toString()}",
                       url: publikasi.link?[index] ?? "",
                     ),
                   ),

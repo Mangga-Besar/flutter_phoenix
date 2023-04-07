@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_phoenix/configs/configs.dart';
 import 'package:flutter_phoenix/enums/page_name.dart';
 import 'package:flutter_phoenix/functions/routes.dart';
 import 'package:flutter_phoenix/models/sections/pelatihan_section.dart';
@@ -56,18 +57,12 @@ class PelatihanSectionListEdit extends SectionList {
               color: Colors.black87,
             ),
             CustomText(
-              "Dimulai : " +
-                  (pelatihan.startDate?.month.toString() ?? "") +
-                  " - " +
-                  (pelatihan.startDate?.year.toString() ?? ""),
+              "Dimulai : ${pelatihan.startDate?.month.toString() ?? ""} - ${pelatihan.startDate?.year.toString() ?? ""}",
               fontSize: 12,
               color: Colors.black87,
             ),
             CustomText(
-              "Berakhir : " +
-                  (pelatihan.endDate?.month.toString() ?? "") +
-                  " - " +
-                  (pelatihan.endDate?.year.toString() ?? ""),
+              "Berakhir : ${pelatihan.endDate?.month.toString() ?? ""} - ${pelatihan.endDate?.year.toString() ?? ""}",
               fontSize: 12,
               color: Colors.black87,
             ),
@@ -83,16 +78,19 @@ class PelatihanSectionListEdit extends SectionList {
             ),
             ListView.builder(
               itemCount: pelatihan.link?.length ?? 0,
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.symmetric(
-                    vertical: 5.0,
+                    vertical: 2.5,
                   ),
                   child: RichText(
                     text: LinkTextSpan(
-                      text: "Link #${index.toString()}",
+                      style: const TextStyle(
+                        color: Configs.linkColor,
+                      ),
+                      text: "Link #${(index + 1).toString()}",
                       url: pelatihan.link?[index] ?? "",
                     ),
                   ),

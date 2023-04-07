@@ -59,7 +59,8 @@ class PublikasiSection with ChangeNotifier implements ISection {
   }
 
   static PublikasiSection? fromMap(Map<String, dynamic>? data) {
-    List<String> link = data?["link"].isEmpty ? <String>[] : data?["link"];
+    List<String> link =
+        data?["link"].isEmpty ? <String>[] : data!["link"].cast<String>();
 
     return data == null
         ? null

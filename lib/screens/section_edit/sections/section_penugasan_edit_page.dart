@@ -19,8 +19,12 @@ class SectionPenugasanEditPage extends SectionEditPage {
     FocusNode _startDateFocusNode = FocusNode();
     FocusNode _endDateFocusNode = FocusNode();
     FocusNode _descriptionFocusNode = FocusNode();
+    PenugasanSection? before;
+
     return Consumer<User>(builder: (_, user, __) {
       return Consumer<PenugasanSection>(builder: (_, penugasan, __) {
+        before = before ?? (penugasan.copy() as PenugasanSection);
+
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -112,8 +116,12 @@ class SectionPenugasanEditPage extends SectionEditPage {
                 child: BaseRaisedButton(
                   ratio: 1 / 1.25,
                   onPressed: () {
-                    user.penugasan!.add(penugasan);
+                    if (before?.name == null) {
+                      user.penugasan!.add(penugasan);
+                    }
+                    penugasan.notifyListeners();
                     UserHelper().updateUser(user.id ?? "", user);
+                    user.notifyListeners();
                     Routes.pop(context);
                   },
                   color: Configs.secondaryColor,
