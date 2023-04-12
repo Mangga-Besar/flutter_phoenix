@@ -53,7 +53,7 @@ class User with ChangeNotifier {
   });
 
   static User empty() {
-    return _empty ??= User(name: "EMPTY");
+    return _empty ??= User(name: "");
   }
 
   bool get isEmpty => this == User.empty();

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/basics/screens/base_screen.dart';
 import 'package:flutter_phoenix/basics/screens/base_screen_with_app_bar.dart';
 import 'package:flutter_phoenix/enums/page_name.dart';
+import 'package:flutter_phoenix/functions/routes.dart';
 import 'package:flutter_phoenix/interfaces/i_section.dart';
 import 'package:flutter_phoenix/models/sections/kontak_section.dart';
 import 'package:flutter_phoenix/models/sections/pelatihan_section.dart';
@@ -38,6 +39,16 @@ class UserListViewScreen extends BaseScreenWithAppBar {
   AppBar? appBar(BuildContext context) {
     return AppBar(
       elevation: 0,
+      actions: [
+        IconButton(
+            onPressed: () {
+              Routes.push(context, PageName.EditSection,
+                  arguments: {"content": User.empty()});
+            },
+            icon: Icon(
+              Icons.add,
+            ))
+      ],
     );
   }
 }

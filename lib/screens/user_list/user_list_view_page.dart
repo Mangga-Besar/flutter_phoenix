@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_phoenix/enums/page_name.dart';
-import 'package:flutter_phoenix/functions/routes.dart';
-import 'package:flutter_phoenix/interfaces/i_section.dart';
 import 'package:flutter_phoenix/models/user/user.dart';
 import 'package:flutter_phoenix/models/user/user_helper.dart';
-import 'package:flutter_phoenix/widgets/builder/user_builder.dart';
 import 'package:flutter_phoenix/widgets/custom/custom_text.dart';
-import 'package:flutter_phoenix/widgets/picture_factory.dart';
 import 'package:flutter_phoenix/widgets/user_list.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
@@ -18,7 +13,7 @@ class UserListViewPage extends StatefulWidget {
 }
 
 class _UserListViewPageState extends State<UserListViewPage> {
-  static const _pageSize = 10;
+  static const _pageSize = 40;
 
   final PagingController<int, User?> _userPagingController =
       PagingController(firstPageKey: 0);
