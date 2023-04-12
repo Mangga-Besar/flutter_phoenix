@@ -46,6 +46,16 @@ class UserHelper extends BaseHTTPHelper {
     return User.fromMap(result) ?? User.empty();
   }
 
+  Future<List<User?>> getUserList(int start, int length) async {
+    var map = {
+      "filter": {"int": start, "length": length}
+    };
+    var jsonMap = jsonEncode(map);
+    var res = await postGenerics(endpoint: "list", json: jsonMap);
+    var result = res.map((e) => jsonDecode(e)).toList();
+    return User.fromMapList(result);
+  }
+
   Future<bool> forgetPassword(String email) async {
     var map = {"email": email};
     var result = await post(

@@ -3,9 +3,12 @@ import 'package:flutter_phoenix/enums/page_name.dart';
 import 'package:flutter_phoenix/functions/routes.dart';
 import 'package:flutter_phoenix/interfaces/i_section.dart';
 import 'package:flutter_phoenix/models/user/user.dart';
+import 'package:flutter_phoenix/models/user/user_helper.dart';
 import 'package:flutter_phoenix/widgets/builder/user_builder.dart';
 import 'package:flutter_phoenix/widgets/custom/custom_text.dart';
 import 'package:flutter_phoenix/widgets/picture_factory.dart';
+import 'package:flutter_phoenix/widgets/user_list.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class UserListViewPage extends StatefulWidget {
   UserListViewPage({super.key});
@@ -15,84 +18,50 @@ class UserListViewPage extends StatefulWidget {
 }
 
 class _UserListViewPageState extends State<UserListViewPage> {
+  static const _pageSize = 10;
+
+  final PagingController<int, User?> _userPagingController =
+      PagingController(firstPageKey: 0);
+
+  late final UserHelper userHelper;
+
   @override
   void initState() {
+    userHelper = UserHelper();
+    _userPagingController.addPageRequestListener((pageKey) {
+      _fetchPage(pageKey);
+    });
+
     super.initState();
   }
 
-  @override
-  void dispose() {
-    super.dispose();
+  Future<void> _fetchPage(int pageKey) async {
+    try {
+      final newItems = await userHelper.getUserList(pageKey, _pageSize);
+      final isLastPage = newItems.length < _pageSize;
+      if (isLastPage) {
+        _userPagingController.appendLastPage(newItems);
+      } else {
+        final int nextPageKey = pageKey + newItems.length;
+        _userPagingController.appendPage(newItems, nextPageKey);
+      }
+    } catch (error) {
+      _userPagingController.error = error;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return UserBuilder(builder: (user) {
-      List<User> listUser = [user ?? User.empty()];
-      return SingleChildScrollView(
-        child: ListView.builder(
-          itemBuilder: (context, i) {
-            return InkWell(
-              onTap: () async {
-                await Routes.push(context, PageName.User,
-                    arguments: {"user": user});
-                setState(() {});
-              },
-              child: Material(
-                color: Colors.transparent,
-                child: Card(
-                  color: Colors.transparent,
-                  elevation: 0,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          right: 15.0,
-                        ),
-                        child: PictureFactory.build(
-                            fit: BoxFit.contain,
-                            height: 100,
-                            width: 100,
-                            "https://www.treasury.gov.ph/wp-content/uploads/2022/01/male-placeholder-image.jpeg"),
-                      ),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            CustomText(
-                              listUser[i].name ?? "",
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            SizedBox(
-                              height: 7.5,
-                            ),
-                            CustomText(
-                              listUser[i].email ?? "",
-                              fontSize: 15,
-                            ),
-                            SizedBox(
-                              height: 7.5,
-                            ),
-                            CustomText(
-                              listUser[i].nik ?? "",
-                              fontSize: 15,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            );
-          },
-          itemCount: listUser.length,
-          physics: const NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-        ),
-      );
-    });
+    return PagedListView<int, User?>(
+      pagingController: _userPagingController,
+      builderDelegate: PagedChildBuilderDelegate<User?>(
+        itemBuilder: (context, item, index) {
+          if (item == null) {
+            return CustomText("Item Empty");
+          }
+          return UserList(user: item);
+        },
+      ),
+    );
   }
 }

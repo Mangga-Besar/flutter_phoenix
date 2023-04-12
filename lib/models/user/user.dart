@@ -84,12 +84,11 @@ class User with ChangeNotifier {
   }
 
   static User? fromMap(Map<String, dynamic>? data) {
-    List<String> a = [];
-    data!["kontak"] = data["kontak"].map((e) => jsonDecode(e)).toList();
-    data["pelatihan"] = data["pelatihan"].map((e) => jsonDecode(e)).toList();
-    data["pendidikan"] = data["pendidikan"].map((e) => jsonDecode(e)).toList();
-    data["penugasan"] = data["penugasan"].map((e) => jsonDecode(e)).toList();
-    data["publikasi"] = data["publikasi"].map((e) => jsonDecode(e)).toList();
+    // data!["kontak"] = data["kontak"].map((e) => jsonDecode(e)).toList();
+    // data["pelatihan"] = data["pelatihan"].map((e) => jsonDecode(e)).toList();
+    // data["pendidikan"] = data["pendidikan"].map((e) => jsonDecode(e)).toList();
+    // data["penugasan"] = data["penugasan"].map((e) => jsonDecode(e)).toList();
+    // data["publikasi"] = data["publikasi"].map((e) => jsonDecode(e)).toList();
     return data == null
         ? null
         : User(
@@ -115,6 +114,10 @@ class User with ChangeNotifier {
           );
   }
 
+  static List<User?> fromMapList(List<dynamic>? data) {
+    return data == null ? [] : data.map((e) => fromMap(e)).toList();
+  }
+
   Map<String, dynamic> toVariables() {
     var pen = pendidikan!.map<String>((e) {
       var map = e!.toVariables();
@@ -133,25 +136,25 @@ class User with ChangeNotifier {
       "address": address,
       "agama": agama,
       "password": password,
-      "kontak": kontak!.map<String>((e) {
+      "kontak": kontak!.map<Map<String, dynamic>>((e) {
         var map = e!.toVariables();
-        return jsonEncode(map);
+        return map;
       }).toList(),
-      "pelatihan": pelatihan!.map<String>((e) {
+      "pelatihan": pelatihan!.map<Map<String, dynamic>>((e) {
         var map = e!.toVariables();
-        return jsonEncode(map);
+        return map;
       }).toList(),
-      "pendidikan": pendidikan!.map<String>((e) {
+      "pendidikan": pendidikan!.map<Map<String, dynamic>>((e) {
         var map = e!.toVariables();
-        return jsonEncode(map);
+        return map;
       }).toList(),
-      "penugasan": penugasan!.map<String>((e) {
+      "penugasan": penugasan!.map<Map<String, dynamic>>((e) {
         var map = e!.toVariables();
-        return jsonEncode(map);
+        return map;
       }).toList(),
-      "publikasi": publikasi!.map<String>((e) {
+      "publikasi": publikasi!.map<Map<String, dynamic>>((e) {
         var map = e!.toVariables();
-        return jsonEncode(map);
+        return map;
       }).toList(),
     };
   }
