@@ -17,4 +17,6 @@ enum PageName {
   Tenant,
   TenantList,
   VideoCall,
+  User,
+  UserList,
 }

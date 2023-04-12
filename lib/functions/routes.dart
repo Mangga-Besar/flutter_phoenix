@@ -7,6 +7,8 @@ import 'package:flutter_phoenix/screens/home/home_screen_route_configuration.dar
 import 'package:flutter_phoenix/screens/login/login_screen_route_configuration.dart';
 import 'package:flutter_phoenix/screens/section_edit/section_edit_screen_route_configuration.dart';
 import 'package:flutter_phoenix/screens/section_list_view/section_list_view_screen_route_configuration.dart';
+import 'package:flutter_phoenix/screens/user/user_screen_route_configuration.dart';
+import 'package:flutter_phoenix/screens/user_list/user_list_view_screen_route_configuration.dart';
 import 'package:flutter_phoenix/widgets/builder/future_use.dart';
 
 class Routes {
@@ -15,6 +17,8 @@ class Routes {
     LoginScreenRouteConfiguration(),
     SectionListViewScreenRouteConfiguration(),
     SectionEditScreenRouteConfiguration(),
+    UserListViewScreenRouteConfiguration(),
+    UserScreenRouteConfiguration()
   ];
 
   static Future<T?> pushAndRemoveUntil<T>(

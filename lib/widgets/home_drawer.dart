@@ -17,6 +17,8 @@ class HomeDrawer extends StatelessWidget {
     return SizedBox(
       width: MediaQuery.of(context).size.width / 1.5,
       child: Drawer(
+        // backgroundColor: Colors.transparent,
+        // shadowColor: Colors.transparent,
         child: Column(
           children: [
             Expanded(
@@ -33,6 +35,16 @@ class HomeDrawer extends StatelessWidget {
                       selected: selected == PageName.Home,
                     ),
                     Divider(height: 20, color: Colors.grey[400]),
+                    NormalListTile(
+                      leading: const Icon(FontAwesomeIcons.userGroup),
+                      title: const Text(
+                        "User",
+                        style: TextStyle(fontSize: 16.0),
+                      ),
+                      onTap: () => getNavigation(context, PageName.UserList),
+                      selected: selected == PageName.UserList,
+                    ),
+                    // Divider(height: 20, color: Colors.grey[400]),
                   ],
                 ),
               ),
