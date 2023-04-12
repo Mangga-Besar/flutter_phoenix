@@ -119,10 +119,6 @@ class User with ChangeNotifier {
   }
 
   Map<String, dynamic> toVariables() {
-    var pen = pendidikan!.map<String>((e) {
-      var map = e!.toVariables();
-      return jsonEncode(map);
-    }).toList();
     return {
       "id": id,
       "name": name,
@@ -136,26 +132,31 @@ class User with ChangeNotifier {
       "address": address,
       "agama": agama,
       "password": password,
-      "kontak": kontak!.map<Map<String, dynamic>>((e) {
-        var map = e!.toVariables();
-        return map;
-      }).toList(),
-      "pelatihan": pelatihan!.map<Map<String, dynamic>>((e) {
-        var map = e!.toVariables();
-        return map;
-      }).toList(),
-      "pendidikan": pendidikan!.map<Map<String, dynamic>>((e) {
-        var map = e!.toVariables();
-        return map;
-      }).toList(),
-      "penugasan": penugasan!.map<Map<String, dynamic>>((e) {
-        var map = e!.toVariables();
-        return map;
-      }).toList(),
-      "publikasi": publikasi!.map<Map<String, dynamic>>((e) {
-        var map = e!.toVariables();
-        return map;
-      }).toList(),
+      "kontak": kontak?.map<Map<String, dynamic>>((e) {
+            var map = e!.toVariables();
+            return map;
+          }).toList() ??
+          [],
+      "pelatihan": pelatihan?.map<Map<String, dynamic>>((e) {
+            var map = e!.toVariables();
+            return map;
+          }).toList() ??
+          [],
+      "pendidikan": pendidikan?.map<Map<String, dynamic>>((e) {
+            var map = e!.toVariables();
+            return map;
+          }).toList() ??
+          [],
+      "penugasan": penugasan?.map<Map<String, dynamic>>((e) {
+            var map = e!.toVariables();
+            return map;
+          }).toList() ??
+          [],
+      "publikasi": publikasi?.map<Map<String, dynamic>>((e) {
+            var map = e!.toVariables();
+            return map;
+          }).toList() ??
+          [],
     };
   }
 
