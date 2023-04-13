@@ -35,7 +35,7 @@ class _UserListState extends State<UserList> {
                   right: 15.0,
                 ),
                 child: PictureFactory.build(
-                    fit: BoxFit.contain,
+                    fit: BoxFit.fitHeight,
                     height: 100,
                     width: 100,
                     "https://www.treasury.gov.ph/wp-content/uploads/2022/01/male-placeholder-image.jpeg"),

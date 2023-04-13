@@ -24,7 +24,6 @@ class UserListViewScreen extends BaseScreenWithAppBar {
           scrollable: false,
           padding: EdgeInsets.zero,
         );
-
   @override
   Widget content(BuildContext context) {
     return UserListViewPage();
@@ -41,8 +40,8 @@ class UserListViewScreen extends BaseScreenWithAppBar {
       elevation: 0,
       actions: [
         IconButton(
-            onPressed: () {
-              Routes.push(context, PageName.EditSection,
+            onPressed: () async {
+              await Routes.push(context, PageName.EditSection,
                   arguments: {"content": User.empty().copy()});
             },
             icon: Icon(

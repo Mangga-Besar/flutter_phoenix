@@ -27,83 +27,6 @@ class _HomePageState extends State<HomePage> {
   late User user;
   @override
   void initState() {
-    user = User(
-      id: "ASD",
-      roleType: RoleType.Guru,
-      userType: UserType.Member,
-      name: "BUDI GUNAWAN",
-      email: 'Budi@gunawan.com',
-      nik: "31730502030405",
-      handPhone: "082132456",
-      dob: DateTime(2000, 1, 15),
-      address: "Jln. Kijoko Bodo, No 17E, RT 01, RW 01, Kota Jakarta Timur",
-      agama: "Katholik",
-      kontak: [
-        KontakSection(
-            contactNumber: 120320130213,
-            description: "ASDSADAWDSAD",
-            hubungan: "AAAAAAAAAA",
-            name: "JOKOBODO"),
-      ],
-      pelatihan: [
-        PelatihanSection(
-          description: "AAAA",
-          name: "ASDASDASD",
-          topik: "MEMBACA BUKU",
-          startDate: DateTime.now().subtract(Duration(days: 1)),
-          endDate: DateTime.now(),
-          pemberiSertifikat: "DIBERI TOKOPED",
-        ),
-      ],
-      pendidikan: [
-        PendidikanSection(
-            description: "AAAA",
-            jurusan: "S!SD",
-            level: PendidikanLevel.S1,
-            lokasi: "BANDUNG",
-            name: "LULUS S1",
-            tahun: DateTime.now()),
-        PendidikanSection(
-            description: "AAAA",
-            jurusan: "S!SD",
-            level: PendidikanLevel.S2,
-            lokasi: "BANDUNG",
-            name: "LULUS S1",
-            tahun: DateTime.now()),
-      ],
-      penugasan: [
-        PenugasanSection(
-          description: "AAAAAAAAAA",
-          name: "MENGARANG Cerita ANAK",
-          tipePekerjaan: "ASD",
-          startDate: DateTime.now().subtract(Duration(days: 1)),
-          endDate: DateTime.now(),
-        ),
-        PenugasanSection(
-          description: "AAAAAAAAAA",
-          tipePekerjaan: "ASD",
-          name: "MENGARANG Cerita ANAK",
-          startDate: DateTime.now().subtract(Duration(days: 1)),
-          endDate: DateTime.now(),
-        ),
-        PenugasanSection(
-          description: "AAAAAAAAAA",
-          tipePekerjaan: "ASD",
-          name: "MENGARANG Cerita ANAK",
-          startDate: DateTime.now().subtract(Duration(days: 1)),
-          endDate: DateTime.now(),
-        ),
-      ],
-      publikasi: [
-        PublikasiSection(
-            bidangIlmu: "Biologi",
-            description: "AAAAAAAAAAAA",
-            name: "PAPER ABABABA",
-            tanggal: DateTime.now(),
-            topik: "DADASDASD"),
-      ],
-    );
-
     super.initState();
   }
 
@@ -114,127 +37,132 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<String>(
-        future: TokenVersion.getToken(),
-        builder: (context, token) {
-          if (token.data == "") {
-            Routes.push(context, PageName.Login);
-          }
-          return UserBuilder(
-            builder: (user) => Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: 10,
-              ),
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 10.0,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              Expanded(
-                                child: CustomText(
-                                  user?.name ?? "",
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold,
+    return RefreshIndicator(
+      onRefresh: () async {
+        setState(() {});
+      },
+      child: FutureBuilder<String>(
+          future: TokenVersion.getToken(),
+          builder: (context, token) {
+            if (token.data == "") {
+              Routes.push(context, PageName.Login);
+            }
+            return UserBuilder(
+              builder: (user) => Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 10,
+                ),
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10.0,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: CustomText(
+                                    user?.name ?? "",
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
-                              ),
-                              IconButton(
-                                onPressed: () async {
-                                  await Routes.push(
-                                      context, PageName.EditSection,
-                                      arguments: {
-                                        "content": user,
-                                      });
-                                  setState(() {
-                                    super.setState(() {});
-                                  });
-                                },
-                                icon: const Icon(
-                                  Icons.edit,
+                                IconButton(
+                                  onPressed: () async {
+                                    await Routes.push(
+                                        context, PageName.EditSection,
+                                        arguments: {
+                                          "content": user,
+                                        });
+                                    setState(() {
+                                      super.setState(() {});
+                                    });
+                                  },
+                                  icon: const Icon(
+                                    Icons.edit,
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          CustomText(
-                            user?.email ?? "",
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          CustomText(
-                            user?.nik ?? "",
-                            fontSize: 15,
-                            fontWeight: FontWeight.w500,
-                          ),
-                          CustomText(
-                            user?.handPhone ?? "",
-                            fontSize: 15,
-                            fontWeight: FontWeight.w500,
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          CustomText(
-                            DateParser.parseDateOnly(
-                                user?.dob ?? DateTime.now()),
-                            fontSize: 15,
-                            color: Colors.black54,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          CustomText(
-                            user?.address ?? "",
-                            color: Colors.black54,
-                            fontWeight: FontWeight.normal,
-                            fontSize: 15,
-                          ),
-                          CustomText(
-                            user?.agama ?? "",
-                            color: Colors.black54,
-                            fontWeight: FontWeight.normal,
-                            fontSize: 15,
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                        ],
+                              ],
+                            ),
+                            CustomText(
+                              user?.email ?? "",
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            CustomText(
+                              user?.nik ?? "",
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500,
+                            ),
+                            CustomText(
+                              user?.handPhone ?? "",
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500,
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            CustomText(
+                              DateParser.parseDateOnly(
+                                  user?.dob ?? DateTime.now()),
+                              fontSize: 15,
+                              color: Colors.black54,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            CustomText(
+                              user?.address ?? "",
+                              color: Colors.black54,
+                              fontWeight: FontWeight.normal,
+                              fontSize: 15,
+                            ),
+                            CustomText(
+                              user?.agama ?? "",
+                              color: Colors.black54,
+                              fontWeight: FontWeight.normal,
+                              fontSize: 15,
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    SectionPart(
-                      title: "KONTAK DARURAT",
-                      user: user!,
-                      content: user.kontak ?? <KontakSection>[],
-                    ),
-                    SectionPart(
-                      title: "PENDIDIKAN",
-                      user: user,
-                      content: user.pendidikan ?? <PendidikanSection>[],
-                    ),
-                    SectionPart(
-                      title: "PELATIHAN",
-                      user: user,
-                      content: user.pelatihan ?? <PelatihanSection>[],
-                    ),
-                    SectionPart(
-                      title: "PUBLIKASI",
-                      user: user,
-                      content: user.publikasi ?? <PublikasiSection>[],
-                    ),
-                    SectionPart(
-                      title: "PENUGASAN",
-                      user: user,
-                      content: user.penugasan ?? <PenugasanSection>[],
-                    ),
-                  ],
+                      SectionPart(
+                        title: "KONTAK DARURAT",
+                        user: user!,
+                        content: user.kontak ?? <KontakSection>[],
+                      ),
+                      SectionPart(
+                        title: "PENDIDIKAN",
+                        user: user,
+                        content: user.pendidikan ?? <PendidikanSection>[],
+                      ),
+                      SectionPart(
+                        title: "PELATIHAN",
+                        user: user,
+                        content: user.pelatihan ?? <PelatihanSection>[],
+                      ),
+                      SectionPart(
+                        title: "PUBLIKASI",
+                        user: user,
+                        content: user.publikasi ?? <PublikasiSection>[],
+                      ),
+                      SectionPart(
+                        title: "PENUGASAN",
+                        user: user,
+                        content: user.penugasan ?? <PenugasanSection>[],
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          );
-        });
+            );
+          }),
+    );
   }
 }

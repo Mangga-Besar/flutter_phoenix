@@ -47,15 +47,18 @@ class _UserListViewPageState extends State<UserListViewPage> {
 
   @override
   Widget build(BuildContext context) {
-    return PagedListView<int, User?>(
-      pagingController: _userPagingController,
-      builderDelegate: PagedChildBuilderDelegate<User?>(
-        itemBuilder: (context, item, index) {
-          if (item == null) {
-            return CustomText("Item Empty");
-          }
-          return UserList(user: item);
-        },
+    return RefreshIndicator(
+      onRefresh: () async => _userPagingController.refresh(),
+      child: PagedListView<int, User?>(
+        pagingController: _userPagingController,
+        builderDelegate: PagedChildBuilderDelegate<User?>(
+          itemBuilder: (context, item, index) {
+            if (item == null) {
+              return CustomText("Item Empty");
+            }
+            return UserList(user: item);
+          },
+        ),
       ),
     );
   }

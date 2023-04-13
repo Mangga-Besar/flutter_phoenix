@@ -39,6 +39,14 @@ class UserHelper extends BaseHTTPHelper {
     return LoginResult.fromMap(result);
   }
 
+  Future<void> delete(String id) async {
+    var map = {"id": id};
+    var jsonMap = jsonEncode(map);
+
+    var result = await getGenerics(endpoint: "delete/$id", json: jsonMap);
+    return result;
+  }
+
   Future<User> getUser(String id) async {
     var map = {"id": id};
     var jsonMap = jsonEncode(map);
