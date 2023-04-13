@@ -45,7 +45,9 @@ class SectionKontakEditPage extends SectionEditPage {
                 _nameFocusNode.unfocus();
                 FocusScope.of(context).requestFocus(_contactNumberFocusNode);
               },
-              onChanged: (value) {},
+              onChanged: (value) {
+                kontak.name = value;
+              },
               validator: (value) => kontak.nameValidator(),
             ),
             const SizedBox(height: 10),
@@ -63,7 +65,9 @@ class SectionKontakEditPage extends SectionEditPage {
                 FocusScope.of(context).requestFocus(_hubunganFocusNode);
               },
               keyboardType: TextInputType.number,
-              onChanged: (value) {},
+              onChanged: (value) {
+                kontak.contactNumber = int.parse(value);
+              },
               validator: (value) => kontak.nameValidator(),
             ),
             const SizedBox(height: 10),
@@ -80,7 +84,9 @@ class SectionKontakEditPage extends SectionEditPage {
                 _hubunganFocusNode.unfocus();
                 FocusScope.of(context).requestFocus(_descriptionFocusNode);
               },
-              onChanged: (value) {},
+              onChanged: (value) {
+                kontak.hubungan = value;
+              },
               validator: (value) => kontak.nameValidator(),
             ),
             const SizedBox(height: 10),
@@ -96,8 +102,9 @@ class SectionKontakEditPage extends SectionEditPage {
               onFieldSubmitted: (value) {
                 _descriptionFocusNode.unfocus();
               },
-              // onChanged: (value) {
-              // },
+              onChanged: (value) {
+                kontak.description = value;
+              },
               validator: (value) => kontak.nameValidator(),
             ),
             const SizedBox(height: 45),
