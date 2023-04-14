@@ -5,7 +5,7 @@ class PlaceHolder extends StatefulWidget {
   final double ratioX;
   final double ratioY;
 
-  PlaceHolder({this.ratioX = 16, this.ratioY = 9});
+  const PlaceHolder({this.ratioX = 16, this.ratioY = 9});
 
   @override
   _PlaceHolderState createState() => _PlaceHolderState();
