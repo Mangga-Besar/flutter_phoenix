@@ -14,6 +14,7 @@ import 'package:flutter_phoenix/models/sections/publikasi_section.dart';
 import 'package:flutter_phoenix/models/user/user.dart';
 import 'package:flutter_phoenix/widgets/builder/user_builder.dart';
 import 'package:flutter_phoenix/widgets/custom/custom_text.dart';
+import 'package:flutter_phoenix/widgets/picture_factory.dart';
 import 'package:flutter_phoenix/widgets/section_part.dart';
 
 class UserPage extends StatefulWidget {
@@ -48,72 +49,95 @@ class _UserPageState extends State<UserPage> {
               padding: const EdgeInsets.symmetric(
                 horizontal: 10.0,
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              child: Stack(
                 children: [
-                  Row(
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Expanded(
-                        child: CustomText(
-                          widget.user.name ?? "",
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      SizedBox(
+                        height: 10,
                       ),
-                      IconButton(
-                        onPressed: () async {
-                          await Routes.push(context, PageName.EditSection,
-                              arguments: {
-                                "content": widget.user,
-                              });
-                          setState(() {
-                            super.setState(() {});
-                          });
-                        },
-                        icon: const Icon(
-                          Icons.edit,
-                        ),
+                      ClipRRect(
+                        borderRadius: BorderRadius.all(Radius.circular(200)),
+                        clipBehavior: Clip.hardEdge,
+                        child: Container(
+                            height: 125,
+                            width: 125,
+                            child: PictureFactory.build(
+                                widget.user.profilePicture ?? "",
+                                padding: EdgeInsets.zero,
+                                fit: BoxFit.contain)),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      CustomText(
+                        widget.user.name ?? "",
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      CustomText(
+                        widget.user.email ?? "",
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      CustomText(
+                        widget.user.nik ?? "",
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      CustomText(
+                        widget.user.handPhone ?? "",
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      CustomText(
+                        DateParser.parseDateOnly(
+                            widget.user.dob ?? DateTime.now()),
+                        fontSize: 15,
+                        color: Colors.black54,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      CustomText(
+                        widget.user.address ?? "",
+                        color: Colors.black54,
+                        fontWeight: FontWeight.normal,
+                        fontSize: 15,
+                      ),
+                      CustomText(
+                        widget.user.agama ?? "",
+                        color: Colors.black54,
+                        fontWeight: FontWeight.normal,
+                        fontSize: 15,
+                      ),
+                      SizedBox(
+                        height: 10,
                       ),
                     ],
                   ),
-                  CustomText(
-                    widget.user.email ?? "",
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  CustomText(
-                    widget.user.nik ?? "",
-                    fontSize: 15,
-                    fontWeight: FontWeight.w500,
-                  ),
-                  CustomText(
-                    widget.user.handPhone ?? "",
-                    fontSize: 15,
-                    fontWeight: FontWeight.w500,
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  CustomText(
-                    DateParser.parseDateOnly(widget.user.dob ?? DateTime.now()),
-                    fontSize: 15,
-                    color: Colors.black54,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  CustomText(
-                    widget.user.address ?? "",
-                    color: Colors.black54,
-                    fontWeight: FontWeight.normal,
-                    fontSize: 15,
-                  ),
-                  CustomText(
-                    widget.user.agama ?? "",
-                    color: Colors.black54,
-                    fontWeight: FontWeight.normal,
-                    fontSize: 15,
-                  ),
-                  SizedBox(
-                    height: 10,
+                  Positioned(
+                    right: 10,
+                    top: 15,
+                    child: IconButton(
+                      onPressed: () async {
+                        await Routes.push(context, PageName.EditSection,
+                            arguments: {
+                              "content": widget.user,
+                            });
+                        setState(() {
+                          super.setState(() {});
+                        });
+                      },
+                      icon: const Icon(
+                        Icons.edit,
+                      ),
+                    ),
                   ),
                 ],
               ),
