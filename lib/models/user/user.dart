@@ -21,6 +21,7 @@ class User with ChangeNotifier {
   String? schoolId;
   String? password;
   String? address;
+  String? profilePicture;
   String? agama;
   DateTime? dob;
   RoleType roleType;
@@ -42,6 +43,7 @@ class User with ChangeNotifier {
     this.password,
     this.address,
     this.agama,
+    this.profilePicture,
     this.dob,
     this.userType = UserType.Committee,
     this.roleType = RoleType.Karyawan,
@@ -69,6 +71,7 @@ class User with ChangeNotifier {
       email: email,
       handPhone: handPhone,
       userType: userType,
+      profilePicture: profilePicture,
       roleType: roleType,
       dob: dob,
       address: address,
@@ -96,6 +99,7 @@ class User with ChangeNotifier {
             name: data["name"] ?? "",
             nik: data["nik"] ?? "",
             email: data["email"] ?? "",
+            profilePicture: data["profilePicture"] ?? "",
             handPhone: data["handPhone"] ?? "",
             userType: EnumParser.getEnum(
                 UserType.values, data["userType"] ?? "Member"),
@@ -123,6 +127,7 @@ class User with ChangeNotifier {
       "id": id,
       "name": name,
       "nik": nik,
+      "profilePicture": profilePicture,
       "email": email,
       "handPhone": handPhone,
       "schoolId": schoolId,

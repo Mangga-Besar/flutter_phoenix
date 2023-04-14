@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/enums/page_name.dart';
-import 'package:flutter_phoenix/enums/pendidikan_level.dart';
-import 'package:flutter_phoenix/enums/role_type.dart';
-import 'package:flutter_phoenix/enums/user_type.dart';
 import 'package:flutter_phoenix/functions/date_parser.dart';
 import 'package:flutter_phoenix/functions/routes.dart';
 import 'package:flutter_phoenix/functions/token_version.dart';
@@ -14,6 +11,7 @@ import 'package:flutter_phoenix/models/sections/publikasi_section.dart';
 import 'package:flutter_phoenix/models/user/user.dart';
 import 'package:flutter_phoenix/widgets/builder/user_builder.dart';
 import 'package:flutter_phoenix/widgets/custom/custom_text.dart';
+import 'package:flutter_phoenix/widgets/picture_factory.dart';
 import 'package:flutter_phoenix/widgets/section_part.dart';
 
 class HomePage extends StatefulWidget {
@@ -53,109 +51,131 @@ class _HomePageState extends State<HomePage> {
                   vertical: 10,
                 ),
                 child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  child: Stack(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 10.0,
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 10.0,
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Expanded(
-                                  child: CustomText(
-                                    user?.name ?? "",
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                SizedBox(
+                                  height: 10,
                                 ),
-                                IconButton(
-                                  onPressed: () async {
-                                    await Routes.push(
-                                        context, PageName.EditSection,
-                                        arguments: {
-                                          "content": user,
-                                        });
-                                    setState(() {
-                                      super.setState(() {});
-                                    });
-                                  },
-                                  icon: const Icon(
-                                    Icons.edit,
-                                  ),
+                                ClipRRect(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(200)),
+                                  clipBehavior: Clip.hardEdge,
+                                  child: Container(
+                                      height: 125,
+                                      width: 125,
+                                      child: PictureFactory.build(
+                                          user?.profilePicture ?? "",
+                                          padding: EdgeInsets.zero,
+                                          fit: BoxFit.contain)),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                CustomText(
+                                  user?.name ?? "",
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                CustomText(
+                                  user?.email ?? "",
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                CustomText(
+                                  user?.nik ?? "",
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                                CustomText(
+                                  user?.handPhone ?? "",
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                CustomText(
+                                  DateParser.parseDateOnly(
+                                      user?.dob ?? DateTime.now()),
+                                  fontSize: 15,
+                                  color: Colors.black54,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                CustomText(
+                                  user?.address ?? "",
+                                  color: Colors.black54,
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 15,
+                                ),
+                                CustomText(
+                                  user?.agama ?? "",
+                                  color: Colors.black54,
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 15,
+                                ),
+                                SizedBox(
+                                  height: 10,
                                 ),
                               ],
                             ),
-                            CustomText(
-                              user?.email ?? "",
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            CustomText(
-                              user?.nik ?? "",
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                            ),
-                            CustomText(
-                              user?.handPhone ?? "",
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            CustomText(
-                              DateParser.parseDateOnly(
-                                  user?.dob ?? DateTime.now()),
-                              fontSize: 15,
-                              color: Colors.black54,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            CustomText(
-                              user?.address ?? "",
-                              color: Colors.black54,
-                              fontWeight: FontWeight.normal,
-                              fontSize: 15,
-                            ),
-                            CustomText(
-                              user?.agama ?? "",
-                              color: Colors.black54,
-                              fontWeight: FontWeight.normal,
-                              fontSize: 15,
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                          ],
+                          ),
+                          SectionPart(
+                            title: "KONTAK DARURAT",
+                            user: user!,
+                            content: user.kontak ?? <KontakSection>[],
+                          ),
+                          SectionPart(
+                            title: "PENDIDIKAN",
+                            user: user,
+                            content: user.pendidikan ?? <PendidikanSection>[],
+                          ),
+                          SectionPart(
+                            title: "PELATIHAN",
+                            user: user,
+                            content: user.pelatihan ?? <PelatihanSection>[],
+                          ),
+                          SectionPart(
+                            title: "PUBLIKASI",
+                            user: user,
+                            content: user.publikasi ?? <PublikasiSection>[],
+                          ),
+                          SectionPart(
+                            title: "PENUGASAN",
+                            user: user,
+                            content: user.penugasan ?? <PenugasanSection>[],
+                          ),
+                        ],
+                      ),
+                      Positioned(
+                        right: 10,
+                        top: 15,
+                        child: IconButton(
+                          onPressed: () async {
+                            await Routes.push(context, PageName.EditSection,
+                                arguments: {
+                                  "content": user,
+                                });
+                            setState(() {
+                              super.setState(() {});
+                            });
+                          },
+                          icon: const Icon(
+                            Icons.edit,
+                          ),
                         ),
-                      ),
-                      SectionPart(
-                        title: "KONTAK DARURAT",
-                        user: user!,
-                        content: user.kontak ?? <KontakSection>[],
-                      ),
-                      SectionPart(
-                        title: "PENDIDIKAN",
-                        user: user,
-                        content: user.pendidikan ?? <PendidikanSection>[],
-                      ),
-                      SectionPart(
-                        title: "PELATIHAN",
-                        user: user,
-                        content: user.pelatihan ?? <PelatihanSection>[],
-                      ),
-                      SectionPart(
-                        title: "PUBLIKASI",
-                        user: user,
-                        content: user.publikasi ?? <PublikasiSection>[],
-                      ),
-                      SectionPart(
-                        title: "PENUGASAN",
-                        user: user,
-                        content: user.penugasan ?? <PenugasanSection>[],
                       ),
                     ],
                   ),

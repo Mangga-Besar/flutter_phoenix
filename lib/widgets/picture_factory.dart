@@ -13,6 +13,7 @@ class PictureFactory {
     Widget? placeholder,
     double? height,
     double? width,
+    EdgeInsetsGeometry? padding,
   }) {
     return CachedNetworkImage(
       imageUrl: imageUrl,
@@ -34,6 +35,7 @@ class PictureFactory {
       errorWidget: (context, url, error) =>
           placeholder ??
           PlaceHolder(
+            padding: padding,
             ratioX: placeholderRatioX,
             ratioY: placeholderRatioY,
           ),
