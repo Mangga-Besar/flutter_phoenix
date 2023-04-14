@@ -7,6 +7,7 @@ class Report {
   String? title;
   String? body;
   String? userId;
+  List<String>? imageList;
   DateTime? reportDate;
   ReportState? reportState;
 
@@ -15,6 +16,7 @@ class Report {
       this.body,
       this.id,
       this.userId,
+      this.imageList,
       this.reportDate,
       this.reportState});
 
@@ -27,6 +29,7 @@ class Report {
         title: title,
         body: body,
         id: id,
+        imageList: imageList,
         userId: userId,
         reportDate: reportDate,
         reportState: reportState);
@@ -39,6 +42,7 @@ class Report {
             title: data["title"],
             body: data["body"],
             id: data["id"],
+            imageList: data["imageList"],
             userId: data["userId"],
             reportDate: DateTime.tryParse(data["reportDate"]),
             reportState:
@@ -54,6 +58,7 @@ class Report {
     return {
       "title": title,
       "body": body,
+      "imageList": imageList,
       "id": id,
       "userId": userId,
       "reportDate": reportDate?.toIso8601String(),
