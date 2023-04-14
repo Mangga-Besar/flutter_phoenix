@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/configs/configs.dart';
 import 'package:flutter_phoenix/functions/routes.dart';
+import 'package:flutter_phoenix/functions/upload/firebase_uploader_helper.dart';
 import 'package:flutter_phoenix/models/sections/kontak_section.dart';
 import 'package:flutter_phoenix/models/user/user.dart';
 import 'package:flutter_phoenix/models/user/user_helper.dart';
@@ -8,6 +9,7 @@ import 'package:flutter_phoenix/screens/section_edit/section_edit_page.dart';
 import 'package:flutter_phoenix/widgets/base_raised_button.dart';
 import 'package:flutter_phoenix/widgets/custom/custom_text.dart';
 import 'package:flutter_phoenix/widgets/date_time_picker_form_field.dart';
+import 'package:flutter_phoenix/widgets/image_add_single.dart';
 import 'package:flutter_phoenix/widgets/normal_form_field.dart';
 import 'package:provider/provider.dart';
 
@@ -26,6 +28,35 @@ class SectionUserEditPage extends SectionEditPage {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          const CustomText(
+            'Profile Picture',
+            fontSize: 15,
+            fontWeight: FontWeight.bold,
+          ),
+          SizedBox(
+            height: 5,
+          ),
+          Center(
+            child: ImageAddSingle(
+              image: user.profilePicture,
+              onChanged: (file) {
+                final fileName = "IMAGE_${user.id!}";
+                FirebaseUploaderHelper(
+                  filePath: file,
+                  name: fileName,
+                  user: user,
+                  onComplete: (val) async {
+                    user.profilePicture = val;
+                    user.notifyListeners();
+                  },
+                ).upload();
+              },
+              withCrop: true,
+            ),
+          ),
+          SizedBox(
+            height: 15,
+          ),
           const CustomText(
             'Nama Lengkap',
             fontSize: 15,
