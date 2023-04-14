@@ -98,7 +98,7 @@ class _LoginPageState extends State<LoginPage> {
               child: BaseRaisedButton(
                 ratio: 1 / 1.25,
                 onPressed: () async {
-                  login(context);
+                  await login(context);
                 },
                 color: Configs.secondaryColor,
                 child: const Text(
@@ -126,7 +126,10 @@ class _LoginPageState extends State<LoginPage> {
       await TokenVersion.setTokenAndUserId(result.token!, result.userId!);
       ToastHelper.show("Login Berhasil!", context);
 
-      Routes.popToTop(context);
+      Routes.pushReplacement(
+        context,
+        PageName.Home,
+      );
     } catch (err) {
       LoadingFunction.closeLoadingDialog(context);
       switch ((err as HTTPException).message) {

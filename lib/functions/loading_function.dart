@@ -33,6 +33,6 @@ class LoadingFunction {
   }
 
   static void closeLoadingDialog(BuildContext context) {
-    Navigator.of(context).pop();
+    // Navigator.of(context).pop();
   }
 }

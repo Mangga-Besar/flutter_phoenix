@@ -44,9 +44,9 @@ class _HomePageState extends State<HomePage> {
       child: FutureBuilder<String>(
           future: TokenVersion.getToken(),
           builder: (context, token) {
-            if (token.data == "") {
-              Routes.push(context, PageName.Login);
-            }
+            // if (token.data == "") {
+            //   Routes.pushReplacement(context, PageName.Login);
+            // }
             return UserBuilder(
               builder: (user) => Padding(
                 padding: const EdgeInsets.symmetric(

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "785798195005",
+    "project_id": "phoenix-cc-706a1",
+    "storage_bucket": "phoenix-cc-706a1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:785798195005:android:ad80702ed1393f46688754",
+        "android_client_info": {
+          "package_name": "com.example.flutter_phoenix"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "785798195005-k70kgj52c3pigtkmqpprinv8ckjnh3s0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0FaH3Zj_o0D89zodqQ8P309uuQMZDEME"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "785798195005-k70kgj52c3pigtkmqpprinv8ckjnh3s0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,29 +1,48 @@
+import 'package:flutter_phoenix/enums/report_state.dart';
+import 'package:flutter_phoenix/functions/enum_parser.dart';
+
 class Report {
   static Report? _empty;
-  String? content;
+  String? id;
+  String? title;
+  String? body;
+  String? userId;
+  DateTime? reportDate;
+  ReportState? reportState;
 
-  Report({this.content});
+  Report(
+      {this.title,
+      this.body,
+      this.id,
+      this.userId,
+      this.reportDate,
+      this.reportState});
 
   static Report empty() {
-    return _empty ??= Report(content: "");
+    return _empty ??= Report(body: "");
   }
 
   Report copy() {
     return Report(
-      content: content,
-    );
+        title: title,
+        body: body,
+        id: id,
+        userId: userId,
+        reportDate: reportDate,
+        reportState: reportState);
   }
 
   static Report? fromMap(Map<String, dynamic>? data) {
-    // data!["kontak"] = data["kontak"].map((e) => jsonDecode(e)).toList();
-    // data["pelatihan"] = data["pelatihan"].map((e) => jsonDecode(e)).toList();
-    // data["pendidikan"] = data["pendidikan"].map((e) => jsonDecode(e)).toList();
-    // data["penugasan"] = data["penugasan"].map((e) => jsonDecode(e)).toList();
-    // data["publikasi"] = data["publikasi"].map((e) => jsonDecode(e)).toList();
     return data == null
         ? null
         : Report(
-            content: data["content"],
+            title: data["title"],
+            body: data["body"],
+            id: data["id"],
+            userId: data["userId"],
+            reportDate: DateTime.tryParse(data["reportDate"]),
+            reportState:
+                EnumParser.getEnum(ReportState.values, data["reportState"]),
           );
   }
 
@@ -33,7 +52,12 @@ class Report {
 
   Map<String, dynamic> toVariables() {
     return {
-      "content": content,
+      "title": title,
+      "body": body,
+      "id": id,
+      "userId": userId,
+      "reportDate": reportDate?.toIso8601String(),
+      "reportState": EnumParser.getString(reportState),
     };
   }
 
