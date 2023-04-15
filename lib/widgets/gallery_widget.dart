@@ -103,7 +103,7 @@ class _ReportGalleryWidgetState extends State<ReportGalleryWidget> {
       filePath: image,
       name: "REPORT_" +
           (widget.user?.id ?? "") +
-          "${now.year.toString()}${now.month.toString()}${now.day.toString()}${now.hour.toString()}${now.minute.toString()}${now.second.toString()}",
+          "_${now.year.toString()}${now.month.toString()}${now.day.toString()}${now.hour.toString()}${now.minute.toString()}${now.second.toString()}",
       onComplete: (data) async {
         widget.images!.add(data);
         setState(() {});
