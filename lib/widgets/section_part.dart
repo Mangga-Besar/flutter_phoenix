@@ -60,33 +60,36 @@ class _SectionPartState extends State<SectionPart> {
               children: [
                 Row(
                   children: [
-                    Expanded(
-                      flex: 5,
-                      child: CustomText(
-                        widget.title ?? "",
-                        color: Colors.black,
-                        fontWeight: FontWeight.w800,
-                        fontSize: 20,
-                      ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: IconButton(
-                        onPressed: () {
-                          Routes.push(
-                            context,
-                            PageName.SectionList,
-                            arguments: {
-                              "content": widget.content,
-                              "user": widget.user,
-                            },
-                          );
-                        },
-                        icon: const Icon(
-                          Icons.edit,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 12.0),
+                      child: Expanded(
+                        flex: 5,
+                        child: CustomText(
+                          widget.title ?? "",
+                          color: Colors.black,
+                          fontWeight: FontWeight.w800,
+                          fontSize: 20,
                         ),
                       ),
-                    )
+                    ),
+                    // Expanded(
+                    //   flex: 1,
+                    //   child: IconButton(
+                    //     onPressed: () {
+                    //       Routes.push(
+                    //         context,
+                    //         PageName.SectionList,
+                    //         arguments: {
+                    //           "content": widget.content,
+                    //           "user": widget.user,
+                    //         },
+                    //       );
+                    //     },
+                    //     icon: const Icon(
+                    //       Icons.edit,
+                    //     ),
+                    //   ),
+                    // )
                   ],
                 ),
                 ListView.builder(
