@@ -54,6 +54,16 @@ class HomeDrawer extends StatelessWidget {
                       onTap: () => getNavigation(context, PageName.Report),
                       selected: selected == PageName.Report,
                     ),
+                    Divider(height: 20, color: Colors.grey[400]),
+                    NormalListTile(
+                      leading: const Icon(FontAwesomeIcons.exclamation),
+                      title: const Text(
+                        "Report List",
+                        style: TextStyle(fontSize: 16.0),
+                      ),
+                      onTap: () => getNavigation(context, PageName.ReportList),
+                      selected: selected == PageName.ReportList,
+                    ),
                     // Divider(height: 20, color: Colors.grey[400]),
                   ],
                 ),

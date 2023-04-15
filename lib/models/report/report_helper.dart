@@ -22,20 +22,20 @@ class ReportHelper extends BaseHTTPHelper {
     return result;
   }
 
-  Future<User> getUser(String id) async {
+  Future<Report> getUser(String id) async {
     var map = {"id": id};
     var jsonMap = jsonEncode(map);
     var result = await post(endpoint: "load", json: jsonMap);
-    return User.fromMap(result) ?? User.empty();
+    return Report.fromMap(result) ?? Report.empty();
   }
 
-  Future<List<User?>> getUserList(int start, int length) async {
+  Future<List<Report?>> getReportList(int start, int length) async {
     var map = {
       "filter": {"int": start, "length": length}
     };
     var jsonMap = jsonEncode(map);
     var res = await postGenerics(endpoint: "list", json: jsonMap);
     var result = res.map((e) => jsonDecode(e)).toList();
-    return User.fromMapList(result);
+    return Report.fromMapList(result);
   }
 }

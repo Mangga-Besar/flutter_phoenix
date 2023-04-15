@@ -12,8 +12,9 @@ import 'package:image_picker/image_picker.dart';
 class ReportGalleryWidget extends StatefulWidget {
   final List<String>? images;
   final User? user;
+  final bool enabled;
 
-  ReportGalleryWidget({this.images, this.user});
+  ReportGalleryWidget({this.images, this.user, this.enabled = true});
 
   @override
   _ReportGalleryWidgetState createState() => _ReportGalleryWidgetState();
@@ -78,22 +79,24 @@ class _ReportGalleryWidgetState extends State<ReportGalleryWidget> {
   }
 
   Widget _buttons() {
-    return Padding(
-      padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
-      child: Row(
-        children: <Widget>[
-          Spacer(),
-          CircleButton(
-            iconData: Icons.image,
-            iconSize: 25,
-            size: 35,
-            padding: EdgeInsets.zero,
-            onPressed: () => _getImage(context, ImageSource.gallery),
-          ),
-          const SizedBox(width: 10),
-        ],
-      ),
-    );
+    return widget.enabled
+        ? Padding(
+            padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
+            child: Row(
+              children: <Widget>[
+                Spacer(),
+                CircleButton(
+                  iconData: Icons.image,
+                  iconSize: 25,
+                  size: 35,
+                  padding: EdgeInsets.zero,
+                  onPressed: () => _getImage(context, ImageSource.gallery),
+                ),
+                const SizedBox(width: 10),
+              ],
+            ),
+          )
+        : Container();
   }
 
   Future<void> _getImage(BuildContext context, ImageSource source) async {

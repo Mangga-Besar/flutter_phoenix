@@ -1,5 +1,6 @@
 enum PageName {
   EditSection,
+  EditReport,
   EmailVerification,
   ForgetPassword,
   Home,
@@ -8,6 +9,7 @@ enum PageName {
   NewPassword,
   Register,
   Report,
+  ReportList,
   SectionList,
   Settings,
   User,

@@ -36,13 +36,16 @@ class Report {
   }
 
   static Report? fromMap(Map<String, dynamic>? data) {
+    List<String> imageList = (data?["imageList"]?.isEmpty ?? true)
+        ? <String>[]
+        : data!["imageList"].cast<String>();
     return data == null
         ? null
         : Report(
             title: data["title"],
             body: data["body"],
             id: data["id"],
-            imageList: data["imageList"],
+            imageList: imageList,
             userId: data["userId"],
             reportDate: DateTime.tryParse(data["reportDate"]),
             reportState:
