@@ -9,18 +9,17 @@ import 'package:focused_menu/modals.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 
-class GalleryWidget extends StatefulWidget {
-  final String? name;
+class ReportGalleryWidget extends StatefulWidget {
   final List<String>? images;
   final User? user;
 
-  GalleryWidget({this.name, this.images, this.user});
+  ReportGalleryWidget({this.images, this.user});
 
   @override
-  _GalleryWidgetState createState() => _GalleryWidgetState();
+  _ReportGalleryWidgetState createState() => _ReportGalleryWidgetState();
 }
 
-class _GalleryWidgetState extends State<GalleryWidget> {
+class _ReportGalleryWidgetState extends State<ReportGalleryWidget> {
   ImagePicker? imagePicker;
 
   @override
@@ -99,9 +98,12 @@ class _GalleryWidgetState extends State<GalleryWidget> {
 
   Future<void> _getImage(BuildContext context, ImageSource source) async {
     var image = await imagePicker!.pickImage(source: source);
+    DateTime now = DateTime.now();
     var helper = FirebaseUploaderHelper(
       filePath: image,
-      name: "PESERTA_" + widget.name!,
+      name: "REPORT_" +
+          (widget.user?.id ?? "") +
+          "${now.year.toString()}${now.month.toString()}${now.day.toString()}${now.hour.toString()}${now.minute.toString()}${now.second.toString()}",
       onComplete: (data) async {
         widget.images!.add(data);
         setState(() {});

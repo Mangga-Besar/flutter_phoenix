@@ -39,7 +39,7 @@ class _ViewerScreenState extends State<ViewerScreen> {
                     ? MediaQuery.of(context).padding.top + 15
                     : 10,
                 child: const BackButton(
-                  color: Colors.black87,
+                  color: Colors.white54,
                 ),
               ),
             ],

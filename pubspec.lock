@@ -441,10 +441,10 @@ packages:
     dependency: "direct main"
     description:
       name: matrix_gesture_detector
-      sha256: "2e3ee8562f283026d0543fde587f11661dd986b3b2568ad74c66dc3d56e19a45"
+      sha256: ed891802e7f018b9fe9ef2e126d361814994c98f0ba86bc17aaaaddc2b55f466
       url: "https://pub.dev"
     source: hosted
-    version: "0.1.0"
+    version: "0.2.0-nullsafety.1"
   meta:
     dependency: transitive
     description:

@@ -78,9 +78,8 @@ class _ReportPageState extends State<ReportPage> {
             SizedBox(
               height: 15,
             ),
-            GalleryWidget(
-              name: report.name,
-              images: report.imageList,
+            ReportGalleryWidget(
+              images: _imageList,
               user: user,
             ),
             Center(
