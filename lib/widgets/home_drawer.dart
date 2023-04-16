@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_phoenix/configs/configs.dart';
 import 'package:flutter_phoenix/enums/page_name.dart';
 import 'package:flutter_phoenix/functions/routes.dart';
 import 'package:flutter_phoenix/functions/token_version.dart';
@@ -78,17 +79,20 @@ class HomeDrawer extends StatelessWidget {
                         ],
                       ),
                     ),
-                    NormalListTile(
-                      leading: const Icon(FontAwesomeIcons.deleteLeft),
-                      title: const Text(
-                        "Logout",
-                        style: TextStyle(fontSize: 16.0),
+                    Container(
+                      color: Colors.red,
+                      child: ListTile(
+                        minLeadingWidth: 35,
+                        leading: Icon(FontAwesomeIcons.deleteLeft),
+                        title: Text(
+                          "Logout",
+                          style: TextStyle(fontSize: 16.0),
+                        ),
+                        onTap: () async {
+                          await TokenVersion.clearTokenAndUserId();
+                          Routes.pushReplacement(context, PageName.Login);
+                        },
                       ),
-                      onTap: () async {
-                        await TokenVersion.clearTokenAndUserId();
-                        Routes.pushAndRemoveUntilFirst(context, PageName.Login);
-                      },
-                      selected: selected == PageName.ReportList,
                     ),
                   ],
                 ),
