@@ -34,6 +34,7 @@ class PendidikanSectionListEdit extends SectionList {
                   arguments: {
                     "content": pendidikan,
                     "user": user,
+                    "type": PendidikanSection
                   },
                 );
               },

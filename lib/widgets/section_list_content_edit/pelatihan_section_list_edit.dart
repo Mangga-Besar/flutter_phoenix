@@ -32,6 +32,7 @@ class PelatihanSectionListEdit extends SectionList {
                   arguments: {
                     "content": pelatihan,
                     "user": user,
+                    "type": PelatihanSection
                   },
                 );
               },

@@ -32,6 +32,7 @@ class PublikasiSectionListEdit extends SectionList {
                   arguments: {
                     "content": publikasi,
                     "user": user,
+                    "type": PublikasiSection
                   },
                 );
               },

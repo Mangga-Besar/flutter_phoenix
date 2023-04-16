@@ -28,6 +28,7 @@ class KontakSectionListEdit extends SectionList {
                   arguments: {
                     "content": kontak,
                     "user": user,
+                    "type": KontakSection
                   },
                 );
               },

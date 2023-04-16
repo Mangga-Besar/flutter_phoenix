@@ -15,16 +15,19 @@ import 'package:flutter_phoenix/widgets/section_list_content/pendidikan_section_
 import 'package:flutter_phoenix/widgets/section_list_content/penugasan_section_list.dart';
 import 'package:flutter_phoenix/widgets/section_list_content/publikasi_section_list.dart';
 import "package:flutter_phoenix/extensions/string_extensions.dart";
+import 'package:provider/provider.dart';
 
 class SectionPart extends StatefulWidget {
-  SectionPart({
-    this.title,
-    super.key,
-    required this.content,
-    required this.user,
-  });
+  SectionPart(
+      {this.title,
+      super.key,
+      required this.content,
+      required this.user,
+      required this.type});
 
-  List<ISection?> content;
+  Type type;
+  User content;
+
   User user;
   String? title;
 
@@ -35,35 +38,57 @@ class SectionPart extends StatefulWidget {
 class _SectionPartState extends State<SectionPart> {
   @override
   Widget build(BuildContext context) {
-    String tipe = (widget.title ?? "").capitalize();
+    int length;
+    if (widget.type == KontakSection) {
+      length = ((widget.content.kontak?.length ?? 0) > 2
+          ? 2
+          : (widget.content.kontak?.length ?? 0));
+    } else if (widget.type == PendidikanSection) {
+      length = ((widget.content.pendidikan?.length ?? 0) > 2
+          ? 2
+          : (widget.content.pendidikan?.length ?? 0));
+    } else if (widget.type == PenugasanSection) {
+      length = ((widget.content.penugasan?.length ?? 0) > 2
+          ? 2
+          : (widget.content.penugasan?.length ?? 0));
+    } else if (widget.type == PelatihanSection) {
+      length = ((widget.content.pelatihan?.length ?? 0) > 2
+          ? 2
+          : (widget.content.pelatihan?.length ?? 0));
+    } else {
+      length = ((widget.content.publikasi?.length ?? 0) > 2
+          ? 2
+          : (widget.content.publikasi?.length ?? 0));
+    }
     return Column(
       children: [
         const Divider(
           color: Colors.black87,
           thickness: 5,
         ),
-        InkWell(
-          onTap: () async {
-            await Routes.push(
-              context,
-              PageName.SectionList,
-              arguments: {
-                "content": widget.content,
-                "user": widget.user,
-              },
-            );
-            setState(() {});
-          },
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 12.0),
-                      child: Expanded(
-                        flex: 5,
+        ChangeNotifierProvider<User>.value(
+            value: widget.content,
+            builder: (context, _) {
+              return InkWell(
+                onTap: () async {
+                  await Routes.push(
+                    context,
+                    PageName.SectionList,
+                    arguments: {
+                      "content": widget.content,
+                      "user": widget.user,
+                      "type": widget.type,
+                    },
+                  );
+                  setState(() {});
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 12.0),
                         child: CustomText(
                           widget.title ?? "",
                           color: Colors.black,
@@ -71,73 +96,57 @@ class _SectionPartState extends State<SectionPart> {
                           fontSize: 20,
                         ),
                       ),
-                    ),
-                    // Expanded(
-                    //   flex: 1,
-                    //   child: IconButton(
-                    //     onPressed: () {
-                    //       Routes.push(
-                    //         context,
-                    //         PageName.SectionList,
-                    //         arguments: {
-                    //           "content": widget.content,
-                    //           "user": widget.user,
-                    //         },
-                    //       );
-                    //     },
-                    //     icon: const Icon(
-                    //       Icons.edit,
-                    //     ),
-                    //   ),
-                    // )
-                  ],
-                ),
-                ListView.builder(
-                  itemBuilder: (context, i) {
-                    if (widget.content is List<KontakSection?>) {
-                      return KontakSectionList(
-                          kontak: (widget.content[i]) as KontakSection);
-                    }
-                    if (widget.content is List<PendidikanSection?>) {
-                      return PendidikanSectionList(
-                          pendidikan: (widget.content[i]) as PendidikanSection);
-                    }
-                    if (widget.content is List<PenugasanSection?>) {
-                      return PenugasanSectionList(
-                          penugasan: (widget.content[i]) as PenugasanSection);
-                    }
-                    if (widget.content is List<PelatihanSection?>) {
-                      return PelatihanSectionList(
-                          pelatihan: (widget.content[i]) as PelatihanSection);
-                    }
-                    if (widget.content is List<PublikasiSection?>) {
-                      return PublikasiSectionList(
-                          publikasi: (widget.content[i]) as PublikasiSection);
-                    }
-                  },
-                  itemCount:
-                      widget.content.length > 2 ? 2 : widget.content.length,
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                ),
-                if (widget.content.length > 2)
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Icon(Icons.arrow_drop_down),
-                      CustomText(
-                        "Show More",
-                        fontWeight: FontWeight.w600,
-                      )
+                      ListView.builder(
+                        itemBuilder: (context, i) {
+                          if (widget.type == KontakSection) {
+                            return KontakSectionList(
+                                kontak: (widget.content.kontak?[i])
+                                    as KontakSection);
+                          }
+                          if (widget.type == PendidikanSection) {
+                            return PendidikanSectionList(
+                                pendidikan: (widget.content.pendidikan?[i])
+                                    as PendidikanSection);
+                          }
+                          if (widget.type == PenugasanSection) {
+                            return PenugasanSectionList(
+                                penugasan: (widget.content.penugasan?[i])
+                                    as PenugasanSection);
+                          }
+                          if (widget.type == PelatihanSection) {
+                            return PelatihanSectionList(
+                                pelatihan: (widget.content.pelatihan?[i])
+                                    as PelatihanSection);
+                          }
+                          if (widget.type == PublikasiSection) {
+                            return PublikasiSectionList(
+                                publikasi: (widget.content.publikasi?[i])
+                                    as PublikasiSection);
+                          }
+                        },
+                        itemCount: length,
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                      ),
+                      if (length > 2)
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: const [
+                            Icon(Icons.arrow_drop_down),
+                            CustomText(
+                              "Show More",
+                              fontWeight: FontWeight.w600,
+                            )
+                          ],
+                        ),
+                      SizedBox(
+                        height: 10,
+                      ),
                     ],
                   ),
-                SizedBox(
-                  height: 10,
                 ),
-              ],
-            ),
-          ),
-        ),
+              );
+            }),
       ],
     );
   }

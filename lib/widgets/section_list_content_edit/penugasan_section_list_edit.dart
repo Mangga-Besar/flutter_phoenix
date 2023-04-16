@@ -32,6 +32,7 @@ class PenugasanSectionListEdit extends SectionList {
                   arguments: {
                     "content": penugasan,
                     "user": user,
+                    "type": PenugasanSection
                   },
                 );
               },

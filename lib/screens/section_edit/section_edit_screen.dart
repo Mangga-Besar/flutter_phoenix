@@ -32,50 +32,52 @@ class SectionEditScreen extends BaseScreenWithAppBar {
   Widget content(BuildContext context) {
     var args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-    Object? content = args["content"];
+    ISection? content = args["content"];
     User user = args["user"] ?? content;
+    Type type = args["type"];
 
-    if (content is KontakSection) {
+    if (type == KontakSection) {
       return ChangeNotifierProvider<User>.value(
         value: user,
         child: ChangeNotifierProvider<KontakSection>.value(
-          value: (content),
+          value: ((content ?? KontakSection()) as KontakSection),
           child: SectionKontakEditPage(),
         ),
       );
-    } else if (content is PelatihanSection) {
+    } else if (type == PelatihanSection) {
       return ChangeNotifierProvider<User>.value(
         value: user,
         child: ChangeNotifierProvider<PelatihanSection>.value(
-            value: (content), child: SectionPelatihanEditPage()),
+            value: ((content ?? PelatihanSection()) as PelatihanSection),
+            child: SectionPelatihanEditPage()),
       );
-    } else if (content is PendidikanSection) {
+    } else if (type == PendidikanSection) {
       return ChangeNotifierProvider<User>.value(
         value: user,
         child: ChangeNotifierProvider<PendidikanSection>.value(
-          value: (content),
+          value: ((content ?? PendidikanSection()) as PendidikanSection),
           child: SectionPendidikanEditPage(),
         ),
       );
-    } else if (content is PenugasanSection) {
+    } else if (type == PenugasanSection) {
       return ChangeNotifierProvider<User>.value(
         value: user,
         child: ChangeNotifierProvider<PenugasanSection>.value(
-          value: (content),
+          value: ((content ?? PenugasanSection()) as PenugasanSection),
           child: SectionPenugasanEditPage(),
         ),
       );
-    } else if (content is PublikasiSection) {
+    } else if (type == PublikasiSection) {
       return ChangeNotifierProvider<User>.value(
         value: user,
         child: ChangeNotifierProvider<PublikasiSection>.value(
-          value: (content as PublikasiSection),
+          value: ((content ?? PublikasiSection()) as PublikasiSection),
           child: SectionPublikasiEditPage(),
         ),
       );
-    } else if (content is User) {
+    } else if (type == User) {
       return ChangeNotifierProvider<User>.value(
-        value: (content as User),
+        value: ((content ?? User()) as User),
         child: SectionUserEditPage(),
       );
     } else {
@@ -87,7 +89,8 @@ class SectionEditScreen extends BaseScreenWithAppBar {
   AppBar appBar(BuildContext context) {
     var args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-    Object content = args["content"];
+    Object? content = args["content"];
+    Type type = args["type"];
     User user;
     if (content is User) {
       user = content as User;
@@ -102,22 +105,23 @@ class SectionEditScreen extends BaseScreenWithAppBar {
       elevation: 0,
       iconTheme: const IconThemeData(color: Colors.black),
       actions: [
-        content is KontakSection ||
-                content is PendidikanSection ||
-                content is PelatihanSection ||
-                content is PenugasanSection ||
-                content is PublikasiSection
+        content != null &&
+                (type == KontakSection ||
+                    type == PendidikanSection ||
+                    type == PelatihanSection ||
+                    type == PenugasanSection ||
+                    type == PublikasiSection)
             ? IconButton(
                 onPressed: () {
-                  if (content is KontakSection) {
+                  if (type == KontakSection) {
                     user.kontak!.remove(content);
-                  } else if (content is PendidikanSection) {
+                  } else if (type == PendidikanSection) {
                     user.pendidikan!.remove(content);
-                  } else if (content is PelatihanSection) {
+                  } else if (type == PelatihanSection) {
                     user.pelatihan!.remove(content);
-                  } else if (content is PenugasanSection) {
+                  } else if (type == PenugasanSection) {
                     user.penugasan!.remove(content);
-                  } else if (content is PublikasiSection) {
+                  } else if (type == PublikasiSection) {
                     user.publikasi!.remove(content);
                   }
                   user.notifyListeners();
