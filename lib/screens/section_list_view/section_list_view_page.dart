@@ -18,7 +18,7 @@ import 'package:provider/provider.dart';
 
 class SectionListViewPage extends StatefulWidget {
   SectionListViewPage(
-      {required this.content,
+      {required this.target,
       required this.type,
       required this.user,
       super.key});
@@ -26,7 +26,7 @@ class SectionListViewPage extends StatefulWidget {
   @override
   _SectionListViewPageState createState() => _SectionListViewPageState();
 
-  User content;
+  User target;
   User user;
   Type type;
 }
@@ -51,18 +51,18 @@ class _SectionListViewPageState extends State<SectionListViewPage> {
   Widget build(BuildContext context) {
     int length;
     if (widget.type == KontakSection) {
-      length = widget.content.kontak?.length ?? 0;
+      length = widget.target.kontak?.length ?? 0;
     } else if (widget.type == PendidikanSection) {
-      length = widget.content.pendidikan?.length ?? 0;
+      length = widget.target.pendidikan?.length ?? 0;
     } else if (widget.type == PenugasanSection) {
-      length = widget.content.penugasan?.length ?? 0;
+      length = widget.target.penugasan?.length ?? 0;
     } else if (widget.type == PelatihanSection) {
-      length = widget.content.pelatihan?.length ?? 0;
+      length = widget.target.pelatihan?.length ?? 0;
     } else {
-      length = widget.content.publikasi?.length ?? 0;
+      length = widget.target.publikasi?.length ?? 0;
     }
     return ChangeNotifierProvider.value(
-        value: widget.content,
+        value: widget.target,
         builder: (context, _) {
           return Consumer<User>(builder: (_, user, __) {
             return SingleChildScrollView(
@@ -76,7 +76,7 @@ class _SectionListViewPageState extends State<SectionListViewPage> {
                           horizontal: 20,
                         ),
                         child: KontakSectionListEdit(
-                          kontak: (widget.content.kontak?[i]) as KontakSection,
+                          kontak: (widget.target.kontak?[i]) as KontakSection,
                           user: user,
                         ),
                       ),
@@ -90,7 +90,7 @@ class _SectionListViewPageState extends State<SectionListViewPage> {
                           horizontal: 20,
                         ),
                         child: PendidikanSectionListEdit(
-                          pendidikan: (widget.content.pendidikan?[i])
+                          pendidikan: (widget.target.pendidikan?[i])
                               as PendidikanSection,
                           user: user,
                         ),
@@ -105,8 +105,8 @@ class _SectionListViewPageState extends State<SectionListViewPage> {
                           horizontal: 20,
                         ),
                         child: PenugasanSectionListEdit(
-                          penugasan: (widget.content.penugasan?[i])
-                              as PenugasanSection,
+                          penugasan:
+                              (widget.target.penugasan?[i]) as PenugasanSection,
                           user: user,
                         ),
                       ),
@@ -120,7 +120,7 @@ class _SectionListViewPageState extends State<SectionListViewPage> {
                           horizontal: 20,
                         ),
                         child: PelatihanSectionListEdit(
-                            pelatihan: (widget.content.pelatihan?[i])
+                            pelatihan: (widget.target.pelatihan?[i])
                                 as PelatihanSection,
                             user: user),
                       ),
@@ -134,8 +134,8 @@ class _SectionListViewPageState extends State<SectionListViewPage> {
                           horizontal: 20,
                         ),
                         child: PublikasiSectionListEdit(
-                          publikasi: (widget.content.publikasi?[i])
-                              as PublikasiSection,
+                          publikasi:
+                              (widget.target.publikasi?[i]) as PublikasiSection,
                           user: user,
                         ),
                       ),

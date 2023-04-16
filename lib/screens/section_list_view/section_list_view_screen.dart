@@ -29,8 +29,9 @@ class SectionListViewScreen extends BaseScreenWithAppBar {
 
     User user = args["user"];
     Type type = args["type"] as Type;
+    User target = args["target"];
     return SectionListViewPage(
-      content: args["content"],
+      target: target,
       user: user,
       type: type,
     );
@@ -50,8 +51,7 @@ class SectionListViewScreen extends BaseScreenWithAppBar {
           Map<String, dynamic> args = ModalRoute.of(context)!.settings.arguments
               as Map<String, dynamic>;
 
-          User user = args["user"];
-          User content = args["content"];
+          User target = args["target"];
           Type type = args["type"] as Type;
 
           if (type == KontakSection) {
@@ -66,8 +66,8 @@ class SectionListViewScreen extends BaseScreenWithAppBar {
                           return SectionEditScreen();
                         },
                         settings: RouteSettings(arguments: {
-                          "content": null,
-                          "user": user,
+                          "content": KontakSection(),
+                          "user": target,
                           "type": type,
                           "new": KontakSection()
                         }),
@@ -87,8 +87,8 @@ class SectionListViewScreen extends BaseScreenWithAppBar {
                           return SectionEditScreen();
                         },
                         settings: RouteSettings(arguments: {
-                          "content": null,
-                          "user": user,
+                          "content": PelatihanSection(),
+                          "user": target,
                           "type": type,
                         }),
                       ),
@@ -107,8 +107,8 @@ class SectionListViewScreen extends BaseScreenWithAppBar {
                           return SectionEditScreen();
                         },
                         settings: RouteSettings(arguments: {
-                          "content": null,
-                          "user": user,
+                          "content": PendidikanSection(),
+                          "user": target,
                           "type": type,
                         }),
                       ),
@@ -127,8 +127,8 @@ class SectionListViewScreen extends BaseScreenWithAppBar {
                           return SectionEditScreen();
                         },
                         settings: RouteSettings(arguments: {
-                          "content": null,
-                          "user": user,
+                          "content": PenugasanSection(),
+                          "user": target,
                           "type": type,
                         }),
                       ),
@@ -147,8 +147,8 @@ class SectionListViewScreen extends BaseScreenWithAppBar {
                           return SectionEditScreen();
                         },
                         settings: RouteSettings(arguments: {
-                          "content": null,
-                          "user": user,
+                          "content": PublikasiSection(),
+                          "user": target,
                           "type": type,
                         }),
                       ),

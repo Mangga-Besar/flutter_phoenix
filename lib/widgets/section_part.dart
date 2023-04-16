@@ -21,12 +21,12 @@ class SectionPart extends StatefulWidget {
   SectionPart(
       {this.title,
       super.key,
-      required this.content,
+      required this.target,
       required this.user,
       required this.type});
 
   Type type;
-  User content;
+  User target;
 
   User user;
   String? title;
@@ -40,25 +40,25 @@ class _SectionPartState extends State<SectionPart> {
   Widget build(BuildContext context) {
     int length;
     if (widget.type == KontakSection) {
-      length = ((widget.content.kontak?.length ?? 0) > 2
+      length = ((widget.target.kontak?.length ?? 0) > 2
           ? 2
-          : (widget.content.kontak?.length ?? 0));
+          : (widget.target.kontak?.length ?? 0));
     } else if (widget.type == PendidikanSection) {
-      length = ((widget.content.pendidikan?.length ?? 0) > 2
+      length = ((widget.target.pendidikan?.length ?? 0) > 2
           ? 2
-          : (widget.content.pendidikan?.length ?? 0));
+          : (widget.target.pendidikan?.length ?? 0));
     } else if (widget.type == PenugasanSection) {
-      length = ((widget.content.penugasan?.length ?? 0) > 2
+      length = ((widget.target.penugasan?.length ?? 0) > 2
           ? 2
-          : (widget.content.penugasan?.length ?? 0));
+          : (widget.target.penugasan?.length ?? 0));
     } else if (widget.type == PelatihanSection) {
-      length = ((widget.content.pelatihan?.length ?? 0) > 2
+      length = ((widget.target.pelatihan?.length ?? 0) > 2
           ? 2
-          : (widget.content.pelatihan?.length ?? 0));
+          : (widget.target.pelatihan?.length ?? 0));
     } else {
-      length = ((widget.content.publikasi?.length ?? 0) > 2
+      length = ((widget.target.publikasi?.length ?? 0) > 2
           ? 2
-          : (widget.content.publikasi?.length ?? 0));
+          : (widget.target.publikasi?.length ?? 0));
     }
     return Column(
       children: [
@@ -67,7 +67,7 @@ class _SectionPartState extends State<SectionPart> {
           thickness: 5,
         ),
         ChangeNotifierProvider<User>.value(
-            value: widget.content,
+            value: widget.target,
             builder: (context, _) {
               return InkWell(
                 onTap: () async {
@@ -75,7 +75,7 @@ class _SectionPartState extends State<SectionPart> {
                     context,
                     PageName.SectionList,
                     arguments: {
-                      "content": widget.content,
+                      "target": widget.target,
                       "user": widget.user,
                       "type": widget.type,
                     },
@@ -100,27 +100,27 @@ class _SectionPartState extends State<SectionPart> {
                         itemBuilder: (context, i) {
                           if (widget.type == KontakSection) {
                             return KontakSectionList(
-                                kontak: (widget.content.kontak?[i])
+                                kontak: (widget.target.kontak?[i])
                                     as KontakSection);
                           }
                           if (widget.type == PendidikanSection) {
                             return PendidikanSectionList(
-                                pendidikan: (widget.content.pendidikan?[i])
+                                pendidikan: (widget.target.pendidikan?[i])
                                     as PendidikanSection);
                           }
                           if (widget.type == PenugasanSection) {
                             return PenugasanSectionList(
-                                penugasan: (widget.content.penugasan?[i])
+                                penugasan: (widget.target.penugasan?[i])
                                     as PenugasanSection);
                           }
                           if (widget.type == PelatihanSection) {
                             return PelatihanSectionList(
-                                pelatihan: (widget.content.pelatihan?[i])
+                                pelatihan: (widget.target.pelatihan?[i])
                                     as PelatihanSection);
                           }
                           if (widget.type == PublikasiSection) {
                             return PublikasiSectionList(
-                                publikasi: (widget.content.publikasi?[i])
+                                publikasi: (widget.target.publikasi?[i])
                                     as PublikasiSection);
                           }
                         },
