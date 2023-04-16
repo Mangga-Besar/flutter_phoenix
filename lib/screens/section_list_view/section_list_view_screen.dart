@@ -17,7 +17,7 @@ class SectionListViewScreen extends BaseScreenWithAppBar {
   SectionListViewScreen()
       : super(
           "SectionListView",
-          PageName.SectionList,
+          PageName.SectionListView,
           scrollable: false,
           padding: EdgeInsets.zero,
         );
@@ -29,12 +29,13 @@ class SectionListViewScreen extends BaseScreenWithAppBar {
 
     User user = args["user"];
     Type type = args["type"] as Type;
-    User target = args["target"];
-    return SectionListViewPage(
-      target: target,
-      user: user,
-      type: type,
-    );
+    return Consumer<User>(builder: (_, target, __) {
+      return SectionListViewPage(
+        target: target,
+        user: user,
+        type: type,
+      );
+    });
   }
 
   @override
@@ -47,11 +48,11 @@ class SectionListViewScreen extends BaseScreenWithAppBar {
     return AppBar(
       elevation: 0,
       actions: [
-        Builder(builder: (context) {
+        Consumer<User>(builder: (_, target, __) {
           Map<String, dynamic> args = ModalRoute.of(context)!.settings.arguments
               as Map<String, dynamic>;
 
-          User target = args["target"];
+          User user = args["user"];
           Type type = args["type"] as Type;
 
           if (type == KontakSection) {

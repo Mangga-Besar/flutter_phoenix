@@ -16,10 +16,11 @@ import 'package:flutter_phoenix/widgets/builder/user_builder.dart';
 import 'package:flutter_phoenix/widgets/custom/custom_text.dart';
 import 'package:flutter_phoenix/widgets/picture_factory.dart';
 import 'package:flutter_phoenix/widgets/section_part.dart';
+import 'package:provider/provider.dart';
 
 class UserPage extends StatefulWidget {
-  UserPage({super.key, required this.user});
-  User user;
+  UserPage({super.key, required this.target});
+  User target;
   @override
   _UserPageState createState() => _UserPageState();
 }
@@ -47,140 +48,139 @@ class _UserPageState extends State<UserPage> {
         },
         child: SingleChildScrollView(
           child: UserBuilder(builder: (user) {
-            return Stack(
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 10.0,
-                      ),
-                      child: Column(
+            return ChangeNotifierProvider.value(
+                value: widget.target,
+                builder: (context, _) {
+                  return Stack(
+                    children: [
+                      Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(
-                            height: 10,
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 10.0,
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                ClipRRect(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(200)),
+                                  clipBehavior: Clip.hardEdge,
+                                  child: Container(
+                                      height: 125,
+                                      width: 125,
+                                      child: PictureFactory.build(
+                                          widget.target.profilePicture ?? "",
+                                          padding: EdgeInsets.zero,
+                                          fit: BoxFit.contain)),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                CustomText(
+                                  widget.target.name ?? "",
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                CustomText(
+                                  widget.target.email ?? "",
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                CustomText(
+                                  widget.target.nik ?? "",
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                                CustomText(
+                                  widget.target.handPhone ?? "",
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                CustomText(
+                                  DateParser.parseDateOnly(
+                                      widget.target.dob ?? DateTime.now()),
+                                  fontSize: 15,
+                                  color: Colors.black54,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                CustomText(
+                                  widget.target.address ?? "",
+                                  color: Colors.black54,
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 15,
+                                ),
+                                CustomText(
+                                  widget.target.agama ?? "",
+                                  color: Colors.black54,
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 15,
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                              ],
+                            ),
                           ),
-                          ClipRRect(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(200)),
-                            clipBehavior: Clip.hardEdge,
-                            child: Container(
-                                height: 125,
-                                width: 125,
-                                child: PictureFactory.build(
-                                    widget.user.profilePicture ?? "",
-                                    padding: EdgeInsets.zero,
-                                    fit: BoxFit.contain)),
+                          SectionPart(
+                            title: "KONTAK DARURAT",
+                            user: user!,
+                            type: KontakSection,
                           ),
-                          SizedBox(
-                            height: 10,
+                          SectionPart(
+                            title: "PENDIDIKAN",
+                            user: user,
+                            type: PendidikanSection,
                           ),
-                          CustomText(
-                            widget.user.name ?? "",
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
+                          SectionPart(
+                            title: "PELATIHAN",
+                            user: user,
+                            type: PelatihanSection,
                           ),
-                          SizedBox(
-                            height: 10,
+                          SectionPart(
+                            title: "PUBLIKASI",
+                            user: user,
+                            type: PublikasiSection,
                           ),
-                          CustomText(
-                            widget.user.email ?? "",
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          CustomText(
-                            widget.user.nik ?? "",
-                            fontSize: 15,
-                            fontWeight: FontWeight.w500,
-                          ),
-                          CustomText(
-                            widget.user.handPhone ?? "",
-                            fontSize: 15,
-                            fontWeight: FontWeight.w500,
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          CustomText(
-                            DateParser.parseDateOnly(
-                                widget.user.dob ?? DateTime.now()),
-                            fontSize: 15,
-                            color: Colors.black54,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          CustomText(
-                            widget.user.address ?? "",
-                            color: Colors.black54,
-                            fontWeight: FontWeight.normal,
-                            fontSize: 15,
-                          ),
-                          CustomText(
-                            widget.user.agama ?? "",
-                            color: Colors.black54,
-                            fontWeight: FontWeight.normal,
-                            fontSize: 15,
-                          ),
-                          SizedBox(
-                            height: 10,
+                          SectionPart(
+                            title: "PENUGASAN",
+                            user: user,
+                            type: PenugasanSection,
                           ),
                         ],
                       ),
-                    ),
-                    SectionPart(
-                      title: "KONTAK DARURAT",
-                      user: user!,
-                      target: widget.user,
-                      type: KontakSection,
-                    ),
-                    SectionPart(
-                      title: "PENDIDIKAN",
-                      user: user,
-                      target: widget.user,
-                      type: PendidikanSection,
-                    ),
-                    SectionPart(
-                      title: "PELATIHAN",
-                      user: user,
-                      target: widget.user,
-                      type: PelatihanSection,
-                    ),
-                    SectionPart(
-                      title: "PUBLIKASI",
-                      user: user,
-                      target: widget.user,
-                      type: PublikasiSection,
-                    ),
-                    SectionPart(
-                      title: "PENUGASAN",
-                      user: user,
-                      target: widget.user,
-                      type: PenugasanSection,
-                    ),
-                  ],
-                ),
-                Positioned(
-                  right: 10,
-                  top: 15,
-                  child: IconButton(
-                    onPressed: () async {
-                      await Routes.push(context, PageName.EditSection,
-                          arguments: {
-                            "content": widget.user,
-                            "user": user,
-                          });
-                      setState(() {
-                        super.setState(() {});
-                      });
-                    },
-                    icon: const Icon(
-                      Icons.edit,
-                    ),
-                  ),
-                ),
-              ],
-            );
+                      Positioned(
+                        right: 10,
+                        top: 15,
+                        child: IconButton(
+                          onPressed: () async {
+                            await Routes.push(context, PageName.EditSection,
+                                arguments: {
+                                  "content": widget.target,
+                                  "user": user,
+                                });
+                            setState(() {
+                              super.setState(() {});
+                            });
+                          },
+                          icon: const Icon(
+                            Icons.edit,
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
+                });
           }),
         ),
       ),

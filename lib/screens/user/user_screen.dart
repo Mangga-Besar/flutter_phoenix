@@ -23,7 +23,7 @@ class UserScreen extends BaseScreenWithAppBar {
     User user = args["user"];
 
     return UserPage(
-      user: user,
+      target: user,
     );
   }
 

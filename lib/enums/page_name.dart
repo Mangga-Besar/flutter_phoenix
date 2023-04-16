@@ -10,7 +10,7 @@ enum PageName {
   Register,
   Report,
   ReportList,
-  SectionList,
+  SectionListView,
   Settings,
   User,
   UserList,
