@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/enums/page_name.dart';
 import 'package:flutter_phoenix/functions/routes.dart';
+import 'package:flutter_phoenix/functions/token_version.dart';
+import 'package:flutter_phoenix/models/user/user_helper.dart';
 import 'package:flutter_phoenix/widgets/normal_list_tile.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -24,47 +26,70 @@ class HomeDrawer extends StatelessWidget {
             Expanded(
               child: SafeArea(
                 child: Column(
-                  children: <Widget>[
-                    NormalListTile(
-                      leading: const Icon(FontAwesomeIcons.houseChimney),
-                      title: const Text(
-                        "Beranda",
-                        style: TextStyle(fontSize: 16.0),
+                  children: [
+                    Expanded(
+                      child: Column(
+                        children: <Widget>[
+                          NormalListTile(
+                            leading: const Icon(FontAwesomeIcons.houseChimney),
+                            title: const Text(
+                              "Beranda",
+                              style: TextStyle(fontSize: 16.0),
+                            ),
+                            onTap: () => getNavigation(context, PageName.Home),
+                            selected: selected == PageName.Home,
+                          ),
+                          Divider(height: 20, color: Colors.grey[400]),
+                          NormalListTile(
+                            leading: const Icon(FontAwesomeIcons.userGroup),
+                            title: const Text(
+                              "User",
+                              style: TextStyle(fontSize: 16.0),
+                            ),
+                            onTap: () =>
+                                getNavigation(context, PageName.UserList),
+                            selected: selected == PageName.UserList,
+                          ),
+                          Divider(height: 20, color: Colors.grey[400]),
+                          NormalListTile(
+                            leading: const Icon(
+                                FontAwesomeIcons.triangleExclamation),
+                            title: const Text(
+                              "Report",
+                              style: TextStyle(fontSize: 16.0),
+                            ),
+                            onTap: () =>
+                                getNavigation(context, PageName.Report),
+                            selected: selected == PageName.Report,
+                          ),
+                          Divider(height: 20, color: Colors.grey[400]),
+                          NormalListTile(
+                            leading: const Icon(FontAwesomeIcons.exclamation),
+                            title: const Text(
+                              "Report List",
+                              style: TextStyle(fontSize: 16.0),
+                            ),
+                            onTap: () =>
+                                getNavigation(context, PageName.ReportList),
+                            selected: selected == PageName.ReportList,
+                          ),
+
+                          // Divider(height: 20, color: Colors.grey[400]),
+                        ],
                       ),
-                      onTap: () => getNavigation(context, PageName.Home),
-                      selected: selected == PageName.Home,
                     ),
-                    Divider(height: 20, color: Colors.grey[400]),
                     NormalListTile(
-                      leading: const Icon(FontAwesomeIcons.userGroup),
+                      leading: const Icon(FontAwesomeIcons.deleteLeft),
                       title: const Text(
-                        "User",
+                        "Logout",
                         style: TextStyle(fontSize: 16.0),
                       ),
-                      onTap: () => getNavigation(context, PageName.UserList),
-                      selected: selected == PageName.UserList,
-                    ),
-                    Divider(height: 20, color: Colors.grey[400]),
-                    NormalListTile(
-                      leading: const Icon(FontAwesomeIcons.triangleExclamation),
-                      title: const Text(
-                        "Report",
-                        style: TextStyle(fontSize: 16.0),
-                      ),
-                      onTap: () => getNavigation(context, PageName.Report),
-                      selected: selected == PageName.Report,
-                    ),
-                    Divider(height: 20, color: Colors.grey[400]),
-                    NormalListTile(
-                      leading: const Icon(FontAwesomeIcons.exclamation),
-                      title: const Text(
-                        "Report List",
-                        style: TextStyle(fontSize: 16.0),
-                      ),
-                      onTap: () => getNavigation(context, PageName.ReportList),
+                      onTap: () async {
+                        await TokenVersion.clearTokenAndUserId();
+                        Routes.pushAndRemoveUntilFirst(context, PageName.Login);
+                      },
                       selected: selected == PageName.ReportList,
                     ),
-                    // Divider(height: 20, color: Colors.grey[400]),
                   ],
                 ),
               ),
