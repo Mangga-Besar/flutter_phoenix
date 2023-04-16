@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_phoenix/enums/page_name.dart';
-import 'package:flutter_phoenix/functions/routes.dart';
-import 'package:flutter_phoenix/interfaces/i_section.dart';
 import 'package:flutter_phoenix/models/sections/kontak_section.dart';
 import 'package:flutter_phoenix/models/sections/pelatihan_section.dart';
 import 'package:flutter_phoenix/models/sections/pendidikan_section.dart';
@@ -15,7 +12,6 @@ import 'package:flutter_phoenix/widgets/section_list_content/pelatihan_section_l
 import 'package:flutter_phoenix/widgets/section_list_content/pendidikan_section_list.dart';
 import 'package:flutter_phoenix/widgets/section_list_content/penugasan_section_list.dart';
 import 'package:flutter_phoenix/widgets/section_list_content/publikasi_section_list.dart';
-import "package:flutter_phoenix/extensions/string_extensions.dart";
 import 'package:provider/provider.dart';
 
 class SectionPart extends StatefulWidget {

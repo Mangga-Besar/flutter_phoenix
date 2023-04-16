@@ -159,25 +159,30 @@ class _UserPageState extends State<UserPage> {
                           ),
                         ],
                       ),
-                      Positioned(
-                        right: 10,
-                        top: 15,
-                        child: IconButton(
-                          onPressed: () async {
-                            await Routes.push(context, PageName.EditSection,
-                                arguments: {
-                                  "content": widget.target,
-                                  "user": user,
-                                });
-                            setState(() {
-                              super.setState(() {});
-                            });
-                          },
-                          icon: const Icon(
-                            Icons.edit,
-                          ),
-                        ),
-                      ),
+                      (user.id == widget.target.id ||
+                              user.isSuper ||
+                              user.isCommitee)
+                          ? Positioned(
+                              right: 10,
+                              top: 15,
+                              child: IconButton(
+                                onPressed: () async {
+                                  await Routes.push(
+                                      context, PageName.EditSection,
+                                      arguments: {
+                                        "content": widget.target,
+                                        "user": user,
+                                      });
+                                  setState(() {
+                                    super.setState(() {});
+                                  });
+                                },
+                                icon: const Icon(
+                                  Icons.edit,
+                                ),
+                              ),
+                            )
+                          : Container(),
                     ],
                   );
                 });
