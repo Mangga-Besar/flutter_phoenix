@@ -9,9 +9,9 @@ import 'package:flutter_phoenix/widgets/custom/custom_text.dart';
 import 'package:flutter_phoenix/widgets/picture_factory.dart';
 
 class ReportList extends StatefulWidget {
-  ReportList({super.key, required this.report});
+  ReportList({super.key, required this.report, this.onTap});
   Report report;
-
+  Function()? onTap;
   @override
   State<ReportList> createState() => _ReportListState();
 }
@@ -20,11 +20,7 @@ class _ReportListState extends State<ReportList> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () async {
-        await Routes.push(context, PageName.EditReport,
-            arguments: {"report": widget.report});
-        setState(() {});
-      },
+      onTap: widget.onTap,
       child: Material(
         color: Colors.transparent,
         child: Card(

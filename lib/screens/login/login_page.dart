@@ -76,21 +76,21 @@ class _LoginPageState extends State<LoginPage> {
             onChanged: (val) => loginData.password = val,
           ),
           const SizedBox(height: 30),
-          // Align(
-          //   alignment: Alignment.centerRight,
-          //   child: GestureDetector(
-          //     onTap: () => Routes.push(context, PageName.ForgetPassword),
-          //     child: const Text(
-          //       "Lupa Password?",
-          //       style: TextStyle(
-          //         decoration: TextDecoration.underline,
-          //         fontWeight: FontWeight.bold,
-          //         color: Configs.secondaryColor,
-          //         fontSize: 14,
-          //       ),
-          //     ),
-          //   ),
-          // ),
+          Align(
+            alignment: Alignment.centerRight,
+            child: GestureDetector(
+              onTap: () => Routes.push(context, PageName.ForgetPassword),
+              child: const Text(
+                "Lupa Password?",
+                style: TextStyle(
+                  decoration: TextDecoration.underline,
+                  fontWeight: FontWeight.bold,
+                  color: Configs.secondaryColor,
+                  fontSize: 14,
+                ),
+              ),
+            ),
+          ),
           const SizedBox(height: 45),
           Center(
             child: SizedBox(

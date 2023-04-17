@@ -173,6 +173,7 @@ class _HomePageState extends State<HomePage> {
                                       context, PageName.EditSection,
                                       arguments: {
                                         "content": user,
+                                        "type": User
                                       });
                                   setState(() {
                                     super.setState(() {});

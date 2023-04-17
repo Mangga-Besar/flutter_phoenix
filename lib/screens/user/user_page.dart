@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/enums/page_name.dart';
-import 'package:flutter_phoenix/enums/pendidikan_level.dart';
-import 'package:flutter_phoenix/enums/role_type.dart';
-import 'package:flutter_phoenix/enums/user_type.dart';
 import 'package:flutter_phoenix/functions/date_parser.dart';
 import 'package:flutter_phoenix/functions/routes.dart';
-import 'package:flutter_phoenix/functions/token_version.dart';
 import 'package:flutter_phoenix/models/sections/kontak_section.dart';
 import 'package:flutter_phoenix/models/sections/pelatihan_section.dart';
 import 'package:flutter_phoenix/models/sections/pendidikan_section.dart';
@@ -172,6 +168,7 @@ class _UserPageState extends State<UserPage> {
                                       arguments: {
                                         "content": widget.target,
                                         "user": user,
+                                        "type": User
                                       });
                                   setState(() {
                                     super.setState(() {});

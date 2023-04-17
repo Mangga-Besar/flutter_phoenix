@@ -3,7 +3,9 @@ import 'package:flutter_phoenix/enums/page_name.dart';
 import 'package:flutter_phoenix/functions/enum_parser.dart';
 import 'package:flutter_phoenix/functions/loading_function.dart';
 import 'package:flutter_phoenix/interfaces/i_route_configuration.dart';
+import 'package:flutter_phoenix/screens/change_password/change_password_screen_route_configuration.dart';
 import 'package:flutter_phoenix/screens/edit_report/edit_report_screen_route_configuration.dart';
+import 'package:flutter_phoenix/screens/forget_password/forget_password_screen_route_configuration.dart';
 import 'package:flutter_phoenix/screens/home/home_screen_route_configuration.dart';
 import 'package:flutter_phoenix/screens/login/login_screen_route_configuration.dart';
 import 'package:flutter_phoenix/screens/report/report_screen_route_configuration.dart';
@@ -12,6 +14,7 @@ import 'package:flutter_phoenix/screens/section_edit/section_edit_screen_route_c
 import 'package:flutter_phoenix/screens/section_list_view/section_list_view_screen_route_configuration.dart';
 import 'package:flutter_phoenix/screens/user/user_screen_route_configuration.dart';
 import 'package:flutter_phoenix/screens/user_list/user_list_view_screen_route_configuration.dart';
+import 'package:flutter_phoenix/screens/verification_key/verification_key_screen_route_configuration.dart';
 import 'package:flutter_phoenix/widgets/builder/future_use.dart';
 
 class Routes {
@@ -25,6 +28,9 @@ class Routes {
     ReportScreenRouteConfiguration(),
     ReportListViewScreenRouteConfiguration(),
     EditReportScreenRouteConfiguration(),
+    ChangePasswordScreenRouteConfiguration(),
+    ForgetPasswordScreenRouteConfiguration(),
+    VerificationKeyScreenRouteConfiguration(),
   ];
 
   static Future<T?> pushAndRemoveUntil<T>(

@@ -83,8 +83,8 @@ class HomeDrawer extends StatelessWidget {
                       color: Colors.red,
                       child: ListTile(
                         minLeadingWidth: 35,
-                        leading: Icon(FontAwesomeIcons.deleteLeft),
-                        title: Text(
+                        leading: const Icon(FontAwesomeIcons.deleteLeft),
+                        title: const Text(
                           "Logout",
                           style: TextStyle(fontSize: 16.0),
                         ),

@@ -64,20 +64,25 @@ class UserHelper extends BaseHTTPHelper {
     return User.fromMapList(result);
   }
 
-  Future<bool> forgetPassword(String email) async {
+  Future<void> forgetPassword(String email) async {
     var map = {"email": email};
     var result = await post(
-      endpoint: "forgetpassword",
+      endpoint: "forgetPassword",
       json: jsonEncode(map),
     );
-    return result['result'] as bool;
   }
 
-  Future<bool> changePassword(
-      String email, String oldPassword, String newPassword) async {
+  Future<bool> validateKey(String email, String key) async {
+    var map = {"email": email, "key": key};
+    var result = await post(
+      endpoint: "validateKey",
+      json: jsonEncode(map),
+    );
+    return true;
+  }
+
+  Future<bool> changePassword(String newPassword) async {
     var map = {
-      "email": email,
-      "oldPassword": oldPassword,
       "newPassword": newPassword,
     };
     var result = await post(

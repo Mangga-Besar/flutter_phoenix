@@ -32,7 +32,7 @@ class SectionEditScreen extends BaseScreenWithAppBar {
   Widget content(BuildContext context) {
     var args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-    ISection? content = args["content"];
+    Object? content = args["content"];
     User user = args["user"] ?? content;
     Type type = args["type"];
 

@@ -1,7 +1,8 @@
 enum PageName {
+  ChangePassword,
   EditSection,
   EditReport,
-  EmailVerification,
+  VerificationKey,
   ForgetPassword,
   Home,
   InfoLogin,

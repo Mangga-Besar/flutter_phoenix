@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_phoenix/enums/page_name.dart';
+import 'package:flutter_phoenix/functions/routes.dart';
 import 'package:flutter_phoenix/models/report/report.dart';
 import 'package:flutter_phoenix/models/report/report_helper.dart';
-import 'package:flutter_phoenix/models/user/user.dart';
-import 'package:flutter_phoenix/models/user/user_helper.dart';
 import 'package:flutter_phoenix/widgets/custom/custom_text.dart';
 import 'package:flutter_phoenix/widgets/report_list.dart';
-import 'package:flutter_phoenix/widgets/user_list.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class ReportListViewPage extends StatefulWidget {
@@ -59,7 +58,14 @@ class _ReportListViewPageState extends State<ReportListViewPage> {
             if (item == null) {
               return CustomText("Item Empty");
             }
-            return ReportList(report: item);
+            return ReportList(
+              report: item,
+              onTap: () async {
+                await Routes.push(context, PageName.EditReport,
+                    arguments: {"report": item});
+                _reportPagingController.refresh();
+              },
+            );
           },
         ),
       ),
