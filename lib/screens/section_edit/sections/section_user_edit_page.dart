@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/configs/configs.dart';
+import 'package:flutter_phoenix/enums/page_name.dart';
 import 'package:flutter_phoenix/functions/routes.dart';
 import 'package:flutter_phoenix/functions/upload/firebase_uploader_helper.dart';
 import 'package:flutter_phoenix/models/sections/kontak_section.dart';
@@ -7,6 +8,7 @@ import 'package:flutter_phoenix/models/user/user.dart';
 import 'package:flutter_phoenix/models/user/user_helper.dart';
 import 'package:flutter_phoenix/screens/section_edit/section_edit_page.dart';
 import 'package:flutter_phoenix/widgets/base_raised_button.dart';
+import 'package:flutter_phoenix/widgets/builder/user_builder.dart';
 import 'package:flutter_phoenix/widgets/custom/custom_text.dart';
 import 'package:flutter_phoenix/widgets/date_time_picker_form_field.dart';
 import 'package:flutter_phoenix/widgets/image_add_single.dart';
@@ -24,7 +26,7 @@ class SectionUserEditPage extends SectionEditPage {
     FocusNode _dobFocusNode = FocusNode();
     FocusNode _agamaFocusNode = FocusNode();
     UserHelper _userHelper = UserHelper();
-    return Consumer<User>(builder: (_, user, __) {
+    return Consumer<User>(builder: (_, target, __) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -38,16 +40,16 @@ class SectionUserEditPage extends SectionEditPage {
           ),
           Center(
             child: ImageAddSingle(
-              image: user.profilePicture,
+              image: target.profilePicture,
               onChanged: (file) {
-                final fileName = "IMAGE_${user.id!}";
+                final fileName = "IMAGE_${target.id!}";
                 FirebaseUploaderHelper(
                   filePath: file,
                   name: fileName,
-                  user: user,
+                  user: target,
                   onComplete: (val) async {
-                    user.profilePicture = val;
-                    user.notifyListeners();
+                    target.profilePicture = val;
+                    target.notifyListeners();
                   },
                 ).upload();
               },
@@ -64,14 +66,14 @@ class SectionUserEditPage extends SectionEditPage {
           ),
           NormalFormField(
             hintText: "ex. Budi Gunawan",
-            text: user.name ?? "",
+            text: target.name ?? "",
             focusNode: _nameFocusNode,
             onFieldSubmitted: (value) {
               _nameFocusNode.unfocus();
               FocusScope.of(context).requestFocus(_nikFocusNode);
             },
             onChanged: (value) {
-              user.name = value;
+              target.name = value;
             },
           ),
           const SizedBox(height: 10),
@@ -82,14 +84,14 @@ class SectionUserEditPage extends SectionEditPage {
           ),
           NormalFormField(
             hintText: "ex. 31730xxxxxx",
-            text: user.nik ?? "",
+            text: target.nik ?? "",
             focusNode: _nikFocusNode,
             onFieldSubmitted: (value) {
               _nikFocusNode.unfocus();
               FocusScope.of(context).requestFocus(_emailFocusNode);
             },
             onChanged: (value) {
-              user.nik = value;
+              target.nik = value;
             },
             // validator: (value) => newUser!.nameValidator(),
           ),
@@ -101,7 +103,7 @@ class SectionUserEditPage extends SectionEditPage {
           ),
           NormalFormField(
             hintText: "ex. xxxx@kanisius.edu",
-            text: user.email ?? "",
+            text: target.email ?? "",
             focusNode: _emailFocusNode,
             onFieldSubmitted: (value) {
               _emailFocusNode.unfocus();
@@ -109,7 +111,7 @@ class SectionUserEditPage extends SectionEditPage {
             },
             keyboardType: TextInputType.emailAddress,
             onChanged: (value) {
-              user.email = value;
+              target.email = value;
             },
             // validator: (value) => newUser!.nameValidator(),
           ),
@@ -121,7 +123,7 @@ class SectionUserEditPage extends SectionEditPage {
           ),
           NormalFormField(
             hintText: "ex. 081234567",
-            text: user.handPhone ?? "",
+            text: target.handPhone ?? "",
             focusNode: _handPhoneFocusNode,
             onFieldSubmitted: (value) {
               _handPhoneFocusNode.unfocus();
@@ -129,7 +131,7 @@ class SectionUserEditPage extends SectionEditPage {
             },
             keyboardType: TextInputType.phone,
             onChanged: (value) {
-              user.handPhone = value;
+              target.handPhone = value;
             },
             // validator: (value) => newUser!.nameValidator(),
           ),
@@ -141,7 +143,7 @@ class SectionUserEditPage extends SectionEditPage {
           ),
           NormalFormField(
             hintText: "ex. Jln. Menteng Raya, No. 64",
-            text: user.address ?? "",
+            text: target.address ?? "",
             focusNode: _addressFocusNode,
             onFieldSubmitted: (value) {
               _addressFocusNode.unfocus();
@@ -149,7 +151,7 @@ class SectionUserEditPage extends SectionEditPage {
             },
             keyboardType: TextInputType.emailAddress,
             onChanged: (value) {
-              user.address = value;
+              target.address = value;
             },
             // validator: (value) => newUser!.nameValidator(),
           ),
@@ -161,10 +163,10 @@ class SectionUserEditPage extends SectionEditPage {
           ),
           DateTimePickerFormField(
             focusNode: _dobFocusNode,
-            initialDate: user.dob ?? DateTime.now(),
+            initialDate: target.dob ?? DateTime.now(),
             onChanged: (val) {
-              user.dob = val;
-              user.notifyListeners();
+              target.dob = val;
+              target.notifyListeners();
             },
           ),
           const SizedBox(height: 10),
@@ -175,17 +177,38 @@ class SectionUserEditPage extends SectionEditPage {
           ),
           NormalFormField(
             hintText: "ex. Katholik",
-            text: user.agama ?? "",
+            text: target.agama ?? "",
             focusNode: _agamaFocusNode,
             onFieldSubmitted: (value) {
               _agamaFocusNode.unfocus();
               FocusScope.of(context).requestFocus(_agamaFocusNode);
             },
             onChanged: (value) {
-              user.agama = value;
+              target.agama = value;
             },
             // validator: (value) => newUser!.nameValidator(),
           ),
+          const SizedBox(height: 25),
+          UserBuilder(builder: (user) {
+            if (user?.id == target.id) {
+              return Align(
+                alignment: Alignment.centerLeft,
+                child: GestureDetector(
+                  onTap: () => Routes.push(context, PageName.ChangePassword),
+                  child: const Text(
+                    "Ganti Password?",
+                    style: TextStyle(
+                      decoration: TextDecoration.underline,
+                      fontWeight: FontWeight.bold,
+                      color: Configs.secondaryColor,
+                      fontSize: 15,
+                    ),
+                  ),
+                ),
+              );
+            }
+            return Container();
+          }),
           const SizedBox(height: 45),
           Center(
             child: SizedBox(
@@ -193,7 +216,7 @@ class SectionUserEditPage extends SectionEditPage {
               child: BaseRaisedButton(
                 ratio: 1 / 1.25,
                 onPressed: () {
-                  _userHelper.updateUser(user.id ?? "", user);
+                  _userHelper.updateUser(target.id ?? "", target);
                   Routes.pop(context);
                 },
                 color: Configs.secondaryColor,
