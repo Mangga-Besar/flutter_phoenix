@@ -3,6 +3,9 @@ import 'package:flutter_phoenix/enums/page_name.dart';
 import 'package:flutter_phoenix/functions/flare_function.dart';
 import 'package:flutter_phoenix/functions/loading_function.dart';
 import 'package:flutter_phoenix/configs/configs.dart';
+import 'package:flutter_phoenix/functions/token_version.dart';
+import 'package:flutter_phoenix/models/login/login_result.dart';
+import 'package:flutter_phoenix/models/user/user.dart';
 import 'package:flutter_phoenix/models/user/user_helper.dart';
 import 'package:flutter_phoenix/functions/routes.dart';
 import 'package:flutter_phoenix/functions/toast_helper.dart';
@@ -61,7 +64,7 @@ class _VerificationKeyPageState extends State<VerificationKeyPage> {
                       const SizedBox(height: 25.0),
                       PinCodeTextField(
                         appContext: context,
-                        length: 4,
+                        length: 6,
                         animationType: AnimationType.scale,
                         pinTheme: PinTheme(
                           activeColor: Configs.primaryColor,
@@ -86,13 +89,12 @@ class _VerificationKeyPageState extends State<VerificationKeyPage> {
                           var result = await verify(val);
                           if (result) {
                             return Routes.pushAndRemoveUntilFirst(
-                                context, PageName.Login);
-                          } else if (result) {
-                            return Routes.push(context, PageName.NewPassword,
-                                arguments: {
-                                  "email": email,
-                                  "code": val,
-                                });
+                                context, PageName.ChangePassword);
+                          } else if (!result) {
+                            return Routes.push(
+                              context,
+                              PageName.Login,
+                            );
                           }
                         },
                       ),
@@ -127,15 +129,15 @@ class _VerificationKeyPageState extends State<VerificationKeyPage> {
       LoadingFunction.showLoadingDialog(context);
       var result = await _helper.validateKey(widget.email, code);
       LoadingFunction.closeLoadingDialog(context);
-
-      if (result) {
-        await FlareFunction.showTrueDialog(context);
-        return true;
-      } else {
-        await FlareFunction.showFalseDialog(context);
-        ToastHelper.showException("Kode Verifikasi salah!", context);
-        return false;
-      }
+      await TokenVersion.setTokenAndUserId(result.token!, result.userId!);
+      // if (result is LoginResult) {
+      await FlareFunction.showTrueDialog(context);
+      return true;
+      // } else {
+      //   await FlareFunction.showFalseDialog(context);
+      //   ToastHelper.showException("Kode Verifikasi salah!", context);
+      //   return false;
+      // }
     } catch (err) {
       LoadingFunction.closeLoadingDialog(context);
       ToastHelper.showException("Ada Error!", context);

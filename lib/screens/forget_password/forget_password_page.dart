@@ -83,15 +83,17 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
   Future<Object?> resetPassword(BuildContext context) async {
     try {
       LoadingFunction.showLoadingDialog(context);
-      await _userHelper!.forgetPassword(_emailController.text);
+      var result = await _userHelper!.forgetPassword(_emailController.text);
       LoadingFunction.closeLoadingDialog(context);
-      return Navigator.of(context).pushReplacement(MaterialPageRoute(
-          settings: RouteSettings(
-            arguments: {
-              "email": _emailController.text,
-            },
-          ),
-          builder: (context) => VerificationKeyScreen()));
+      if (result) {
+        return Navigator.of(context).pushReplacement(MaterialPageRoute(
+            settings: RouteSettings(
+              arguments: {
+                "email": _emailController.text,
+              },
+            ),
+            builder: (context) => VerificationKeyScreen()));
+      }
     } catch (err) {
       LoadingFunction.closeLoadingDialog(context);
       switch ((err as HTTPException).message) {

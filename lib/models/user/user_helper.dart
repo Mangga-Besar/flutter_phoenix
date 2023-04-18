@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter_phoenix/functions/token_version.dart';
 import 'package:flutter_phoenix/models/login/login_data.dart';
 import 'package:flutter_phoenix/models/login/login_result.dart';
 import 'package:flutter_phoenix/basics/helpers/base_http_helper.dart';
@@ -67,28 +68,29 @@ class UserHelper extends BaseHTTPHelper {
   Future<bool> forgetPassword(String email) async {
     var map = {"email": email};
     try {
-      var result = await post(
+      var result = await postString(
         endpoint: "forgetPassword",
         json: jsonEncode(map),
       );
-
-      return true;
+      if (result == "true") {
+        return true;
+      } else {
+        return false;
+      }
     } catch (e) {
       return false;
     }
   }
 
-  Future<bool> validateKey(String email, String key) async {
+  Future<LoginResult> validateKey(String email, String key) async {
     var map = {"email": email, "key": key};
-    try {
-      var result = await post(
-        endpoint: "validateKey",
-        json: jsonEncode(map),
-      );
-      return true;
-    } catch (e) {
-      return false;
-    }
+    var result = await postString(
+      endpoint: "validateKey",
+      json: jsonEncode(map),
+    );
+    var log = jsonDecode(result);
+    var login = LoginResult.fromMap(log);
+    return login;
   }
 
   Future<bool> changePassword(String newPassword) async {

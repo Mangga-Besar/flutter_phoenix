@@ -7,7 +7,6 @@ enum PageName {
   Home,
   InfoLogin,
   Login,
-  NewPassword,
   Register,
   Report,
   ReportList,

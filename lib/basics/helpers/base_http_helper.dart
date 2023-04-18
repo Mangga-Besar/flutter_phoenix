@@ -36,7 +36,6 @@ abstract class BaseHTTPHelper {
       if (response.statusCode == 200) {
         var map;
         try {
-          print(response.body);
           map = jsonDecode(response.body);
         } catch (err) {
           print(err);
