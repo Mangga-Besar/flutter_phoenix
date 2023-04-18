@@ -1,6 +1,7 @@
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/functions/loading_function.dart';
+import 'package:flutter_phoenix/functions/routes.dart';
 import 'package:flutter_phoenix/functions/toast_helper.dart';
 import 'package:flutter_phoenix/configs/configs.dart';
 import 'package:flutter_phoenix/models/user/user_helper.dart';
@@ -91,7 +92,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                       await _helper.changePassword(_newPasswordController.text);
                       ToastHelper.show("Password sudah diganti!", context);
                       LoadingFunction.closeLoadingDialog(context);
-                      Navigator.of(context).pop();
+                      Routes.popToTop(context);
                     } catch (err) {
                       LoadingFunction.closeLoadingDialog(context);
                       ToastHelper.showException(
