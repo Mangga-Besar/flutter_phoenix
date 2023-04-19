@@ -41,8 +41,11 @@ class UserListViewScreen extends BaseScreenWithAppBar {
       actions: [
         IconButton(
             onPressed: () async {
-              await Routes.push(context, PageName.EditSection,
-                  arguments: {"content": User.empty().copy()});
+              await Routes.push(
+                context,
+                PageName.EditSection,
+                arguments: {"content": User.empty().copy(), "type": User},
+              );
             },
             icon: Icon(
               Icons.add,

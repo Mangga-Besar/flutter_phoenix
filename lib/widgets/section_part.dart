@@ -56,7 +56,7 @@ class _SectionPartState extends State<SectionPart> {
         children: [
           const Divider(
             color: Colors.black87,
-            thickness: 5,
+            thickness: 2.5,
           ),
           ChangeNotifierProvider<User>.value(
               value: target,
