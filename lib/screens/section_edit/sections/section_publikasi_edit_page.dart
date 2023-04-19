@@ -46,7 +46,9 @@ class SectionPublikasiEditPage extends SectionEditPage {
                 _nameFocusNode.unfocus();
                 FocusScope.of(context).requestFocus(_tanggalFocusNode);
               },
-              onChanged: (value) {},
+              onChanged: (value) {
+                publikasi.name = value;
+              },
             ),
             const SizedBox(height: 10),
             const CustomText(
@@ -56,7 +58,9 @@ class SectionPublikasiEditPage extends SectionEditPage {
             ),
             DateTimePickerFormField(
               focusNode: _tanggalFocusNode,
-              onChanged: (val) {},
+              onChanged: (val) {
+                publikasi.tanggal = val;
+              },
             ),
             const SizedBox(height: 10),
             const CustomText(
@@ -71,7 +75,9 @@ class SectionPublikasiEditPage extends SectionEditPage {
                 _bidangIlmuFocusNode.unfocus();
                 FocusScope.of(context).requestFocus(_topikFocusNode);
               },
-              onChanged: (value) {},
+              onChanged: (value) {
+                publikasi.bidangIlmu = value;
+              },
             ),
             const SizedBox(height: 10),
             const CustomText(
@@ -86,7 +92,9 @@ class SectionPublikasiEditPage extends SectionEditPage {
                 _topikFocusNode.unfocus();
                 FocusScope.of(context).requestFocus(_topikFocusNode);
               },
-              onChanged: (value) {},
+              onChanged: (value) {
+                publikasi.topik = value;
+              },
             ),
             const SizedBox(height: 10),
             const CustomText(
@@ -101,7 +109,9 @@ class SectionPublikasiEditPage extends SectionEditPage {
                 _descriptionFocusNode.unfocus();
                 FocusScope.of(context).requestFocus(_descriptionFocusNode);
               },
-              onChanged: (value) {},
+              onChanged: (value) {
+                publikasi.description = value;
+              },
             ),
             const SizedBox(height: 45),
             Center(
