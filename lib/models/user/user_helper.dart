@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'dart:io';
 
+import 'package:flutter_phoenix/basics/exceptions/http_exception.dart';
 import 'package:flutter_phoenix/functions/token_version.dart';
 import 'package:flutter_phoenix/models/login/login_data.dart';
 import 'package:flutter_phoenix/models/login/login_result.dart';
@@ -37,6 +39,9 @@ class UserHelper extends BaseHTTPHelper {
   Future<LoginResult> login(LoginData data) async {
     var map = data.toJSON();
     var result = await post(endpoint: "login", json: map);
+    if (result["error"] != null) {
+      throw HttpException(result["error"]);
+    }
     return LoginResult.fromMap(result);
   }
 
@@ -95,21 +100,12 @@ class UserHelper extends BaseHTTPHelper {
 
   Future<bool> changePassword(String newPassword) async {
     var map = {
-      "newPassword": newPassword,
+      "new_password": newPassword,
     };
     var result = await postBool(
-      endpoint: "changepassword",
+      endpoint: "changePassword",
       json: jsonEncode(map),
     );
     return result;
-  }
-
-  Future<bool> newPassword(String email, String code, String password) async {
-    var map = {"email": email, "code": code, "password": password};
-    var result = await post(
-      endpoint: "newpassword",
-      json: jsonEncode(map),
-    );
-    return result['result'] as bool;
   }
 }

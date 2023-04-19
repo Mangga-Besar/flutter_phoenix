@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/basics/exceptions/http_exception.dart';
 
@@ -132,8 +134,9 @@ class _LoginPageState extends State<LoginPage> {
       );
     } catch (err) {
       LoadingFunction.closeLoadingDialog(context);
-      switch ((err as HTTPException).message) {
-        case "Access denied":
+
+      switch ((err as HttpException).message) {
+        case "Invalid Login":
           ToastHelper.showException("Login tidak dikenal!", context);
           break;
         default:
