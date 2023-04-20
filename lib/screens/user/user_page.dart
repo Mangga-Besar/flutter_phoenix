@@ -72,7 +72,7 @@ class _UserPageState extends State<UserPage> {
                                       child: PictureFactory.build(
                                           widget.target.profilePicture ?? "",
                                           padding: EdgeInsets.zero,
-                                          fit: BoxFit.contain)),
+                                          fit: BoxFit.cover)),
                                 ),
                                 SizedBox(
                                   height: 10,
@@ -90,16 +90,19 @@ class _UserPageState extends State<UserPage> {
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
                                 ),
+                                // CustomText(
+                                //   ((widget.target.isCommitee ||
+                                //           widget.target.isSuper))
+                                //       ? ("${widget.target.nik?.substring(0, 4) ?? ""}******")
+                                //       : widget.target.nik ?? "",
+                                //   fontSize: 15,
+                                //   fontWeight: FontWeight.w500,
+                                // ),
                                 CustomText(
                                   ((widget.target.isCommitee ||
                                           widget.target.isSuper))
-                                      ? ("${widget.target.nik?.substring(0, 4) ?? ""}******")
-                                      : widget.target.nik ?? "",
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                                CustomText(
-                                  widget.target.handPhone ?? "",
+                                      ? widget.target.nik ?? ""
+                                      : ("${widget.target.handPhone?.substring(0, widget.target.handPhone!.length - 4) ?? ""}****"),
                                   fontSize: 15,
                                   fontWeight: FontWeight.w500,
                                 ),

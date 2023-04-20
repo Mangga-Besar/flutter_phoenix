@@ -25,6 +25,17 @@ class ReportListViewScreen extends BaseScreenWithAppBar {
   }
 
   @override
+  Widget? floatingActionButton(BuildContext context) {
+    // TODO: implement floatingActionButton
+    return FloatingActionButton(
+      onPressed: () async {
+        await Routes.push(context, PageName.Report);
+      },
+      child: Icon(Icons.add),
+    );
+  }
+
+  @override
   AppBar? appBar(BuildContext context) {
     return AppBar(
       elevation: 0,

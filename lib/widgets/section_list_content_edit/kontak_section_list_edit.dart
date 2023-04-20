@@ -11,8 +11,11 @@ class KontakSectionListEdit extends SectionList {
   KontakSectionListEdit({required this.kontak, required this.user, super.key});
   KontakSection kontak;
   User user;
+  late String handPhone;
+
   @override
   Widget getContent(BuildContext context) {
+    handPhone = (kontak.contactNumber ?? "").toString();
     return Stack(
       children: [
         Positioned(
@@ -44,7 +47,9 @@ class KontakSectionListEdit extends SectionList {
               fontSize: 15,
             ),
             CustomText(
-              (kontak.contactNumber ?? "").toString(),
+              ((user.isCommitee || user.isSuper))
+                  ? handPhone
+                  : ("${handPhone.substring(0, handPhone.length - 4)}****"),
               fontSize: 12,
               fontWeight: FontWeight.w500,
             ),

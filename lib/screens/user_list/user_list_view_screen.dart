@@ -35,22 +35,17 @@ class UserListViewScreen extends BaseScreenWithAppBar {
   }
 
   @override
-  AppBar? appBar(BuildContext context) {
-    return AppBar(
-      elevation: 0,
-      actions: [
-        IconButton(
-            onPressed: () async {
-              await Routes.push(
-                context,
-                PageName.EditSection,
-                arguments: {"content": User.empty().copy(), "type": User},
-              );
-            },
-            icon: Icon(
-              Icons.add,
-            ))
-      ],
+  Widget? floatingActionButton(BuildContext context) {
+    // TODO: implement floatingActionButton
+    return FloatingActionButton(
+      onPressed: () async {
+        await Routes.push(
+          context,
+          PageName.EditSection,
+          arguments: {"content": User.empty().copy(), "type": User},
+        );
+      },
+      child: Icon(Icons.add),
     );
   }
 }

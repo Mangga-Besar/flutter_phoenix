@@ -81,7 +81,7 @@ class _HomePageState extends State<HomePage> {
                                             child: PictureFactory.build(
                                                 user?.profilePicture ?? "",
                                                 padding: EdgeInsets.zero,
-                                                fit: BoxFit.contain)),
+                                                fit: BoxFit.cover)),
                                       ),
                                       SizedBox(
                                         height: 10,
@@ -99,15 +99,17 @@ class _HomePageState extends State<HomePage> {
                                         fontSize: 15,
                                         fontWeight: FontWeight.bold,
                                       ),
+                                      // CustomText(
+                                      //   ((user.isCommitee || user.isSuper))
+                                      //       ? ("${user.nik?.substring(0, 4) ?? ""}******")
+                                      //       : user.nik ?? "",
+                                      //   fontSize: 15,
+                                      //   fontWeight: FontWeight.w500,
+                                      // ),
                                       CustomText(
                                         ((user.isCommitee || user.isSuper))
-                                            ? ("${user.nik?.substring(0, 4) ?? ""}******")
-                                            : user.nik ?? "",
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                      CustomText(
-                                        user.handPhone ?? "",
+                                            ? user.nik ?? ""
+                                            : ("${user.handPhone?.substring(0, user.handPhone!.length - 4) ?? ""}****"),
                                         fontSize: 15,
                                         fontWeight: FontWeight.w500,
                                       ),

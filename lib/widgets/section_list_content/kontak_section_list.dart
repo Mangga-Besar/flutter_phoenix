@@ -6,9 +6,11 @@ import 'package:flutter_phoenix/widgets/section_list.dart';
 class KontakSectionList extends SectionList {
   KontakSectionList({required this.kontak, super.key});
   KontakSection kontak;
+  late String handPhone;
 
   @override
   Widget getContent(BuildContext context) {
+    handPhone = (kontak.contactNumber ?? "").toString();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -18,7 +20,7 @@ class KontakSectionList extends SectionList {
           fontSize: 15,
         ),
         CustomText(
-          (kontak.contactNumber ?? "").toString(),
+          ("${handPhone.substring(0, handPhone.length - 4)}****"),
           fontSize: 12,
           fontWeight: FontWeight.w500,
         ),

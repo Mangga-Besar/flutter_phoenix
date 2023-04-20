@@ -19,6 +19,6 @@ class ReportScreen extends BaseScreenWithAppBar {
 
   @override
   Widget? drawer(BuildContext context) {
-    return const HomeDrawer(selected: PageName.Report);
+    // return const HomeDrawer(selected: PageName.Report);
   }
 }

@@ -35,11 +35,16 @@ class _UserListState extends State<UserList> {
                 padding: const EdgeInsets.only(
                   right: 15.0,
                 ),
-                child: PictureFactory.build(
-                  widget.user.profilePicture ?? "",
-                  fit: BoxFit.fitHeight,
-                  height: 100,
-                  width: 100,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(200)),
+                  clipBehavior: Clip.hardEdge,
+                  child: PictureFactory.build(
+                    widget.user.profilePicture ?? "",
+                    padding: EdgeInsets.zero,
+                    fit: BoxFit.fitHeight,
+                    height: 100,
+                    width: 100,
+                  ),
                 ),
               ),
               Expanded(
