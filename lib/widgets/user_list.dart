@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/enums/page_name.dart';
+import 'package:flutter_phoenix/functions/enum_parser.dart';
 import 'package:flutter_phoenix/functions/routes.dart';
 import 'package:flutter_phoenix/models/user/user.dart';
 import 'package:flutter_phoenix/widgets/custom/custom_text.dart';
@@ -61,7 +62,7 @@ class _UserListState extends State<UserList> {
                       height: 7.5,
                     ),
                     CustomText(
-                      widget.user.nik ?? "",
+                      EnumParser.getString(widget.user.roleType),
                       fontSize: 15,
                     ),
                   ],

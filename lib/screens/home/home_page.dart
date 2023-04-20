@@ -87,7 +87,7 @@ class _HomePageState extends State<HomePage> {
                                         height: 10,
                                       ),
                                       CustomText(
-                                        user?.name ?? "",
+                                        user!.name ?? "",
                                         fontSize: 24,
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -95,17 +95,19 @@ class _HomePageState extends State<HomePage> {
                                         height: 10,
                                       ),
                                       CustomText(
-                                        user?.email ?? "",
+                                        user.email ?? "",
                                         fontSize: 15,
                                         fontWeight: FontWeight.bold,
                                       ),
                                       CustomText(
-                                        user?.nik ?? "",
+                                        ((user.isCommitee || user.isSuper))
+                                            ? ("${user.nik?.substring(0, 4) ?? ""}******")
+                                            : user.nik ?? "",
                                         fontSize: 15,
                                         fontWeight: FontWeight.w500,
                                       ),
                                       CustomText(
-                                        user?.handPhone ?? "",
+                                        user.handPhone ?? "",
                                         fontSize: 15,
                                         fontWeight: FontWeight.w500,
                                       ),
@@ -114,19 +116,19 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                       CustomText(
                                         DateParser.parseDateOnly(
-                                            user?.dob ?? DateTime.now()),
+                                            user.dob ?? DateTime.now()),
                                         fontSize: 15,
                                         color: Colors.black54,
                                         fontWeight: FontWeight.bold,
                                       ),
                                       CustomText(
-                                        user?.address ?? "",
+                                        user.address ?? "",
                                         color: Colors.black54,
                                         fontWeight: FontWeight.normal,
                                         fontSize: 15,
                                       ),
                                       CustomText(
-                                        user?.agama ?? "",
+                                        user.agama ?? "",
                                         color: Colors.black54,
                                         fontWeight: FontWeight.normal,
                                         fontSize: 15,
@@ -139,7 +141,7 @@ class _HomePageState extends State<HomePage> {
                                 ),
                                 SectionPart(
                                   title: "KONTAK DARURAT",
-                                  user: user!,
+                                  user: user,
                                   type: KontakSection,
                                 ),
                                 SectionPart(

@@ -91,7 +91,10 @@ class _UserPageState extends State<UserPage> {
                                   fontWeight: FontWeight.bold,
                                 ),
                                 CustomText(
-                                  widget.target.nik ?? "",
+                                  ((widget.target.isCommitee ||
+                                          widget.target.isSuper))
+                                      ? ("${widget.target.nik?.substring(0, 4) ?? ""}******")
+                                      : widget.target.nik ?? "",
                                   fontSize: 15,
                                   fontWeight: FontWeight.w500,
                                 ),
