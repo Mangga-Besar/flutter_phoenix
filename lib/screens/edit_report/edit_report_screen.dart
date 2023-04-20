@@ -52,6 +52,7 @@ class EditReportScreen extends BaseScreenWithAppBar {
                   },
                   icon: Icon(Icons.delete));
             }
+            return Container();
           },
         )
       ],
