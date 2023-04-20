@@ -54,111 +54,116 @@ class SectionListViewScreen extends BaseScreenWithAppBar {
 
           User user = args["user"];
           Type type = args["type"] as Type;
-
-          if (type == KontakSection) {
-            return ChangeNotifierProvider<KontakSection>(
-              create: (context) => KontakSection(),
-              child: IconButton(
-                  icon: Icon(Icons.add),
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return SectionEditScreen();
-                        },
-                        settings: RouteSettings(arguments: {
-                          "content": KontakSection(),
-                          "user": target,
-                          "type": type,
-                          "new": KontakSection()
-                        }),
-                      ),
-                    );
-                  }),
-            );
-          } else if (type == PelatihanSection) {
-            return ChangeNotifierProvider<PelatihanSection>(
-              create: (context) => PelatihanSection(),
-              child: IconButton(
-                  icon: Icon(Icons.add),
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return SectionEditScreen();
-                        },
-                        settings: RouteSettings(arguments: {
-                          "content": PelatihanSection(),
-                          "user": target,
-                          "type": type,
-                        }),
-                      ),
-                    );
-                  }),
-            );
-          } else if (type == PendidikanSection) {
-            return ChangeNotifierProvider<PendidikanSection>(
-              create: (context) => PendidikanSection(),
-              child: IconButton(
-                  icon: Icon(Icons.add),
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return SectionEditScreen();
-                        },
-                        settings: RouteSettings(arguments: {
-                          "content": PendidikanSection(),
-                          "user": target,
-                          "type": type,
-                        }),
-                      ),
-                    );
-                  }),
-            );
-          } else if (type == PenugasanSection) {
-            return ChangeNotifierProvider<PenugasanSection>(
-              create: (context) => PenugasanSection(),
-              child: IconButton(
-                  icon: Icon(Icons.add),
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return SectionEditScreen();
-                        },
-                        settings: RouteSettings(arguments: {
-                          "content": PenugasanSection(),
-                          "user": target,
-                          "type": type,
-                        }),
-                      ),
-                    );
-                  }),
-            );
-          } else if (type == PublikasiSection) {
-            return ChangeNotifierProvider<PublikasiSection>(
-              create: (context) => PublikasiSection(),
-              child: IconButton(
-                  icon: Icon(Icons.add),
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return SectionEditScreen();
-                        },
-                        settings: RouteSettings(arguments: {
-                          "content": PublikasiSection(),
-                          "user": target,
-                          "type": type,
-                        }),
-                      ),
-                    );
-                  }),
-            );
-          } else {
-            return Container();
-          }
+          return (user.isCommitee || user.isSuper || user.id == target.id)
+              ? Builder(
+                  builder: (context) {
+                    if (type == KontakSection) {
+                      return ChangeNotifierProvider<KontakSection>(
+                        create: (context) => KontakSection(),
+                        child: IconButton(
+                            icon: Icon(Icons.add),
+                            onPressed: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) {
+                                    return SectionEditScreen();
+                                  },
+                                  settings: RouteSettings(arguments: {
+                                    "content": KontakSection(),
+                                    "user": target,
+                                    "type": type,
+                                    "new": KontakSection()
+                                  }),
+                                ),
+                              );
+                            }),
+                      );
+                    } else if (type == PelatihanSection) {
+                      return ChangeNotifierProvider<PelatihanSection>(
+                        create: (context) => PelatihanSection(),
+                        child: IconButton(
+                            icon: Icon(Icons.add),
+                            onPressed: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) {
+                                    return SectionEditScreen();
+                                  },
+                                  settings: RouteSettings(arguments: {
+                                    "content": PelatihanSection(),
+                                    "user": target,
+                                    "type": type,
+                                  }),
+                                ),
+                              );
+                            }),
+                      );
+                    } else if (type == PendidikanSection) {
+                      return ChangeNotifierProvider<PendidikanSection>(
+                        create: (context) => PendidikanSection(),
+                        child: IconButton(
+                            icon: Icon(Icons.add),
+                            onPressed: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) {
+                                    return SectionEditScreen();
+                                  },
+                                  settings: RouteSettings(arguments: {
+                                    "content": PendidikanSection(),
+                                    "user": target,
+                                    "type": type,
+                                  }),
+                                ),
+                              );
+                            }),
+                      );
+                    } else if (type == PenugasanSection) {
+                      return ChangeNotifierProvider<PenugasanSection>(
+                        create: (context) => PenugasanSection(),
+                        child: IconButton(
+                            icon: Icon(Icons.add),
+                            onPressed: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) {
+                                    return SectionEditScreen();
+                                  },
+                                  settings: RouteSettings(arguments: {
+                                    "content": PenugasanSection(),
+                                    "user": target,
+                                    "type": type,
+                                  }),
+                                ),
+                              );
+                            }),
+                      );
+                    } else if (type == PublikasiSection) {
+                      return ChangeNotifierProvider<PublikasiSection>(
+                        create: (context) => PublikasiSection(),
+                        child: IconButton(
+                            icon: Icon(Icons.add),
+                            onPressed: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) {
+                                    return SectionEditScreen();
+                                  },
+                                  settings: RouteSettings(arguments: {
+                                    "content": PublikasiSection(),
+                                    "user": target,
+                                    "type": type,
+                                  }),
+                                ),
+                              );
+                            }),
+                      );
+                    } else {
+                      return Container();
+                    }
+                  },
+                )
+              : Container();
         })
       ],
     );

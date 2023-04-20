@@ -45,7 +45,7 @@ class User with ChangeNotifier {
     this.agama,
     this.profilePicture,
     this.dob,
-    this.userType = UserType.Committee,
+    this.userType = UserType.Member,
     this.roleType = RoleType.Karyawan,
     this.kontak,
     this.pelatihan,

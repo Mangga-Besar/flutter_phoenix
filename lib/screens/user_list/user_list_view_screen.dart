@@ -13,6 +13,7 @@ import 'package:flutter_phoenix/models/user/user.dart';
 import 'package:flutter_phoenix/screens/section_edit/section_edit_screen.dart';
 import 'package:flutter_phoenix/screens/section_list_view/section_list_view_page.dart';
 import 'package:flutter_phoenix/screens/user_list/user_list_view_page.dart';
+import 'package:flutter_phoenix/widgets/builder/user_builder.dart';
 import 'package:flutter_phoenix/widgets/home_drawer.dart';
 import 'package:provider/provider.dart';
 
@@ -37,15 +38,20 @@ class UserListViewScreen extends BaseScreenWithAppBar {
   @override
   Widget? floatingActionButton(BuildContext context) {
     // TODO: implement floatingActionButton
-    return FloatingActionButton(
-      onPressed: () async {
-        await Routes.push(
-          context,
-          PageName.EditSection,
-          arguments: {"content": User.empty().copy(), "type": User},
+    return UserBuilder(builder: (user) {
+      if (user!.isCommitee || user.isSuper) {
+        return FloatingActionButton(
+          onPressed: () async {
+            await Routes.push(
+              context,
+              PageName.EditSection,
+              arguments: {"content": User.empty().copy(), "type": User},
+            );
+          },
+          child: Icon(Icons.add),
         );
-      },
-      child: Icon(Icons.add),
-    );
+      }
+      return Container();
+    });
   }
 }

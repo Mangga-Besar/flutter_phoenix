@@ -4,6 +4,7 @@ import 'package:flutter_phoenix/enums/page_name.dart';
 import 'package:flutter_phoenix/functions/routes.dart';
 import 'package:flutter_phoenix/models/user/user.dart';
 import 'package:flutter_phoenix/screens/report_list/report_list_view_page.dart';
+import 'package:flutter_phoenix/widgets/builder/user_builder.dart';
 import 'package:flutter_phoenix/widgets/home_drawer.dart';
 
 class ReportListViewScreen extends BaseScreenWithAppBar {
@@ -27,18 +28,16 @@ class ReportListViewScreen extends BaseScreenWithAppBar {
   @override
   Widget? floatingActionButton(BuildContext context) {
     // TODO: implement floatingActionButton
-    return FloatingActionButton(
-      onPressed: () async {
-        await Routes.push(context, PageName.Report);
-      },
-      child: Icon(Icons.add),
-    );
-  }
-
-  @override
-  AppBar? appBar(BuildContext context) {
-    return AppBar(
-      elevation: 0,
-    );
+    return UserBuilder(builder: (user) {
+      if (user!.isCommitee || user.isSuper) {
+        return FloatingActionButton(
+          onPressed: () async {
+            await Routes.push(context, PageName.Report);
+          },
+          child: Icon(Icons.add),
+        );
+      }
+      return Container();
+    });
   }
 }

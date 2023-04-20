@@ -77,7 +77,7 @@ class _SectionListViewPageState extends State<SectionListViewPage> {
                         ),
                         child: KontakSectionListEdit(
                           kontak: (widget.target.kontak?[i]) as KontakSection,
-                          user: user,
+                          target: user,
                         ),
                       ),
                     );
@@ -92,7 +92,7 @@ class _SectionListViewPageState extends State<SectionListViewPage> {
                         child: PendidikanSectionListEdit(
                           pendidikan: (widget.target.pendidikan?[i])
                               as PendidikanSection,
-                          user: user,
+                          target: user,
                         ),
                       ),
                     );
@@ -107,7 +107,7 @@ class _SectionListViewPageState extends State<SectionListViewPage> {
                         child: PenugasanSectionListEdit(
                           penugasan:
                               (widget.target.penugasan?[i]) as PenugasanSection,
-                          user: user,
+                          target: user,
                         ),
                       ),
                     );
@@ -122,7 +122,7 @@ class _SectionListViewPageState extends State<SectionListViewPage> {
                         child: PelatihanSectionListEdit(
                             pelatihan: (widget.target.pelatihan?[i])
                                 as PelatihanSection,
-                            user: user),
+                            target: user),
                       ),
                     );
                   }
@@ -136,7 +136,7 @@ class _SectionListViewPageState extends State<SectionListViewPage> {
                         child: PublikasiSectionListEdit(
                           publikasi:
                               (widget.target.publikasi?[i]) as PublikasiSection,
-                          user: user,
+                          target: user,
                         ),
                       ),
                     );

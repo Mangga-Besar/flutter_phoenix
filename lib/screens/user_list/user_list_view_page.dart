@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/models/user/user.dart';
 import 'package:flutter_phoenix/models/user/user_helper.dart';
 import 'package:flutter_phoenix/widgets/custom/custom_text.dart';
+import 'package:flutter_phoenix/widgets/loading_widget.dart';
 import 'package:flutter_phoenix/widgets/user_list.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
@@ -52,9 +53,20 @@ class _UserListViewPageState extends State<UserListViewPage> {
       child: PagedListView<int, User?>(
         pagingController: _userPagingController,
         builderDelegate: PagedChildBuilderDelegate<User?>(
+          firstPageProgressIndicatorBuilder: (context) {
+            return LoadingWidget();
+          },
+          noItemsFoundIndicatorBuilder: (context) {
+            return const Center(
+                child: CustomText(
+              "NO USER FOUND",
+              fontSize: 28,
+              fontWeight: FontWeight.bold,
+            ));
+          },
           itemBuilder: (context, item, index) {
             if (item == null) {
-              return CustomText("Item Empty");
+              return const CustomText("Item Empty");
             }
             return UserList(user: item);
           },

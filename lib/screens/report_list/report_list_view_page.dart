@@ -4,6 +4,7 @@ import 'package:flutter_phoenix/functions/routes.dart';
 import 'package:flutter_phoenix/models/report/report.dart';
 import 'package:flutter_phoenix/models/report/report_helper.dart';
 import 'package:flutter_phoenix/widgets/custom/custom_text.dart';
+import 'package:flutter_phoenix/widgets/loading_widget.dart';
 import 'package:flutter_phoenix/widgets/report_list.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
@@ -54,6 +55,17 @@ class _ReportListViewPageState extends State<ReportListViewPage> {
       child: PagedListView<int, Report?>(
         pagingController: _reportPagingController,
         builderDelegate: PagedChildBuilderDelegate<Report?>(
+          firstPageProgressIndicatorBuilder: (context) {
+            return LoadingWidget();
+          },
+          noItemsFoundIndicatorBuilder: (context) {
+            return const Center(
+                child: CustomText(
+              "NO USER FOUND",
+              fontSize: 28,
+              fontWeight: FontWeight.bold,
+            ));
+          },
           itemBuilder: (context, item, index) {
             if (item == null) {
               return CustomText("Item Empty");

@@ -5,77 +5,82 @@ import 'package:flutter_phoenix/functions/enum_parser.dart';
 import 'package:flutter_phoenix/functions/routes.dart';
 import 'package:flutter_phoenix/models/sections/penugasan_section.dart';
 import 'package:flutter_phoenix/models/user/user.dart';
+import 'package:flutter_phoenix/widgets/builder/user_builder.dart';
 import 'package:flutter_phoenix/widgets/custom/custom_text.dart';
 import 'package:flutter_phoenix/widgets/section_list.dart';
 import 'package:provider/provider.dart';
 
 class PenugasanSectionListEdit extends SectionList {
   PenugasanSectionListEdit(
-      {required this.penugasan, required this.user, super.key});
+      {required this.penugasan, required this.target, super.key});
   PenugasanSection penugasan;
-  User user;
+  User target;
 
   @override
   Widget getContent(BuildContext context) {
-    return Stack(
-      children: [
-        Positioned(
-          right: 0,
-          child: ChangeNotifierProvider.value(
-            value: penugasan,
-            builder: (context, _) => IconButton(
-              icon: const Icon(Icons.edit),
-              onPressed: () {
-                Routes.push(
-                  context,
-                  PageName.EditSection,
-                  arguments: {
-                    "content": penugasan,
-                    "user": user,
-                    "type": PenugasanSection
-                  },
-                );
-              },
-            ),
+    return UserBuilder(builder: (user) {
+      return Stack(
+        children: [
+          (user!.isCommitee || user.isSuper || user.id == target.id)
+              ? Positioned(
+                  right: 0,
+                  child: ChangeNotifierProvider.value(
+                    value: penugasan,
+                    builder: (context, _) => IconButton(
+                      icon: const Icon(Icons.edit),
+                      onPressed: () {
+                        Routes.push(
+                          context,
+                          PageName.EditSection,
+                          arguments: {
+                            "content": penugasan,
+                            "user": target,
+                            "type": PenugasanSection
+                          },
+                        );
+                      },
+                    ),
+                  ),
+                )
+              : Container(),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CustomText(
+                penugasan.name ?? "",
+                fontWeight: FontWeight.w800,
+                fontSize: 15,
+              ),
+              CustomText(
+                penugasan.tipePekerjaan ?? "",
+                fontSize: 15,
+                fontWeight: FontWeight.w500,
+              ),
+              CustomText(
+                "Dimulai : " +
+                    (penugasan.startDate?.month.toString() ?? "") +
+                    " - " +
+                    (penugasan.startDate?.year.toString() ?? ""),
+                fontSize: 12,
+                color: Colors.black87,
+              ),
+              CustomText(
+                "Berakhir : " +
+                    (penugasan.endDate?.month.toString() ?? "") +
+                    " - " +
+                    (penugasan.endDate?.year.toString() ?? ""),
+                fontSize: 12,
+                color: Colors.black87,
+              ),
+              CustomText(
+                penugasan.description ?? "",
+                fontSize: 12,
+                color: Colors.black87,
+              ),
+            ],
           ),
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CustomText(
-              penugasan.name ?? "",
-              fontWeight: FontWeight.w800,
-              fontSize: 15,
-            ),
-            CustomText(
-              penugasan.tipePekerjaan ?? "",
-              fontSize: 15,
-              fontWeight: FontWeight.w500,
-            ),
-            CustomText(
-              "Dimulai : " +
-                  (penugasan.startDate?.month.toString() ?? "") +
-                  " - " +
-                  (penugasan.startDate?.year.toString() ?? ""),
-              fontSize: 12,
-              color: Colors.black87,
-            ),
-            CustomText(
-              "Berakhir : " +
-                  (penugasan.endDate?.month.toString() ?? "") +
-                  " - " +
-                  (penugasan.endDate?.year.toString() ?? ""),
-              fontSize: 12,
-              color: Colors.black87,
-            ),
-            CustomText(
-              penugasan.description ?? "",
-              fontSize: 12,
-              color: Colors.black87,
-            ),
-          ],
-        ),
-      ],
-    );
+        ],
+      );
+    });
   }
 }

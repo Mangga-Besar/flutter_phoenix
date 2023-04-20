@@ -42,7 +42,7 @@ class SectionUserEditPage extends SectionEditPage {
             child: ImageAddSingle(
               image: target.profilePicture,
               onChanged: (file) {
-                final fileName = "IMAGE_${target.id!}";
+                final fileName = "IMAGE_${target.id ?? ''}";
                 FirebaseUploaderHelper(
                   filePath: file,
                   name: fileName,

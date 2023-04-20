@@ -66,8 +66,12 @@ class UserHelper extends BaseHTTPHelper {
     };
     var jsonMap = jsonEncode(map);
     var res = await postGenerics(endpoint: "list", json: jsonMap);
-    var result = res.map((e) => jsonDecode(e)).toList();
-    return User.fromMapList(result);
+    try {
+      var result = res.map((e) => jsonDecode(e)).toList();
+      return User.fromMapList(result);
+    } catch (err) {
+      return [];
+    }
   }
 
   Future<bool> forgetPassword(String email) async {
