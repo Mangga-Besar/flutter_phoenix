@@ -98,12 +98,23 @@ class SectionEditScreen extends BaseScreenWithAppBar {
       user = args["user"];
     }
     return AppBar(
-      title: const CustomText("EDIT", fontSize: 20),
+      title: CustomText(
+        (type == KontakSection)
+            ? "Kontak"
+            : type == PendidikanSection
+                ? "Pendidikan"
+                : type == PelatihanSection
+                    ? "Pelatihan"
+                    : type == PenugasanSection
+                        ? "Penugasan"
+                        : type == PublikasiSection
+                            ? "Publikasi"
+                            : "Edit",
+        fontWeight: FontWeight.bold,
+        color: Colors.white,
+      ),
       centerTitle: true,
-      systemOverlayStyle: SystemUiOverlayStyle.light,
-      backgroundColor: Colors.transparent,
       elevation: 0,
-      iconTheme: const IconThemeData(color: Colors.black),
       actions: [
         content != null &&
                 (type == KontakSection ||

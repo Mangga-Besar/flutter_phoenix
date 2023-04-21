@@ -11,6 +11,7 @@ import 'package:flutter_phoenix/models/sections/publikasi_section.dart';
 import 'package:flutter_phoenix/models/user/user.dart';
 import 'package:flutter_phoenix/screens/section_edit/section_edit_screen.dart';
 import 'package:flutter_phoenix/screens/section_list_view/section_list_view_page.dart';
+import 'package:flutter_phoenix/widgets/custom/custom_text.dart';
 import 'package:provider/provider.dart';
 
 class SectionListViewScreen extends BaseScreenWithAppBar {
@@ -41,6 +42,34 @@ class SectionListViewScreen extends BaseScreenWithAppBar {
   @override
   Widget? drawer(BuildContext context) {
     return null;
+  }
+
+  @override
+  AppBar? appBar(BuildContext context) {
+    var args =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    Type type = args["type"];
+
+    // TODO: implement appBar
+    return AppBar(
+      title: CustomText(
+        (type == KontakSection)
+            ? "Kontak"
+            : type == PendidikanSection
+                ? "Pendidikan"
+                : type == PelatihanSection
+                    ? "Pelatihan"
+                    : type == PenugasanSection
+                        ? "Penugasan"
+                        : type == PublikasiSection
+                            ? "Publikasi"
+                            : "Edit",
+        fontWeight: FontWeight.bold,
+        color: Colors.white,
+      ),
+      centerTitle: true,
+      elevation: 0,
+    );
   }
 
   @override

@@ -6,6 +6,7 @@ import 'package:flutter_phoenix/models/user/user.dart';
 import 'package:flutter_phoenix/models/user/user_helper.dart';
 import 'package:flutter_phoenix/screens/user/user_page.dart';
 import 'package:flutter_phoenix/widgets/builder/user_builder.dart';
+import 'package:flutter_phoenix/widgets/custom/custom_text.dart';
 
 class UserScreen extends BaseScreenWithAppBar {
   UserScreen()
@@ -41,6 +42,12 @@ class UserScreen extends BaseScreenWithAppBar {
     User user = args["user"];
 
     return AppBar(
+      centerTitle: true,
+      title: CustomText(
+        "Profil",
+        fontWeight: FontWeight.bold,
+        color: Colors.white,
+      ),
       actions: [
         UserBuilder(builder: (user) {
           return (user!.isCommitee || user.isSuper)

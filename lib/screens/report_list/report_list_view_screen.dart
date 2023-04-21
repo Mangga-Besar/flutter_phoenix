@@ -5,6 +5,7 @@ import 'package:flutter_phoenix/functions/routes.dart';
 import 'package:flutter_phoenix/models/user/user.dart';
 import 'package:flutter_phoenix/screens/report_list/report_list_view_page.dart';
 import 'package:flutter_phoenix/widgets/builder/user_builder.dart';
+import 'package:flutter_phoenix/widgets/custom/custom_text.dart';
 import 'package:flutter_phoenix/widgets/home_drawer.dart';
 
 class ReportListViewScreen extends BaseScreenWithAppBar {
@@ -36,5 +37,20 @@ class ReportListViewScreen extends BaseScreenWithAppBar {
         child: Icon(Icons.add),
       );
     });
+  }
+
+  @override
+  AppBar? appBar(BuildContext context) {
+    // TODO: implement appBar
+    return AppBar(
+      centerTitle: true,
+      title: CustomText(
+        "Daftar Laporan",
+        fontWeight: FontWeight.bold,
+        color: Colors.white,
+      ),
+      // backgroundColor: Colors.transparent,
+      elevation: 0,
+    );
   }
 }

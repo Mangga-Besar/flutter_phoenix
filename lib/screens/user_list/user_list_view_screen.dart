@@ -14,6 +14,7 @@ import 'package:flutter_phoenix/screens/section_edit/section_edit_screen.dart';
 import 'package:flutter_phoenix/screens/section_list_view/section_list_view_page.dart';
 import 'package:flutter_phoenix/screens/user_list/user_list_view_page.dart';
 import 'package:flutter_phoenix/widgets/builder/user_builder.dart';
+import 'package:flutter_phoenix/widgets/custom/custom_text.dart';
 import 'package:flutter_phoenix/widgets/home_drawer.dart';
 import 'package:provider/provider.dart';
 
@@ -33,6 +34,21 @@ class UserListViewScreen extends BaseScreenWithAppBar {
   @override
   Widget? drawer(BuildContext context) {
     return const HomeDrawer(selected: PageName.UserList);
+  }
+
+  @override
+  AppBar? appBar(BuildContext context) {
+    // TODO: implement appBar
+    return AppBar(
+      centerTitle: true,
+      title: CustomText(
+        "Daftar Profil",
+        fontWeight: FontWeight.bold,
+        color: Colors.white,
+      ),
+      // backgroundColor: Colors.transparent,
+      elevation: 0,
+    );
   }
 
   @override

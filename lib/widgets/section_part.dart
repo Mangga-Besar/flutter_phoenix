@@ -34,19 +34,19 @@ class _SectionPartState extends State<SectionPart> {
       int showLength;
       if (widget.type == KontakSection) {
         length = (target.kontak?.length ?? 0);
-        showLength = length > 2 ? 2 : length;
+        showLength = length > 4 ? 4 : length;
       } else if (widget.type == PendidikanSection) {
         length = (target.pendidikan?.length ?? 0);
-        showLength = length > 2 ? 2 : length;
+        showLength = length > 4 ? 4 : length;
       } else if (widget.type == PenugasanSection) {
         length = (target.penugasan?.length ?? 0);
-        showLength = length > 2 ? 2 : length;
+        showLength = length > 4 ? 4 : length;
       } else if (widget.type == PelatihanSection) {
         length = (target.pelatihan?.length ?? 0);
-        showLength = length > 2 ? 2 : length;
+        showLength = length > 4 ? 4 : length;
       } else {
         length = (target.publikasi?.length ?? 0);
-        showLength = length > 2 ? 2 : length;
+        showLength = length > 4 ? 4 : length;
       }
       return Column(
         children: [
@@ -125,7 +125,7 @@ class _SectionPartState extends State<SectionPart> {
                           physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                         ),
-                        if (length > 2)
+                        if (length > 4)
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: const [

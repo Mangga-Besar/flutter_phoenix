@@ -36,6 +36,9 @@ class _ReportListViewPageState extends State<ReportListViewPage> {
   Future<void> _fetchPage(int pageKey) async {
     try {
       final newItems = await reportHelper.getReportList(pageKey, _pageSize);
+      newItems.sort(
+        (a, b) => b!.reportDate!.compareTo(a!.reportDate!),
+      );
       final isLastPage = newItems.length < _pageSize;
       if (isLastPage) {
         _reportPagingController.appendLastPage(newItems);

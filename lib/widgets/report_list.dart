@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/enums/page_name.dart';
 import 'package:flutter_phoenix/enums/report_state.dart';
+import 'package:flutter_phoenix/functions/date_parser.dart';
 import 'package:flutter_phoenix/functions/enum_parser.dart';
 import 'package:flutter_phoenix/functions/routes.dart';
 import 'package:flutter_phoenix/models/report/report.dart';
@@ -44,6 +45,13 @@ class _ReportListState extends State<ReportList> {
                 ),
                 CustomText(
                   widget.report.body ?? "",
+                  fontSize: 15,
+                ),
+                const SizedBox(
+                  height: 7.5,
+                ),
+                CustomText(
+                  "Reported : ${DateParser.parseDateOnly(widget.report.reportDate!)} ",
                   fontSize: 15,
                 ),
                 const SizedBox(

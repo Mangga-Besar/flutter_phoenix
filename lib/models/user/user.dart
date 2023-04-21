@@ -87,35 +87,64 @@ class User with ChangeNotifier {
   }
 
   static User? fromMap(Map<String, dynamic>? data) {
-    // data!["kontak"] = data["kontak"].map((e) => jsonDecode(e)).toList();
-    // data["pelatihan"] = data["pelatihan"].map((e) => jsonDecode(e)).toList();
-    // data["pendidikan"] = data["pendidikan"].map((e) => jsonDecode(e)).toList();
-    // data["penugasan"] = data["penugasan"].map((e) => jsonDecode(e)).toList();
-    // data["publikasi"] = data["publikasi"].map((e) => jsonDecode(e)).toList();
-    return data == null
-        ? null
-        : User(
-            id: data["id"] ?? "",
-            name: data["name"] ?? "",
-            nik: data["nik"] ?? "",
-            email: data["email"] ?? "",
-            profilePicture: data["profilePicture"] ?? "",
-            handPhone: data["handPhone"] ?? "",
-            userType: EnumParser.getEnum(
-                UserType.values, data["userType"] ?? "Member"),
-            roleType:
-                EnumParser.getEnum(RoleType.values, data["roleType"] ?? "Guru"),
-            dob: DateTime.tryParse(data["dob"] ?? ""),
-            address: data["address"],
-            agama: data["agama"],
-            password: data["password"],
-            schoolId: data["schoolId"],
-            kontak: KontakSection.fromMapList(data["kontak"]),
-            pelatihan: PelatihanSection.fromMapList(data["pelatihan"]),
-            pendidikan: PendidikanSection.fromMapList(data["pendidikan"]),
-            penugasan: PenugasanSection.fromMapList(data["penugasan"]),
-            publikasi: PublikasiSection.fromMapList(data["publikasi"]),
-          );
+    try {
+      if (data == null) {
+        return null;
+      } else {
+        var kontak = KontakSection.fromMapList(data["kontak"]);
+        var pelatihan = PelatihanSection.fromMapList(data["pelatihan"]);
+        var pendidikan = PendidikanSection.fromMapList(data["pendidikan"]);
+        var penugasan = PenugasanSection.fromMapList(data["penugasan"]);
+        var publikasi = PublikasiSection.fromMapList(data["publikasi"]);
+
+        pelatihan.sort(
+          (a, b) {
+            var s = b!.endDate!.compareTo(a!.endDate!);
+            return s;
+          },
+        );
+        penugasan.sort(
+          (a, b) {
+            return b!.endDate!.compareTo(a!.endDate!);
+          },
+        );
+        pendidikan.sort(
+          (a, b) {
+            return b!.tahun!.compareTo(a!.tahun!);
+          },
+        );
+        publikasi.sort(
+          (a, b) {
+            return b!.tanggal!.compareTo(a!.tanggal!);
+          },
+        );
+
+        return User(
+          id: data["id"] ?? "",
+          name: data["name"] ?? "",
+          nik: data["nik"] ?? "",
+          email: data["email"] ?? "",
+          profilePicture: data["profilePicture"] ?? "",
+          handPhone: data["handPhone"] ?? "",
+          userType:
+              EnumParser.getEnum(UserType.values, data["userType"] ?? "Member"),
+          roleType:
+              EnumParser.getEnum(RoleType.values, data["roleType"] ?? "Guru"),
+          dob: DateTime.tryParse(data["dob"] ?? ""),
+          address: data["address"],
+          agama: data["agama"],
+          password: data["password"],
+          schoolId: data["schoolId"],
+          kontak: kontak,
+          pelatihan: pelatihan,
+          pendidikan: pendidikan,
+          penugasan: penugasan,
+          publikasi: publikasi,
+        );
+      }
+    } catch (err) {
+      return null;
+    }
   }
 
   static List<User?> fromMapList(List<dynamic>? data) {
