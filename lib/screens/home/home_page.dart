@@ -91,6 +91,7 @@ class _HomePageState extends State<HomePage> {
                                           user!.name ?? "",
                                           fontSize: 24,
                                           fontWeight: FontWeight.bold,
+                                          textAlign: TextAlign.center,
                                         ),
                                         SizedBox(
                                           height: 10,
@@ -99,6 +100,7 @@ class _HomePageState extends State<HomePage> {
                                           user.email ?? "",
                                           fontSize: 15,
                                           fontWeight: FontWeight.bold,
+                                          textAlign: TextAlign.center,
                                         ),
                                         // CustomText(
                                         //   ((user.isCommitee || user.isSuper))
@@ -128,6 +130,7 @@ class _HomePageState extends State<HomePage> {
                                           user.address ?? "",
                                           color: Colors.black54,
                                           fontWeight: FontWeight.normal,
+                                          textAlign: TextAlign.center,
                                           fontSize: 15,
                                         ),
                                         CustomText(

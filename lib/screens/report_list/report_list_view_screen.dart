@@ -29,15 +29,12 @@ class ReportListViewScreen extends BaseScreenWithAppBar {
   Widget? floatingActionButton(BuildContext context) {
     // TODO: implement floatingActionButton
     return UserBuilder(builder: (user) {
-      if (user!.isCommitee || user.isSuper) {
-        return FloatingActionButton(
-          onPressed: () async {
-            await Routes.push(context, PageName.Report);
-          },
-          child: Icon(Icons.add),
-        );
-      }
-      return Container();
+      return FloatingActionButton(
+        onPressed: () async {
+          await Routes.push(context, PageName.Report);
+        },
+        child: Icon(Icons.add),
+      );
     });
   }
 }
