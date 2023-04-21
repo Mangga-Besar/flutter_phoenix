@@ -46,7 +46,7 @@ class _ImageAddSingleState extends State<ImageAddSingle> {
                   child: Icon(Icons.add_circle, color: Colors.grey, size: 100),
                 )
               : PictureFactory.build(
-                  widget.image!,
+                  widget.image ?? "",
                   placeholder: LoadingFunction.loadingInfinte(),
                 ),
         ),

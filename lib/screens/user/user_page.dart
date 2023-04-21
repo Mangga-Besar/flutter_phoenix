@@ -56,82 +56,83 @@ class _UserPageState extends State<UserPage> {
                             padding: const EdgeInsets.symmetric(
                               horizontal: 10.0,
                             ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                ClipRRect(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(200)),
-                                  clipBehavior: Clip.hardEdge,
-                                  child: Container(
-                                      height: 125,
-                                      width: 125,
-                                      child: PictureFactory.build(
-                                          widget.target.profilePicture ?? "",
-                                          padding: EdgeInsets.zero,
-                                          fit: BoxFit.cover)),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                CustomText(
-                                  widget.target.name ?? "",
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                CustomText(
-                                  widget.target.email ?? "",
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                                // CustomText(
-                                //   ((widget.target.isCommitee ||
-                                //           widget.target.isSuper))
-                                //       ? ("${widget.target.nik?.substring(0, 4) ?? ""}******")
-                                //       : widget.target.nik ?? "",
-                                //   fontSize: 15,
-                                //   fontWeight: FontWeight.w500,
-                                // ),
-                                CustomText(
-                                  ((widget.target.isCommitee ||
-                                          widget.target.isSuper))
-                                      ? widget.target.nik ?? ""
-                                      : ("${widget.target.handPhone?.substring(0, widget.target.handPhone!.length - 4) ?? ""}****"),
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                CustomText(
-                                  DateParser.parseDateOnly(
-                                      widget.target.dob ?? DateTime.now()),
-                                  fontSize: 15,
-                                  color: Colors.black54,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                                CustomText(
-                                  widget.target.address ?? "",
-                                  color: Colors.black54,
-                                  fontWeight: FontWeight.normal,
-                                  fontSize: 15,
-                                ),
-                                CustomText(
-                                  widget.target.agama ?? "",
-                                  color: Colors.black54,
-                                  fontWeight: FontWeight.normal,
-                                  fontSize: 15,
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                              ],
+                            child: Center(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  ClipRRect(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(200)),
+                                    clipBehavior: Clip.hardEdge,
+                                    child: Container(
+                                        height: 125,
+                                        width: 125,
+                                        child: PictureFactory.build(
+                                            widget.target.profilePicture ?? "",
+                                            padding: EdgeInsets.zero,
+                                            fit: BoxFit.cover)),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  CustomText(
+                                    widget.target.name ?? "",
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  CustomText(
+                                    widget.target.email ?? "",
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  // CustomText(
+                                  //   ((widget.target.isCommitee ||
+                                  //           widget.target.isSuper))
+                                  //       ? ("${widget.target.nik?.substring(0, 4) ?? ""}******")
+                                  //       : widget.target.nik ?? "",
+                                  //   fontSize: 15,
+                                  //   fontWeight: FontWeight.w500,
+                                  // ),
+                                  CustomText(
+                                    ((user!.isCommitee || user.isSuper))
+                                        ? widget.target.handPhone ?? ""
+                                        : ("${widget.target.handPhone?.substring(0, widget.target.handPhone!.length - 4) ?? ""}****"),
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  CustomText(
+                                    DateParser.parseDateOnly(
+                                        widget.target.dob ?? DateTime.now()),
+                                    fontSize: 15,
+                                    color: Colors.black54,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  CustomText(
+                                    widget.target.address ?? "",
+                                    color: Colors.black54,
+                                    fontWeight: FontWeight.normal,
+                                    fontSize: 15,
+                                  ),
+                                  CustomText(
+                                    widget.target.agama ?? "",
+                                    color: Colors.black54,
+                                    fontWeight: FontWeight.normal,
+                                    fontSize: 15,
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                           SectionPart(

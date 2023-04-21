@@ -5,6 +5,7 @@ import 'package:flutter_phoenix/functions/routes.dart';
 import 'package:flutter_phoenix/models/user/user.dart';
 import 'package:flutter_phoenix/models/user/user_helper.dart';
 import 'package:flutter_phoenix/screens/user/user_page.dart';
+import 'package:flutter_phoenix/widgets/builder/user_builder.dart';
 
 class UserScreen extends BaseScreenWithAppBar {
   UserScreen()
@@ -41,15 +42,19 @@ class UserScreen extends BaseScreenWithAppBar {
 
     return AppBar(
       actions: [
-        IconButton(
-          onPressed: () {
-            UserHelper().delete(user.id ?? "");
-            Routes.pop(context);
-          },
-          icon: Icon(
-            Icons.delete,
-          ),
-        )
+        UserBuilder(builder: (user) {
+          return (user!.isCommitee || user.isSuper)
+              ? IconButton(
+                  onPressed: () {
+                    UserHelper().delete(user.id ?? "");
+                    Routes.pop(context);
+                  },
+                  icon: Icon(
+                    Icons.delete,
+                  ),
+                )
+              : Container();
+        })
       ],
     );
   }
