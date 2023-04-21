@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/functions/image_picker_helper.dart';
 import 'package:flutter_phoenix/functions/loading_function.dart';
+import 'package:flutter_phoenix/functions/toast_helper.dart';
 import 'package:flutter_phoenix/widgets/picture_factory.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -32,7 +33,11 @@ class _ImageAddSingleState extends State<ImageAddSingle> {
         } else {
           file = await ImagePickerHelper.openGalleryWithoutCrop();
         }
-        widget.onChanged!(file!);
+        try {
+          widget.onChanged!(file!);
+        } catch (err) {
+          ToastHelper.showException("Gagal mengupload Gambar", context);
+        }
       },
       child: ClipRRect(
         borderRadius: BorderRadius.all(Radius.circular(10)),
