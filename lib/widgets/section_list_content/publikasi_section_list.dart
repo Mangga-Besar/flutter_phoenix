@@ -12,27 +12,33 @@ class PublikasiSectionList extends SectionList {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CustomText(
-          publikasi.name ?? "",
-          fontWeight: FontWeight.w800,
-          fontSize: 15,
-        ),
+        publikasi.name?.isNotEmpty ?? false
+            ? CustomText(
+                publikasi.name ?? "",
+                fontWeight: FontWeight.w800,
+                fontSize: 15,
+              )
+            : Container(),
         CustomText(
           publikasi.tanggal?.year.toString() ?? "",
           fontWeight: FontWeight.w500,
           fontSize: 15,
         ),
-        CustomText(
-          publikasi.topik ?? "",
-          fontSize: 12,
-          fontWeight: FontWeight.bold,
-          color: Colors.black87,
-        ),
-        CustomText(
-          publikasi.description ?? "",
-          fontSize: 12,
-          color: Colors.black87,
-        ),
+        publikasi.topik?.isNotEmpty ?? false
+            ? CustomText(
+                publikasi.topik ?? "",
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
+                color: Colors.black87,
+              )
+            : Container(),
+        publikasi.description?.isNotEmpty ?? false
+            ? CustomText(
+                publikasi.description ?? "",
+                fontSize: 12,
+                color: Colors.black87,
+              )
+            : Container(),
       ],
     );
   }

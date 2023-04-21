@@ -13,7 +13,7 @@ class _SectionListState extends State<SectionList> {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(
-        vertical: 5.0,
+        vertical: 2.0,
       ),
       child: widget.getContent(context),
     );

@@ -48,11 +48,13 @@ class PendidikanSectionListEdit extends SectionList {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CustomText(
-                pendidikan.name == "" ? "NULL" : pendidikan.name ?? "",
-                fontWeight: FontWeight.w800,
-                fontSize: 15,
-              ),
+              pendidikan.name?.isNotEmpty ?? false
+                  ? CustomText(
+                      pendidikan.name ?? "",
+                      fontWeight: FontWeight.w800,
+                      fontSize: 15,
+                    )
+                  : Container(),
               CustomText(
                 pendidikan.tahun?.year.toString() ?? "NULL",
                 fontSize: 15,
@@ -72,18 +74,20 @@ class PendidikanSectionListEdit extends SectionList {
                 fontWeight: FontWeight.bold,
                 color: Colors.black87,
               ),
-              CustomText(
-                pendidikan.lokasi == "" ? "NULL" : pendidikan.lokasi ?? "",
-                fontSize: 12,
-                color: Colors.black87,
-              ),
-              CustomText(
-                pendidikan.description == ""
-                    ? "NULL"
-                    : pendidikan.description ?? "",
-                fontSize: 12,
-                color: Colors.black87,
-              ),
+              pendidikan.lokasi?.isNotEmpty ?? false
+                  ? CustomText(
+                      pendidikan.lokasi ?? "",
+                      fontSize: 12,
+                      color: Colors.black87,
+                    )
+                  : Container(),
+              pendidikan.name?.isNotEmpty ?? false
+                  ? CustomText(
+                      pendidikan.description ?? "",
+                      fontSize: 12,
+                      color: Colors.black87,
+                    )
+                  : Container(),
               pendidikan.link?.isNotEmpty ?? false
                   ? const CustomText(
                       "Link Terkait :",

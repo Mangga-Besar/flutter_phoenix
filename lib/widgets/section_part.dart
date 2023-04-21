@@ -31,32 +31,28 @@ class _SectionPartState extends State<SectionPart> {
   Widget build(BuildContext context) {
     return Consumer<User>(builder: (_, target, __) {
       int length;
+      int showLength;
       if (widget.type == KontakSection) {
-        length = ((target.kontak?.length ?? 0) > 2
-            ? 2
-            : (target.kontak?.length ?? 0));
+        length = (target.kontak?.length ?? 0);
+        showLength = length > 2 ? 2 : length;
       } else if (widget.type == PendidikanSection) {
-        length = ((target.pendidikan?.length ?? 0) > 2
-            ? 2
-            : (target.pendidikan?.length ?? 0));
+        length = (target.pendidikan?.length ?? 0);
+        showLength = length > 2 ? 2 : length;
       } else if (widget.type == PenugasanSection) {
-        length = ((target.penugasan?.length ?? 0) > 2
-            ? 2
-            : (target.penugasan?.length ?? 0));
+        length = (target.penugasan?.length ?? 0);
+        showLength = length > 2 ? 2 : length;
       } else if (widget.type == PelatihanSection) {
-        length = ((target.pelatihan?.length ?? 0) > 2
-            ? 2
-            : (target.pelatihan?.length ?? 0));
+        length = (target.pelatihan?.length ?? 0);
+        showLength = length > 2 ? 2 : length;
       } else {
-        length = ((target.publikasi?.length ?? 0) > 2
-            ? 2
-            : (target.publikasi?.length ?? 0));
+        length = (target.publikasi?.length ?? 0);
+        showLength = length > 2 ? 2 : length;
       }
       return Column(
         children: [
           const Divider(
-            color: Colors.black87,
-            thickness: 2.5,
+            color: Colors.black54,
+            thickness: 2,
           ),
           ChangeNotifierProvider<User>.value(
               value: target,
@@ -87,7 +83,10 @@ class _SectionPartState extends State<SectionPart> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 12.0),
+                          padding: const EdgeInsets.only(
+                            bottom: 7.5,
+                            top: 2.5,
+                          ),
                           child: CustomText(
                             widget.title ?? "",
                             color: Colors.black,
@@ -122,7 +121,7 @@ class _SectionPartState extends State<SectionPart> {
                                       as PublikasiSection);
                             }
                           },
-                          itemCount: length,
+                          itemCount: showLength,
                           physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                         ),

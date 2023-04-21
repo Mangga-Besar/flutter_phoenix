@@ -12,21 +12,27 @@ class PelatihanSectionList extends SectionList {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CustomText(
-          pelatihan.name ?? "",
-          fontWeight: FontWeight.w800,
-          fontSize: 15,
-        ),
-        CustomText(
-          pelatihan.topik ?? "",
-          fontSize: 12,
-          fontWeight: FontWeight.w500,
-        ),
-        CustomText(
-          pelatihan.pemberiSertifikat ?? "",
-          fontSize: 12,
-          color: Colors.black87,
-        ),
+        pelatihan.name?.isNotEmpty ?? false
+            ? CustomText(
+                pelatihan.name ?? "",
+                fontWeight: FontWeight.w800,
+                fontSize: 15,
+              )
+            : Container(),
+        pelatihan.topik?.isNotEmpty ?? false
+            ? CustomText(
+                pelatihan.topik ?? "",
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
+              )
+            : Container(),
+        pelatihan.pemberiSertifikat?.isNotEmpty ?? false
+            ? CustomText(
+                pelatihan.pemberiSertifikat ?? "",
+                fontSize: 12,
+                color: Colors.black87,
+              )
+            : Container(),
         CustomText(
           "Dimulai : " +
               (pelatihan.startDate?.month.toString() ?? "") +
@@ -43,11 +49,13 @@ class PelatihanSectionList extends SectionList {
           fontSize: 12,
           color: Colors.black87,
         ),
-        CustomText(
-          pelatihan.description ?? "",
-          fontSize: 12,
-          color: Colors.black87,
-        ),
+        pelatihan.description?.isNotEmpty ?? false
+            ? CustomText(
+                pelatihan.description ?? "",
+                fontSize: 12,
+                color: Colors.black87,
+              )
+            : Container(),
       ],
     );
   }

@@ -46,28 +46,36 @@ class KontakSectionListEdit extends SectionList {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CustomText(
-                kontak.name ?? "",
-                fontWeight: FontWeight.w800,
-                fontSize: 15,
-              ),
-              CustomText(
-                ((target.isCommitee || target.isSuper))
-                    ? handPhone
-                    : ("${handPhone.substring(0, handPhone.length - 4)}****"),
-                fontSize: 12,
-                fontWeight: FontWeight.w500,
-              ),
-              CustomText(
-                kontak.hubungan ?? "",
-                fontSize: 12,
-                color: Colors.black87,
-              ),
-              CustomText(
-                kontak.description ?? "",
-                fontSize: 12,
-                color: Colors.black87,
-              ),
+              kontak.name?.isNotEmpty ?? false
+                  ? CustomText(
+                      kontak.name ?? "",
+                      fontWeight: FontWeight.w800,
+                      fontSize: 15,
+                    )
+                  : Container(),
+              handPhone.isNotEmpty
+                  ? CustomText(
+                      ((target.isCommitee || target.isSuper))
+                          ? handPhone
+                          : ("${handPhone.substring(0, handPhone.length - 4)}****"),
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                    )
+                  : Container(),
+              kontak.hubungan?.isNotEmpty ?? false
+                  ? CustomText(
+                      kontak.hubungan ?? "",
+                      fontSize: 12,
+                      color: Colors.black87,
+                    )
+                  : Container(),
+              kontak.description?.isNotEmpty ?? false
+                  ? CustomText(
+                      kontak.description ?? "",
+                      fontSize: 12,
+                      color: Colors.black87,
+                    )
+                  : Container(),
             ],
           ),
         ],

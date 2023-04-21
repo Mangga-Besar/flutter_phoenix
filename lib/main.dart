@@ -6,7 +6,6 @@ import 'package:flutter_phoenix/enums/page_name.dart';
 import 'package:flutter_phoenix/firebase_options.dart';
 import 'package:flutter_phoenix/functions/routes.dart';
 import 'package:flutter_phoenix/functions/token_version.dart';
-import 'package:flutter_phoenix/models/login/login_data.dart';
 import 'package:flutter_phoenix/widgets/animated_splash/animated_splash.dart';
 
 void main() async {

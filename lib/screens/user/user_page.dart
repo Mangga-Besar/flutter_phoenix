@@ -68,8 +68,8 @@ class _UserPageState extends State<UserPage> {
                                         BorderRadius.all(Radius.circular(200)),
                                     clipBehavior: Clip.hardEdge,
                                     child: Container(
-                                        height: 125,
-                                        width: 125,
+                                        height: 200,
+                                        width: 200,
                                         child: PictureFactory.build(
                                             widget.target.profilePicture ?? "",
                                             padding: EdgeInsets.zero,
@@ -80,6 +80,7 @@ class _UserPageState extends State<UserPage> {
                                   ),
                                   CustomText(
                                     widget.target.name ?? "",
+                                    textAlign: TextAlign.center,
                                     fontSize: 24,
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -89,6 +90,7 @@ class _UserPageState extends State<UserPage> {
                                   CustomText(
                                     widget.target.email ?? "",
                                     fontSize: 15,
+                                    textAlign: TextAlign.center,
                                     fontWeight: FontWeight.bold,
                                   ),
                                   // CustomText(
@@ -120,6 +122,7 @@ class _UserPageState extends State<UserPage> {
                                     widget.target.address ?? "",
                                     color: Colors.black54,
                                     fontWeight: FontWeight.normal,
+                                    textAlign: TextAlign.center,
                                     fontSize: 15,
                                   ),
                                   CustomText(
@@ -137,7 +140,7 @@ class _UserPageState extends State<UserPage> {
                           ),
                           SectionPart(
                             title: "KONTAK DARURAT",
-                            user: user!,
+                            user: user,
                             type: KontakSection,
                           ),
                           SectionPart(

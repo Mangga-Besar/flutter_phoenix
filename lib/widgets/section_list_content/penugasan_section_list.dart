@@ -14,16 +14,20 @@ class PenugasanSectionList extends SectionList {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CustomText(
-          penugasan.name ?? "",
-          fontWeight: FontWeight.w800,
-          fontSize: 15,
-        ),
-        CustomText(
-          penugasan.tipePekerjaan ?? "",
-          fontSize: 15,
-          fontWeight: FontWeight.w500,
-        ),
+        penugasan.name?.isNotEmpty ?? false
+            ? CustomText(
+                penugasan.name ?? "",
+                fontWeight: FontWeight.w800,
+                fontSize: 15,
+              )
+            : Container(),
+        penugasan.tipePekerjaan?.isNotEmpty ?? false
+            ? CustomText(
+                penugasan.tipePekerjaan ?? "",
+                fontSize: 15,
+                fontWeight: FontWeight.w500,
+              )
+            : Container(),
         CustomText(
           "Dimulai : " +
               (penugasan.startDate?.month.toString() ?? "") +
@@ -40,11 +44,13 @@ class PenugasanSectionList extends SectionList {
           fontSize: 12,
           color: Colors.black87,
         ),
-        CustomText(
-          penugasan.description ?? "",
-          fontSize: 12,
-          color: Colors.black87,
-        ),
+        penugasan.description?.isNotEmpty ?? false
+            ? CustomText(
+                penugasan.description ?? "",
+                fontSize: 12,
+                color: Colors.black87,
+              )
+            : Container(),
       ],
     );
   }

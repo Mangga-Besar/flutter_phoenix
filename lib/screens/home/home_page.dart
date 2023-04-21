@@ -77,8 +77,8 @@ class _HomePageState extends State<HomePage> {
                                               Radius.circular(200)),
                                           clipBehavior: Clip.hardEdge,
                                           child: Container(
-                                              height: 125,
-                                              width: 125,
+                                              height: 200,
+                                              width: 200,
                                               child: PictureFactory.build(
                                                   user?.profilePicture ?? "",
                                                   padding: EdgeInsets.zero,
