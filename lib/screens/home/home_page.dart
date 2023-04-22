@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> {
       child: FutureBuilder<String>(
           future: TokenVersion.getToken(),
           builder: (context, token) {
-            // if (token.data == "") {
+            // if (token.data == "" || token.data == null) {
             //   Routes.pushReplacement(context, PageName.Login);
             // }
             return UserBuilder(
@@ -111,8 +111,8 @@ class _HomePageState extends State<HomePage> {
                                         // ),
                                         CustomText(
                                           ((user.isCommitee || user.isSuper))
-                                              ? user.nik ?? ""
-                                              : ("${user.handPhone?.substring(0, user.handPhone!.length - 4) ?? ""}****"),
+                                              ? user.handPhone ?? ""
+                                              : ("${user.handPhone?.substring(0, user.handPhone!.length - 5) ?? ""}*****"),
                                           fontSize: 15,
                                           fontWeight: FontWeight.w500,
                                         ),

@@ -18,7 +18,7 @@ class DateParser {
     "May",
     "June",
     "July",
-    "August", 
+    "August",
     "September",
     "October",
     "November",
@@ -44,6 +44,12 @@ class DateParser {
     var localDate = dateTime.toLocal();
     var monthName = monthNames[localDate.month - 1];
     return "${localDate.day} $monthName ${localDate.year}";
+  }
+
+  static String parseYearMonth(DateTime dateTime) {
+    var localDate = dateTime.toLocal();
+    var monthName = monthNames[localDate.month - 1];
+    return "$monthName ${localDate.year}";
   }
 
   static String parseTime(DateTime dateTime) {

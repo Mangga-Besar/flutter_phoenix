@@ -104,7 +104,7 @@ class _UserPageState extends State<UserPage> {
                                   CustomText(
                                     ((user!.isCommitee || user.isSuper))
                                         ? widget.target.handPhone ?? ""
-                                        : ("${widget.target.handPhone?.substring(0, widget.target.handPhone!.length - 4) ?? ""}****"),
+                                        : ("${widget.target.handPhone?.substring(0, widget.target.handPhone!.length - 5) ?? ""}*****"),
                                     fontSize: 15,
                                     fontWeight: FontWeight.w500,
                                   ),
