@@ -48,16 +48,11 @@ class PublikasiSectionListEdit extends SectionList {
             children: [
               publikasi.name?.isNotEmpty ?? false
                   ? CustomText(
-                      publikasi.name ?? "",
+                      "${publikasi.name ?? ''} - (${publikasi.tanggal?.year.toString() ?? ''})",
                       fontWeight: FontWeight.w800,
                       fontSize: 15,
                     )
                   : Container(),
-              CustomText(
-                publikasi.tanggal?.year.toString() ?? "",
-                fontWeight: FontWeight.w500,
-                fontSize: 15,
-              ),
               publikasi.topik?.isNotEmpty ?? false
                   ? CustomText(
                       publikasi.topik ?? "",

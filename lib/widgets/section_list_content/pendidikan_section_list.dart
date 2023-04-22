@@ -16,16 +16,11 @@ class PendidikanSectionList extends SectionList {
       children: [
         pendidikan.name?.isNotEmpty ?? false
             ? CustomText(
-                pendidikan.name ?? "",
+                "${EnumParser.getString(pendidikan.level)} - ${pendidikan.name ?? ""} (${pendidikan.tahun?.year.toString()})",
                 fontWeight: FontWeight.w800,
                 fontSize: 15,
               )
             : Container(),
-        CustomText(
-          pendidikan.tahun?.year.toString() ?? "NULL",
-          fontSize: 15,
-          fontWeight: FontWeight.w500,
-        ),
         pendidikan.jurusan?.isNotEmpty ?? false
             ? CustomText(
                 pendidikan.jurusan ?? "",
@@ -34,20 +29,7 @@ class PendidikanSectionList extends SectionList {
                 color: Colors.black87,
               )
             : Container(),
-        CustomText(
-          EnumParser.getString(pendidikan.level),
-          fontSize: 12,
-          fontWeight: FontWeight.bold,
-          color: Colors.black87,
-        ),
-        pendidikan.lokasi?.isNotEmpty ?? false
-            ? CustomText(
-                pendidikan.lokasi ?? "",
-                fontSize: 12,
-                color: Colors.black87,
-              )
-            : Container(),
-        pendidikan.name?.isNotEmpty ?? false
+        pendidikan.description?.isNotEmpty ?? false
             ? CustomText(
                 pendidikan.description ?? "",
                 fontSize: 12,

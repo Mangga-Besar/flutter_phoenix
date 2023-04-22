@@ -32,6 +32,12 @@ class KontakSection with ChangeNotifier implements ISection {
     return (name?.isEmpty ?? false) ? "Nama tidak boleh kosong" : null;
   }
 
+  String? contactNumberValidator() {
+    return (contactNumber?.isNaN ?? false)
+        ? "Nomor HandPhone tidak boleh kosong"
+        : null;
+  }
+
   @override
   ISection? copy() {
     return KontakSection(

@@ -9,7 +9,6 @@ class PendidikanSection with ChangeNotifier implements ISection {
     this.jurusan,
     this.level = PendidikanLevel.SD,
     this.link,
-    this.lokasi,
     this.name,
     this.tahun,
   });
@@ -26,7 +25,6 @@ class PendidikanSection with ChangeNotifier implements ISection {
 
   String? jurusan;
 
-  String? lokasi;
   List<String>? link;
   PendidikanLevel? level;
   DateTime? tahun;
@@ -43,7 +41,6 @@ class PendidikanSection with ChangeNotifier implements ISection {
       jurusan: jurusan,
       level: level,
       link: link,
-      lokasi: lokasi,
       name: name,
       tahun: tahun,
     );
@@ -55,7 +52,6 @@ class PendidikanSection with ChangeNotifier implements ISection {
       "tahun": (tahun ?? DateTime.now()).toIso8601String(),
       "description": description,
       "level": EnumParser.getString(level),
-      "lokasi": lokasi,
       "jurusan": jurusan,
       "link": link,
     };
@@ -75,7 +71,6 @@ class PendidikanSection with ChangeNotifier implements ISection {
             link: link,
             level:
                 EnumParser.getEnum(PendidikanLevel.values, data["level"] ?? ""),
-            lokasi: data["lokasi"] ?? "",
             jurusan: data["jurusan"] ?? "",
           );
   }

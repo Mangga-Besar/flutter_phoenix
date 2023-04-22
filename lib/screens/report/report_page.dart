@@ -26,6 +26,8 @@ class _ReportPageState extends State<ReportPage> {
   late final TextEditingController _bodyController;
   late final TextEditingController _titleController;
   late final List<String> _imageList;
+  late final _formKey;
+
   @override
   void initState() {
     reportHelper = ReportHelper();
@@ -34,6 +36,7 @@ class _ReportPageState extends State<ReportPage> {
     _bodyFocusNode = FocusNode();
     _bodyController = TextEditingController();
     _titleController = TextEditingController();
+    _formKey = GlobalKey<FormState>();
     super.initState();
   }
 
@@ -45,106 +48,122 @@ class _ReportPageState extends State<ReportPage> {
       ),
       child: UserBuilder(builder: (user) {
         return SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(
-                height: 20,
-              ),
-              const Center(
-                child: CustomText(
-                  "Lapor Masalah",
-                  fontSize: 24,
+          child: Form(
+            key: _formKey,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(
+                  height: 20,
+                ),
+                const Center(
+                  child: CustomText(
+                    "Lapor Masalah",
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                const CustomText(
+                  'Judul *',
+                  fontSize: 15,
                   fontWeight: FontWeight.bold,
                 ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              const CustomText(
-                'Title',
-                fontSize: 15,
-                fontWeight: FontWeight.bold,
-              ),
-              NormalFormField(
-                hintText: "ex. AC rusak",
-                text: _titleController.text,
-                focusNode: _titleFocusNode,
-                onFieldSubmitted: (value) {
-                  _titleFocusNode.unfocus();
-                  FocusScope.of(context).requestFocus(_bodyFocusNode);
-                },
-                onChanged: (value) {
-                  _titleController.text = value;
-                },
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              const CustomText(
-                'Laporan',
-                fontSize: 15,
-                fontWeight: FontWeight.bold,
-              ),
-              NormalFormField(
-                hintText: "ex. AC tidak menghasilkan udara yang sejuk.",
-                text: _bodyController.text,
-                focusNode: _bodyFocusNode,
-                onFieldSubmitted: (value) {
-                  _bodyFocusNode.unfocus();
-                  // FocusScope.of(context).requestFocus(_contactNumberFocusNode);
-                },
-                onChanged: (value) {
-                  _bodyController.text = value;
-                },
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              ReportGalleryWidget(
-                images: _imageList,
-                user: user,
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              Center(
-                child: SizedBox(
-                  height: 50,
-                  child: BaseRaisedButton(
-                    ratio: 1 / 1.25,
-                    onPressed: () async {
-                      Report report = Report(
-                          body: _bodyController.text,
-                          imageList: _imageList,
-                          reportDate: DateTime.now(),
-                          reportState: ReportState.Reported,
-                          title: _titleController.text,
-                          userId: (user?.id ?? ""));
-                      try {
-                        await reportHelper.update(report.id ?? "", report);
-                        _titleController.text = "";
-                        _bodyController.text = "";
-                        setState(() {
-                          _imageList.clear();
-                        });
-                      } catch (e) {
-                        print(e);
-                      }
-                      // Routes.pop(context);
-                    },
-                    color: Configs.secondaryColor,
-                    child: const Text(
-                      "SIMPAN",
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.white,
+                NormalFormField(
+                  hintText: "ex. AC rusak",
+                  text: _titleController.text,
+                  focusNode: _titleFocusNode,
+                  validator: (p0) {
+                    return (p0?.isEmpty ?? true)
+                        ? "Judul Tidak Boleh Kosong"
+                        : null;
+                  },
+                  onFieldSubmitted: (value) {
+                    _titleFocusNode.unfocus();
+                    FocusScope.of(context).requestFocus(_bodyFocusNode);
+                  },
+                  onChanged: (value) {
+                    _titleController.text = value;
+                  },
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                const CustomText(
+                  'Laporan *',
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                ),
+                NormalFormField(
+                  hintText: "ex. AC tidak menghasilkan udara yang sejuk.",
+                  text: _bodyController.text,
+                  focusNode: _bodyFocusNode,
+                  onFieldSubmitted: (value) {
+                    _bodyFocusNode.unfocus();
+                    // FocusScope.of(context).requestFocus(_contactNumberFocusNode);
+                  },
+                  validator: (p0) {
+                    return (p0?.isEmpty ?? true)
+                        ? "Laporan Tidak Boleh Kosong"
+                        : null;
+                  },
+                  onChanged: (value) {
+                    _bodyController.text = value;
+                  },
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                ReportGalleryWidget(
+                  images: _imageList,
+                  user: user,
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                Center(
+                  child: SizedBox(
+                    height: 50,
+                    child: BaseRaisedButton(
+                      ratio: 1 / 1.25,
+                      onPressed: () async {
+                        Report report = Report(
+                            body: _bodyController.text,
+                            imageList: _imageList,
+                            reportDate: DateTime.now(),
+                            reportState: ReportState.Reported,
+                            title: _titleController.text,
+                            userId: (user?.id ?? ""));
+                        if (_formKey.currentState!.validate()) {
+                          try {
+                            await reportHelper.update(report.id ?? "", report);
+                            _titleController.text = "";
+                            _bodyController.text = "";
+                            setState(() {
+                              _imageList.clear();
+                            });
+                          } catch (e) {
+                            print(e);
+                          }
+                        }
+                        // Routes.pop(context);
+                      },
+                      color: Configs.secondaryColor,
+                      child: const Text(
+                        "SIMPAN",
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       }),

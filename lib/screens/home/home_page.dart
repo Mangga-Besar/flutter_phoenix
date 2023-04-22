@@ -120,7 +120,7 @@ class _HomePageState extends State<HomePage> {
                                           height: 10,
                                         ),
                                         CustomText(
-                                          DateParser.parseDateOnly(
+                                          DateParser.parseDateMonth(
                                               user.dob ?? DateTime.now()),
                                           fontSize: 15,
                                           color: Colors.black54,
@@ -133,12 +133,6 @@ class _HomePageState extends State<HomePage> {
                                           textAlign: TextAlign.center,
                                           fontSize: 15,
                                         ),
-                                        CustomText(
-                                          user.agama ?? "",
-                                          color: Colors.black54,
-                                          fontWeight: FontWeight.normal,
-                                          fontSize: 15,
-                                        ),
                                         SizedBox(
                                           height: 10,
                                         ),
@@ -147,27 +141,27 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                 ),
                                 SectionPart(
-                                  title: "KONTAK DARURAT",
+                                  title: "Kontak Darurat",
                                   user: user,
                                   type: KontakSection,
                                 ),
                                 SectionPart(
-                                  title: "PENDIDIKAN",
+                                  title: "Pendidikan",
                                   user: user,
                                   type: PendidikanSection,
                                 ),
                                 SectionPart(
-                                  title: "PELATIHAN",
+                                  title: "Pelatihan",
                                   user: user,
                                   type: PelatihanSection,
                                 ),
                                 SectionPart(
-                                  title: "PUBLIKASI",
+                                  title: "Publikasi",
                                   user: user,
                                   type: PublikasiSection,
                                 ),
                                 SectionPart(
-                                  title: "PENUGASAN",
+                                  title: "Penugasan",
                                   user: user,
                                   type: PenugasanSection,
                                 ),

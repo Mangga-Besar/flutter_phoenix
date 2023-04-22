@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_phoenix/functions/date_parser.dart';
 import 'package:flutter_phoenix/models/sections/pelatihan_section.dart';
 import 'package:flutter_phoenix/widgets/custom/custom_text.dart';
 import 'package:flutter_phoenix/widgets/section_list.dart';
@@ -19,6 +20,11 @@ class PelatihanSectionList extends SectionList {
                 fontSize: 15,
               )
             : Container(),
+        CustomText(
+          "(${DateParser.parseDateOnly(pelatihan.startDate!)} - ${DateParser.parseDateOnly(pelatihan.endDate!)})",
+          fontSize: 15,
+          fontWeight: FontWeight.bold,
+        ),
         pelatihan.topik?.isNotEmpty ?? false
             ? CustomText(
                 pelatihan.topik ?? "",
@@ -33,22 +39,6 @@ class PelatihanSectionList extends SectionList {
                 color: Colors.black87,
               )
             : Container(),
-        CustomText(
-          "Dimulai : " +
-              (pelatihan.startDate?.month.toString() ?? "") +
-              " - " +
-              (pelatihan.startDate?.year.toString() ?? ""),
-          fontSize: 12,
-          color: Colors.black87,
-        ),
-        CustomText(
-          "Berakhir : " +
-              (pelatihan.endDate?.month.toString() ?? "") +
-              " - " +
-              (pelatihan.endDate?.year.toString() ?? ""),
-          fontSize: 12,
-          color: Colors.black87,
-        ),
         pelatihan.description?.isNotEmpty ?? false
             ? CustomText(
                 pelatihan.description ?? "",

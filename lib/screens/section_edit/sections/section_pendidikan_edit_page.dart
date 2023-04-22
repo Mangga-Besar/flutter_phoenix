@@ -3,6 +3,7 @@ import 'package:flutter_phoenix/configs/configs.dart';
 import 'package:flutter_phoenix/enums/pendidikan_level.dart';
 import 'package:flutter_phoenix/functions/enum_parser.dart';
 import 'package:flutter_phoenix/functions/routes.dart';
+import 'package:flutter_phoenix/functions/toast_helper.dart';
 import 'package:flutter_phoenix/interfaces/i_has_name.dart';
 import 'package:flutter_phoenix/models/sections/pelatihan_section.dart';
 import 'package:flutter_phoenix/models/sections/pendidikan_section.dart';
@@ -35,187 +36,188 @@ class SectionPendidikanEditPage extends SectionEditPage {
       DropdownClass(name: "S2"),
       DropdownClass(name: "S3"),
     ];
-    PendidikanSection? before;
-    return Consumer<User>(builder: (_, user, __) {
-      return Consumer<PendidikanSection>(builder: (_, pendidikan, __) {
-        late DropdownClass dropdownClass = list.firstWhere(
-          (element) {
-            return pendidikan.level ==
-                EnumParser.getEnum(PendidikanLevel.values, element.name!);
-          },
-        );
-        before = before ?? (pendidikan.copy() as PendidikanSection);
+    final _formKey = GlobalKey<FormState>();
 
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 5),
-            const CustomText(
-              'Nama',
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
-            ),
-            NormalFormField(
-              hintText: "ex. Bachelor of Science",
-              text: pendidikan.name ?? "",
-              focusNode: _nameFocusNode,
-              onFieldSubmitted: (value) {
-                _nameFocusNode.unfocus();
-                FocusScope.of(context).requestFocus(_tahunFocusNode);
-              },
-              onChanged: (value) {
-                pendidikan.name = value;
-              },
-            ),
-            const SizedBox(height: 10),
-            const CustomText(
-              'Tahun',
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
-            ),
-            DateTimePickerFormField(
-              focusNode: _tahunFocusNode,
-              initialDate: pendidikan.tahun ?? DateTime.now(),
-              onChanged: (val) {
-                pendidikan.tahun = val;
-                pendidikan.notifyListeners();
-              },
-            ),
-            const SizedBox(height: 10),
-            const CustomText(
-              'Lokasi / Institusi',
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
-            ),
-            NormalFormField(
-              hintText: "ex. Universitas Indonesia",
-              text: pendidikan.lokasi ?? "",
-              focusNode: _lokasiFocusNode,
-              onFieldSubmitted: (value) {
-                _lokasiFocusNode.unfocus();
-                FocusScope.of(context).requestFocus(_jurusanFocusNode);
-              },
-              onChanged: (value) {
-                pendidikan.lokasi = value;
-              },
-            ),
-            const SizedBox(height: 10),
-            const CustomText(
-              'Tingkat',
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
-            ),
-            CustomDropdown<DropdownClass>(
-              hint: "Pilih Tingkat Pendidikan",
-              selected: dropdownClass,
-              list: list,
-              onChanged: (val) {
-                dropdownClass = val ?? list[0];
-              },
-            ),
-            const SizedBox(height: 10),
-            const CustomText(
-              'Jurusan*',
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
-            ),
-            NormalFormField(
-              hintText: "ex. IPA / IPS",
-              text: pendidikan.tahun?.year.toString() ?? "",
-              focusNode: _jurusanFocusNode,
-              onFieldSubmitted: (value) {
-                _jurusanFocusNode.unfocus();
-              },
-              onChanged: (value) {
-                pendidikan.jurusan = value;
-              },
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            Row(
-              children: [
-                const CustomText(
-                  'Link Terkait*',
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold,
-                ),
-                IconButton(
-                  onPressed: () {
-                    pendidikan.link ??= <String>[];
-                    pendidikan.link!.add("");
-                    pendidikan.notifyListeners();
-                  },
-                  icon: Icon(Icons.add),
-                )
-              ],
-            ),
-            ListView.builder(
-              itemCount: pendidikan.link?.length ?? 0,
-              itemBuilder: (context, i) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 5.0),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: NormalFormField(
-                          hintText: "Link #$i",
-                          text: pendidikan.link![i],
-                          onChanged: (value) {
-                            pendidikan.link![i] = value;
-                          },
-                        ),
-                      ),
-                      IconButton(
-                        onPressed: () {
-                          pendidikan.link!.removeAt(i);
-                          pendidikan.notifyListeners();
-                        },
-                        icon: Icon(
-                          Icons.remove_circle,
-                          color: Colors.red,
-                        ),
-                      )
-                    ],
+    PendidikanSection? before;
+    return Form(
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      key: _formKey,
+      child: Consumer<User>(builder: (_, user, __) {
+        return Consumer<PendidikanSection>(builder: (_, pendidikan, __) {
+          late DropdownClass dropdownClass = list.firstWhere(
+            (element) {
+              return pendidikan.level ==
+                  EnumParser.getEnum(PendidikanLevel.values, element.name!);
+            },
+          );
+          before = before ?? (pendidikan.copy() as PendidikanSection);
+
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 5),
+              const CustomText(
+                'Nama *',
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+              ),
+              NormalFormField(
+                hintText: "ex. Bachelor of Science",
+                text: pendidikan.name ?? "",
+                focusNode: _nameFocusNode,
+                onFieldSubmitted: (value) {
+                  _nameFocusNode.unfocus();
+                  FocusScope.of(context).requestFocus(_tahunFocusNode);
+                },
+                validator: (p0) {
+                  if (p0 == null || p0.isEmpty) {
+                    return "Nama tidak boleh kosong";
+                  } else {
+                    return null;
+                  }
+                },
+                onChanged: (value) {
+                  pendidikan.name = value;
+                },
+              ),
+              const SizedBox(height: 10),
+              const CustomText(
+                'Tahun',
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+              ),
+              DateTimePickerFormField(
+                focusNode: _tahunFocusNode,
+                initialDate: pendidikan.tahun ?? DateTime.now(),
+                onChanged: (val) {
+                  pendidikan.tahun = val;
+                  pendidikan.notifyListeners();
+                },
+              ),
+              const SizedBox(height: 10),
+              const SizedBox(height: 10),
+              const CustomText(
+                'Tingkat',
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+              ),
+              CustomDropdown<DropdownClass>(
+                hint: "Pilih Tingkat Pendidikan",
+                selected: dropdownClass,
+                list: list,
+                onChanged: (val) {
+                  dropdownClass = val ?? list[0];
+                },
+              ),
+              const SizedBox(height: 10),
+              const CustomText(
+                'Jurusan*',
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+              ),
+              NormalFormField(
+                hintText: "ex. IPA / IPS",
+                text: pendidikan.tahun?.year.toString() ?? "",
+                focusNode: _jurusanFocusNode,
+                onFieldSubmitted: (value) {
+                  _jurusanFocusNode.unfocus();
+                },
+                onChanged: (value) {
+                  pendidikan.jurusan = value;
+                },
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Row(
+                children: [
+                  const CustomText(
+                    'Link Terkait*',
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
                   ),
-                );
-              },
-              physics: NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-            ),
-            const SizedBox(height: 45),
-            Center(
-              child: SizedBox(
-                height: 50,
-                child: BaseRaisedButton(
-                  ratio: 1 / 1.25,
-                  onPressed: () {
-                    pendidikan.level = EnumParser.getEnum(
-                        PendidikanLevel.values, dropdownClass.name ?? "");
-                    if (before?.name == null) {
-                      user.pendidikan!.add(pendidikan);
-                    }
-                    pendidikan.notifyListeners();
-                    UserHelper().updateUser(user.id ?? "", user);
-                    user.notifyListeners();
-                    Routes.pop(context);
-                  },
-                  color: Configs.secondaryColor,
-                  child: const Text(
-                    "SIMPAN",
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.white,
+                  IconButton(
+                    onPressed: () {
+                      pendidikan.link ??= <String>[];
+                      pendidikan.link!.add("");
+                      pendidikan.notifyListeners();
+                    },
+                    icon: Icon(Icons.add),
+                  )
+                ],
+              ),
+              ListView.builder(
+                itemCount: pendidikan.link?.length ?? 0,
+                itemBuilder: (context, i) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 5.0),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: NormalFormField(
+                            hintText: "Link #$i",
+                            text: pendidikan.link![i],
+                            onChanged: (value) {
+                              pendidikan.link![i] = value;
+                            },
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            pendidikan.link!.removeAt(i);
+                            pendidikan.notifyListeners();
+                          },
+                          icon: Icon(
+                            Icons.remove_circle,
+                            color: Colors.red,
+                          ),
+                        )
+                      ],
+                    ),
+                  );
+                },
+                physics: NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+              ),
+              const SizedBox(height: 45),
+              Center(
+                child: SizedBox(
+                  height: 50,
+                  child: BaseRaisedButton(
+                    ratio: 1 / 1.25,
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        pendidikan.level = EnumParser.getEnum(
+                            PendidikanLevel.values, dropdownClass.name ?? "");
+                        if (before?.name == null) {
+                          user.pendidikan!.add(pendidikan);
+                        }
+                        pendidikan.notifyListeners();
+                        UserHelper().updateUser(user.id ?? "", user);
+                        user.notifyListeners();
+                        Routes.pop(context);
+                      } else {
+                        ToastHelper.showException(
+                            "Terdapat Kesalahn pada data..", context);
+                      }
+                    },
+                    color: Configs.secondaryColor,
+                    child: const Text(
+                      "SIMPAN",
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-            const SizedBox(height: 20),
-          ],
-        );
-      });
-    });
+              const SizedBox(height: 20),
+            ],
+          );
+        });
+      }),
+    );
   }
 }
 

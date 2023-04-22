@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_phoenix/functions/date_parser.dart';
 import 'package:flutter_phoenix/functions/enum_parser.dart';
 import 'package:flutter_phoenix/models/sections/penugasan_section.dart';
 import 'package:flutter_phoenix/widgets/custom/custom_text.dart';
@@ -21,29 +22,18 @@ class PenugasanSectionList extends SectionList {
                 fontSize: 15,
               )
             : Container(),
+        CustomText(
+          "(${DateParser.parseYearMonth(penugasan.startDate!)} - ${DateParser.parseYearMonth(penugasan.endDate!)})",
+          fontSize: 15,
+          fontWeight: FontWeight.bold,
+        ),
         penugasan.tipePekerjaan?.isNotEmpty ?? false
             ? CustomText(
                 penugasan.tipePekerjaan ?? "",
-                fontSize: 15,
-                fontWeight: FontWeight.w500,
+                fontSize: 12,
+                color: Colors.black87,
               )
             : Container(),
-        CustomText(
-          "Dimulai : " +
-              (penugasan.startDate?.month.toString() ?? "") +
-              " - " +
-              (penugasan.startDate?.year.toString() ?? ""),
-          fontSize: 12,
-          color: Colors.black87,
-        ),
-        CustomText(
-          "Berakhir : " +
-              (penugasan.endDate?.month.toString() ?? "") +
-              " - " +
-              (penugasan.endDate?.year.toString() ?? ""),
-          fontSize: 12,
-          color: Colors.black87,
-        ),
         penugasan.description?.isNotEmpty ?? false
             ? CustomText(
                 penugasan.description ?? "",

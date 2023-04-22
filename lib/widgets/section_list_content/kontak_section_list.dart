@@ -35,13 +35,13 @@ class KontakSectionList extends SectionList {
                 color: Colors.black87,
               )
             : Container(),
-        (kontak.hubungan?.isNotEmpty ?? false)
-            ? CustomText(
-                kontak.description ?? "",
-                fontSize: 12,
-                color: Colors.black87,
-              )
-            : Container(),
+        // (kontak.description?.isNotEmpty ?? false)
+        //     ? CustomText(
+        //         kontak.description ?? "",
+        //         fontSize: 12,
+        //         color: Colors.black87,
+        //       )
+        //     : Container(),
       ],
     );
   }

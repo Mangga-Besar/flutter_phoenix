@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/configs/configs.dart';
 import 'package:flutter_phoenix/functions/routes.dart';
+import 'package:flutter_phoenix/functions/toast_helper.dart';
 import 'package:flutter_phoenix/models/sections/pelatihan_section.dart';
 import 'package:flutter_phoenix/models/user/user.dart';
 import 'package:flutter_phoenix/models/user/user_helper.dart';
@@ -22,145 +23,163 @@ class SectionPelatihanEditPage extends SectionEditPage {
     FocusNode _startDateFocusNode = FocusNode();
     FocusNode _endDateFocusNode = FocusNode();
     PelatihanSection? before;
+    final _formKey = GlobalKey<FormState>();
 
-    return Consumer<User>(builder: (_, user, __) {
-      return Consumer<PelatihanSection>(builder: (_, pelatihan, __) {
-        before = before ?? (pelatihan.copy() as PelatihanSection);
+    return Form(
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      key: _formKey,
+      child: Consumer<User>(builder: (_, user, __) {
+        return Consumer<PelatihanSection>(builder: (_, pelatihan, __) {
+          before = before ?? (pelatihan.copy() as PelatihanSection);
 
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const CustomText(
-              'Nama',
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
-            ),
-            NormalFormField(
-              hintText: "ex. Pelatihan Mengajar",
-              text: pelatihan.name ?? "",
-              focusNode: _nameFocusNode,
-              onFieldSubmitted: (value) {
-                _nameFocusNode.unfocus();
-                FocusScope.of(context).requestFocus(_topikFocusNode);
-              },
-              onChanged: (value) {
-                pelatihan.name = value;
-              },
-              // validator: (value) => pelatihan!.nameValidator(),
-            ),
-            const SizedBox(height: 10),
-            const CustomText(
-              'Topik',
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
-            ),
-            NormalFormField(
-              hintText: "ex. Kemampuan Mengajar",
-              text: pelatihan.topik ?? "",
-              focusNode: _topikFocusNode,
-              onFieldSubmitted: (value) {
-                _topikFocusNode.unfocus();
-                FocusScope.of(context)
-                    .requestFocus(_pemberiSertifikatFocusNode);
-              },
-              onChanged: (value) {
-                pelatihan.topik = value;
-              },
-            ),
-            const SizedBox(height: 10),
-            const CustomText(
-              'Pemberi Sertifikat',
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
-            ),
-            NormalFormField(
-              hintText: "ex. Goethe",
-              text: pelatihan.name ?? "",
-              focusNode: _pemberiSertifikatFocusNode,
-              onFieldSubmitted: (value) {
-                _pemberiSertifikatFocusNode.unfocus();
-                FocusScope.of(context).requestFocus(_startDateFocusNode);
-              },
-              onChanged: (value) {
-                pelatihan.pemberiSertifikat = value;
-              },
-            ),
-            const SizedBox(height: 10),
-            const CustomText(
-              'Tanggal Mulai Pelatihan',
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
-            ),
-            DateTimePickerFormField(
-              focusNode: _startDateFocusNode,
-              initialDate: pelatihan.startDate ?? DateTime.now(),
-              onChanged: (val) {
-                pelatihan.startDate = val;
-                pelatihan.notifyListeners();
-              },
-            ),
-            const SizedBox(height: 10),
-            const CustomText(
-              'Tanggal Berakhir Pelatihan',
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
-            ),
-            DateTimePickerFormField(
-              focusNode: _endDateFocusNode,
-              initialDate: pelatihan.endDate ?? DateTime.now(),
-              onChanged: (val) {
-                pelatihan.endDate = val;
-                pelatihan.notifyListeners();
-              },
-            ),
-            const SizedBox(height: 10),
-            const CustomText(
-              'Deskripsi',
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
-            ),
-            NormalFormField(
-              hintText: "ex. Deskripsi",
-              maxLines: 3,
-              text: pelatihan.description ?? "",
-              focusNode: _descriptionFocusNode,
-              onFieldSubmitted: (value) {
-                _descriptionFocusNode.unfocus();
-              },
-              onChanged: (value) {
-                pelatihan.description = value;
-              },
-            ),
-            const SizedBox(height: 45),
-            Center(
-              child: SizedBox(
-                height: 50,
-                child: BaseRaisedButton(
-                  ratio: 1 / 1.25,
-                  onPressed: () {
-                    if (before?.name == null) {
-                      user.pelatihan!.add(pelatihan);
-                    }
-                    pelatihan.notifyListeners();
-                    UserHelper().updateUser(user.id ?? "", user);
-                    user.notifyListeners();
-                    Routes.pop(context);
-                  },
-                  color: Configs.secondaryColor,
-                  child: const Text(
-                    "SIMPAN",
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.white,
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const CustomText(
+                'Nama *',
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+              ),
+              NormalFormField(
+                hintText: "ex. Pelatihan Mengajar",
+                text: pelatihan.name ?? "",
+                focusNode: _nameFocusNode,
+                validator: (p0) {
+                  if (p0 == null || p0.isEmpty) {
+                    return "Nama tidak boleh kosong";
+                  } else {
+                    return null;
+                  }
+                },
+
+                onFieldSubmitted: (value) {
+                  _nameFocusNode.unfocus();
+                  FocusScope.of(context).requestFocus(_topikFocusNode);
+                },
+                onChanged: (value) {
+                  pelatihan.name = value;
+                },
+                // validator: (value) => pelatihan!.nameValidator(),
+              ),
+              const SizedBox(height: 10),
+              const CustomText(
+                'Topik',
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+              ),
+              NormalFormField(
+                hintText: "ex. Kemampuan Mengajar",
+                text: pelatihan.topik ?? "",
+                focusNode: _topikFocusNode,
+                onFieldSubmitted: (value) {
+                  _topikFocusNode.unfocus();
+                  FocusScope.of(context)
+                      .requestFocus(_pemberiSertifikatFocusNode);
+                },
+                onChanged: (value) {
+                  pelatihan.topik = value;
+                },
+              ),
+              const SizedBox(height: 10),
+              const CustomText(
+                'Pemberi Sertifikat',
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+              ),
+              NormalFormField(
+                hintText: "ex. Goethe",
+                text: pelatihan.name ?? "",
+                focusNode: _pemberiSertifikatFocusNode,
+                onFieldSubmitted: (value) {
+                  _pemberiSertifikatFocusNode.unfocus();
+                  FocusScope.of(context).requestFocus(_startDateFocusNode);
+                },
+                onChanged: (value) {
+                  pelatihan.pemberiSertifikat = value;
+                },
+              ),
+              const SizedBox(height: 10),
+              const CustomText(
+                'Tanggal Mulai Pelatihan',
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+              ),
+              DateTimePickerFormField(
+                focusNode: _startDateFocusNode,
+                initialDate: pelatihan.startDate ?? DateTime.now(),
+                onChanged: (val) {
+                  pelatihan.startDate = val;
+                  pelatihan.notifyListeners();
+                },
+              ),
+              const SizedBox(height: 10),
+              const CustomText(
+                'Tanggal Berakhir Pelatihan',
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+              ),
+              DateTimePickerFormField(
+                focusNode: _endDateFocusNode,
+                initialDate: pelatihan.endDate ?? DateTime.now(),
+                onChanged: (val) {
+                  pelatihan.endDate = val;
+                  pelatihan.notifyListeners();
+                },
+              ),
+              const SizedBox(height: 10),
+              const CustomText(
+                'Deskripsi',
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+              ),
+              NormalFormField(
+                hintText: "ex. Deskripsi",
+                maxLines: 3,
+                text: pelatihan.description ?? "",
+                focusNode: _descriptionFocusNode,
+                onFieldSubmitted: (value) {
+                  _descriptionFocusNode.unfocus();
+                },
+                onChanged: (value) {
+                  pelatihan.description = value;
+                },
+              ),
+              const SizedBox(height: 45),
+              Center(
+                child: SizedBox(
+                  height: 50,
+                  child: BaseRaisedButton(
+                    ratio: 1 / 1.25,
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        if (before?.name == null) {
+                          user.pelatihan!.add(pelatihan);
+                        }
+                        pelatihan.notifyListeners();
+                        UserHelper().updateUser(user.id ?? "", user);
+                        user.notifyListeners();
+                        Routes.pop(context);
+                      } else {
+                        ToastHelper.showException(
+                            "Terdapat Kesalahn pada data..", context);
+                      }
+                    },
+                    color: Configs.secondaryColor,
+                    child: const Text(
+                      "SIMPAN",
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-            const SizedBox(height: 20),
-          ],
-        );
-      });
-    });
+              const SizedBox(height: 20),
+            ],
+          );
+        });
+      }),
+    );
   }
 }
