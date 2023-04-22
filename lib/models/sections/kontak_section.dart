@@ -29,7 +29,7 @@ class KontakSection with ChangeNotifier implements ISection {
   }
 
   String? nameValidator() {
-    return name!.isEmpty ? "Nama Lengkap tidak boleh kosong" : null;
+    return (name?.isEmpty ?? false) ? "Nama tidak boleh kosong" : null;
   }
 
   @override

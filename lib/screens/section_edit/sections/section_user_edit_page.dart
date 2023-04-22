@@ -68,6 +68,7 @@ class SectionUserEditPage extends SectionEditPage {
             hintText: "ex. Budi Gunawan",
             text: target.name ?? "",
             focusNode: _nameFocusNode,
+            validator: target.nameValidator,
             onFieldSubmitted: (value) {
               _nameFocusNode.unfocus();
               FocusScope.of(context).requestFocus(_nikFocusNode);
@@ -86,6 +87,7 @@ class SectionUserEditPage extends SectionEditPage {
             hintText: "ex. 31730xxxxxx",
             text: target.nik ?? "",
             focusNode: _nikFocusNode,
+
             onFieldSubmitted: (value) {
               _nikFocusNode.unfocus();
               FocusScope.of(context).requestFocus(_emailFocusNode);
@@ -104,6 +106,7 @@ class SectionUserEditPage extends SectionEditPage {
           NormalFormField(
             hintText: "ex. xxxx@kanisius.edu",
             text: target.email ?? "",
+            validator: target.emailValidator,
             focusNode: _emailFocusNode,
             onFieldSubmitted: (value) {
               _emailFocusNode.unfocus();
@@ -145,6 +148,7 @@ class SectionUserEditPage extends SectionEditPage {
             hintText: "ex. Jln. Menteng Raya, No. 64",
             text: target.address ?? "",
             focusNode: _addressFocusNode,
+            maxLines: 3,
             onFieldSubmitted: (value) {
               _addressFocusNode.unfocus();
               FocusScope.of(context).requestFocus(_dobFocusNode);

@@ -104,6 +104,7 @@ class SectionPublikasiEditPage extends SectionEditPage {
             ),
             NormalFormField(
               hintText: "ex. Deskripsi",
+              maxLines: 3,
               focusNode: _descriptionFocusNode,
               onFieldSubmitted: (value) {
                 _descriptionFocusNode.unfocus();

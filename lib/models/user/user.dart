@@ -194,12 +194,19 @@ class User with ChangeNotifier {
     };
   }
 
-  Future<void> update() async {
-    // await instance.collection('users').doc(id).update(toVariables());
+  String? nameValidator(String? s) {
+    if (s?.isEmpty ?? false) {
+      return "Nama tidak boleh kosong";
+    }
+    return null;
   }
 
-  static Future<User?> load(String uid) async {
-    // var document = await instance.collection('users').doc(uid).get();
-    // return User.fromMap(document.data()!);
+  String? emailValidator(String? s) {
+    if (RegExp(
+            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+        .hasMatch(s ?? "")) {
+      return "Email tidak dikenal";
+    }
+    return null;
   }
 }
