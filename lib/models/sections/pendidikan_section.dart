@@ -7,7 +7,7 @@ class PendidikanSection with ChangeNotifier implements ISection {
   PendidikanSection({
     this.description,
     this.jurusan,
-    this.level,
+    this.level = PendidikanLevel.SD,
     this.link,
     this.lokasi,
     this.name,

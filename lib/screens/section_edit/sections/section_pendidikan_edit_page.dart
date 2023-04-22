@@ -35,10 +35,15 @@ class SectionPendidikanEditPage extends SectionEditPage {
       DropdownClass(name: "S2"),
       DropdownClass(name: "S3"),
     ];
-    late DropdownClass dropdownClass = list[0];
     PendidikanSection? before;
     return Consumer<User>(builder: (_, user, __) {
       return Consumer<PendidikanSection>(builder: (_, pendidikan, __) {
+        late DropdownClass dropdownClass = list.firstWhere(
+          (element) {
+            return pendidikan.level ==
+                EnumParser.getEnum(PendidikanLevel.values, element.name!);
+          },
+        );
         before = before ?? (pendidikan.copy() as PendidikanSection);
 
         return Column(

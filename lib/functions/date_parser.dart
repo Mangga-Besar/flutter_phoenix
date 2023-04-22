@@ -46,6 +46,12 @@ class DateParser {
     return "${localDate.day} $monthName ${localDate.year}";
   }
 
+  static String parseDateMonth(DateTime dateTime) {
+    var localDate = dateTime.toLocal();
+    var monthName = monthNames[localDate.month - 1];
+    return "${localDate.day} $monthName";
+  }
+
   static String parseYearMonth(DateTime dateTime) {
     var localDate = dateTime.toLocal();
     var monthName = monthNames[localDate.month - 1];
