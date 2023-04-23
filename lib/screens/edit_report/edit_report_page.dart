@@ -69,7 +69,7 @@ class _EditReportPageState extends State<EditReportPage> {
               ),
               const Center(
                 child: CustomText(
-                  "Laporan",
+                  "Lapor Masalah",
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                 ),

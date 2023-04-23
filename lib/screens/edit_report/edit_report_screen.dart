@@ -7,6 +7,8 @@ import 'package:flutter_phoenix/models/report/report.dart';
 import 'package:flutter_phoenix/models/report/report_helper.dart';
 import 'package:flutter_phoenix/screens/edit_report/edit_report_page.dart';
 import 'package:flutter_phoenix/widgets/builder/user_builder.dart';
+import 'package:flutter_phoenix/widgets/custom/custom_text.dart';
+
 import 'package:flutter_phoenix/widgets/home_drawer.dart';
 
 class EditReportScreen extends BaseScreenWithAppBar {
@@ -41,6 +43,12 @@ class EditReportScreen extends BaseScreenWithAppBar {
 
     Report? report = args["report"];
     return AppBar(
+      centerTitle: true,
+      title: CustomText(
+        "Lapor",
+        fontWeight: FontWeight.bold,
+        color: Colors.white,
+      ),
       actions: [
         UserBuilder(
           builder: (user) {
