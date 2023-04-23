@@ -14,6 +14,7 @@ import 'package:flutter_phoenix/widgets/custom/custom_text.dart';
 import 'package:flutter_phoenix/widgets/picture_factory.dart';
 import 'package:flutter_phoenix/widgets/section_part.dart';
 import 'package:provider/provider.dart';
+import 'dart:math';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -112,7 +113,7 @@ class _HomePageState extends State<HomePage> {
                                         CustomText(
                                           ((user.isCommitee || user.isSuper))
                                               ? user.handPhone ?? ""
-                                              : ("${user.handPhone?.substring(0, user.handPhone!.length - 5) ?? ""}*****"),
+                                              : ("${user.handPhone?.substring(0, (user.handPhone!.length - min(user.handPhone!.length, 5))) ?? ""}*****"),
                                           fontSize: 15,
                                           fontWeight: FontWeight.w500,
                                         ),

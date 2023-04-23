@@ -1,7 +1,10 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/configs/configs.dart';
 import 'package:flutter_phoenix/enums/page_name.dart';
 import 'package:flutter_phoenix/enums/role_type.dart';
+import 'package:flutter_phoenix/functions/date_parser.dart';
 import 'package:flutter_phoenix/functions/enum_parser.dart';
 import 'package:flutter_phoenix/functions/routes.dart';
 import 'package:flutter_phoenix/functions/toast_helper.dart';
@@ -18,6 +21,11 @@ import 'package:flutter_phoenix/widgets/date_time_picker_form_field.dart';
 import 'package:flutter_phoenix/widgets/image_add_single.dart';
 import 'package:flutter_phoenix/widgets/normal_form_field.dart';
 import 'package:provider/provider.dart';
+
+const _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
+Random _rnd = Random();
+String getRandomString(int length) => String.fromCharCodes(Iterable.generate(
+    length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))));
 
 class SectionUserEditPage extends SectionEditPage {
   @override
@@ -38,6 +46,8 @@ class SectionUserEditPage extends SectionEditPage {
     final _formKey = GlobalKey<FormState>();
 
     return Form(
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      key: _formKey,
       child: UserBuilder(builder: (user) {
         return Consumer<User>(builder: (_, target, __) {
           late DropdownClass dropdownClass = list.firstWhere(
@@ -62,7 +72,7 @@ class SectionUserEditPage extends SectionEditPage {
                 child: ImageAddSingle(
                   image: target.profilePicture,
                   onChanged: (file) {
-                    final fileName = "IMAGE_${target.id ?? ''}";
+                    final fileName = "IMAGE_${getRandomString(6)}";
                     FirebaseUploaderHelper(
                       filePath: file,
                       name: fileName,
@@ -168,12 +178,12 @@ class SectionUserEditPage extends SectionEditPage {
                 hintText: "ex. Jln. Menteng Raya, No. 64",
                 text: target.address ?? "",
                 focusNode: _addressFocusNode,
-                maxLines: 3,
+                maxLines: null,
+                keyboardType: TextInputType.multiline,
                 onFieldSubmitted: (value) {
                   _addressFocusNode.unfocus();
                   FocusScope.of(context).requestFocus(_dobFocusNode);
                 },
-                keyboardType: TextInputType.emailAddress,
                 onChanged: (value) {
                   target.address = value;
                 },

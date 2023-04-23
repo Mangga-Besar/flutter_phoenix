@@ -113,6 +113,8 @@ class SectionPenugasanEditPage extends SectionEditPage {
               NormalFormField(
                 text: penugasan.description,
                 hintText: "ex. Deskripsi",
+                maxLines: null,
+                keyboardType: TextInputType.multiline,
                 focusNode: _descriptionFocusNode,
                 onFieldSubmitted: (value) {
                   _descriptionFocusNode.unfocus();

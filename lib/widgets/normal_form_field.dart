@@ -77,7 +77,7 @@ class NormalFormField extends StatelessWidget {
               prefixIcon: prefixIcon,
               suffixIcon: suffixIcon,
             ),
-        maxLines: maxLines ?? 1,
+        maxLines: maxLines,
         maxLength: maxLength,
         inputFormatters: inputFormatters ?? const [],
       ),

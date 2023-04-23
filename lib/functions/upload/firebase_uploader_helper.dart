@@ -37,7 +37,7 @@ class FirebaseUploaderHelper extends BaseUploaderHelper {
       SettableMetadata(
         contentType: contentType,
         cacheControl: "max-age=3600",
-        customMetadata: {"tenantId": user!.id!},
+        customMetadata: {"userId": user?.id ?? ""},
       ),
     );
 

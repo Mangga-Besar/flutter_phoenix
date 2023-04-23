@@ -134,7 +134,8 @@ class SectionPelatihanEditPage extends SectionEditPage {
               ),
               NormalFormField(
                 hintText: "ex. Deskripsi",
-                maxLines: 3,
+                maxLines: null,
+                keyboardType: TextInputType.multiline,
                 text: pelatihan.description ?? "",
                 focusNode: _descriptionFocusNode,
                 onFieldSubmitted: (value) {

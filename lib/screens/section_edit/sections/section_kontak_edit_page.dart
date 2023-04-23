@@ -101,7 +101,8 @@ class SectionKontakEditPage extends SectionEditPage {
               ),
               NormalFormField(
                 hintText: "ex. Deskripsi",
-                maxLines: 3,
+                maxLines: null,
+                keyboardType: TextInputType.multiline,
                 text: kontak.name ?? "",
                 focusNode: _descriptionFocusNode,
                 onFieldSubmitted: (value) {
